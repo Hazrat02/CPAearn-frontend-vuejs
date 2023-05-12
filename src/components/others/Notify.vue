@@ -70,13 +70,9 @@ const app = createApp({
     function show() {
       NotifyService.show('text notification')
     }
-    function show2() {
-      NotifyService.show(
-        [h(VButton, null, { default: () => 'button' }), ' in notify']
-      )
-    }
     
-    return { show, show2 }
+    
+    return { show }
   },
 }).mount('#app')
 

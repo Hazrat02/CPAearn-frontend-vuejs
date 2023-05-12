@@ -13,7 +13,9 @@
     "tsparticles": "^2.9.3",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vue3-particles": "^2.9.3"
+    "vue3-carousel": "^0.3.1",
+    "vue3-particles": "^2.9.3",
+    "vue3-snotify": "^0.0.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
