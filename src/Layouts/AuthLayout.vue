@@ -1,11 +1,13 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+
+
 </script>
 <template>
 
 
     <div>
-      <Bg/>
+      <Bgs/>
         <section class="overflow-hidden content-wrapper">
        
 
@@ -18,10 +20,7 @@ import { RouterLink, RouterView } from 'vue-router'
                         The best offer <br />
                         <span style="color: hsl(218, 81%, 75%);">for your business</span>
                     </h1>
-                    <p class="mb-4 opacity-60" style="color: hsl(218, 81%, 85%)">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Temporibus
-                    </p>
+                    <slot name="bodytext" />
                 </div>
 
                 <div class="col-lg-6 mb-5 mb-lg-0 position-relative ">
@@ -34,7 +33,7 @@ import { RouterLink, RouterView } from 'vue-router'
                         
                         <RouterLink to="/register">Register</RouterLink>
 
-                        <slot/>
+                        <slot />
                        
 
                     </div>

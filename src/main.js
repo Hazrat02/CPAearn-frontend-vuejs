@@ -1,28 +1,43 @@
-import Background from './components/others/Bg.vue'
+import Backgrounds from './components/others/Bgs.vue'
+import Footer from './components/others/Footer.vue'
+import Header from './components/others/Header.vue'
+
+
+
+
+
+
 import MobileNav from './components/others/MobileNav.vue'
+import extra from './utils/extra.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import Particles from 'vue3-particles'
-// import Vue3Notification from '@kyvg/vue3-notification'
 import Notifications from '@kyvg/vue3-notification'
-// import { notify } from 'vue3-notify'
-// import Toast from 'vue-toastification'
-// import snotify from 'vue3-snotify';
+
 import 'vue3-snotify/style';
-// const b = require('vue3-snotify');
+
+// ==========package=============
+import './assets/base.js';
+import './assets/main.css';
+
+import AuthLayout from "./Layouts/AuthLayout.vue";
 
 
 const app = createApp(App)
-// app.use(b);
-app.use(router);
 
+app.use(router);
+// app.provide('logout', logout);
+
+app.config.globalProperties.$extrat = extra;
 app.use(Notifications);
 app.use(Particles);
-// app.use(Toast)
 
-// app.use(notify);
-app.component('Bg', Background);
+
+app.component('Bgs', Backgrounds);
+app.component('Footer', Footer);
+app.component('Header', Header);
 app.component('MobileNav', MobileNav);
+app.component('AuthLayout', AuthLayout);
 app.mount('#app')
 

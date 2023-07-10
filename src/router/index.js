@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import HomeLayout from '../Layouts/HomeLayout.vue'
@@ -6,6 +7,7 @@ import AuthLayout from '../Layouts/AuthLayout.vue'
 import LoginComponent from '../components/Auth/Login.vue'
 import RegisterComponent from '../components/Auth/Register.vue'
 import ForgetComponent from '../components/Auth/Forget.vue'
+import authenticated from '../midleware/auth.js';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -15,6 +17,7 @@ const router = createRouter({
       component: HomeView,
       meta:{
         Layout:HomeLayout,
+        // requiresAuth:'auth'
       },
       
     },
@@ -32,12 +35,10 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+   
       component:LoginComponent,
       meta:{
-        Layout:AuthLayout,
+      requiresGuest:true,
       },
     },
     {
@@ -48,7 +49,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component:RegisterComponent,
       meta:{
-        Layout:AuthLayout,
+        requiresGuest:true,
       },
     },
     {
@@ -65,4 +66,26 @@ const router = createRouter({
   ]
 })
 
+
+
+
+
+
+
+router.beforeEach((to,from, next) => {
+  if (to.meta.requiresAuth  && !authenticated()) {
+    
+    // Redirect to login page or any other desired route
+    next('/login');
+    
+  } else {
+    if (to.meta.requiresGuest  && authenticated()) {
+      next('/');
+    } else {
+      next();
+    }
+    // Allow navigation to the next route
+    
+  }
+});
 export default router
