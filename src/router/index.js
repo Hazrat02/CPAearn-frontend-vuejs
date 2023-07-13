@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import ServicesView from '../views/ServicesView.vue'
+import RefferView from '../views/RefferView.vue'
+import ContactView from '../views/ContactView.vue'
+import WallateView from '../views/WallateView.vue'
+import VipView from '../views/VipView.vue'
 import AboutView from '../views/AboutView.vue'
 import HomeLayout from '../Layouts/HomeLayout.vue'
 import AuthLayout from '../Layouts/AuthLayout.vue'
@@ -75,7 +79,58 @@ const router = createRouter({
       meta:{
         requiresGuest:true,
       },
-    }
+    },
+    {
+      path: '/contact',
+      name: 'contactUs',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component:ContactView,
+      meta:{
+        requiresGuest:true,
+      },
+    },
+    {
+      path: '/wallate',
+      name: 'wallate',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component:WallateView,
+      meta:{
+        requiresGuest:true,
+      },
+    },
+    {
+      path: '/earning',
+      name: 'earning',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component:ContactView,
+      meta:{
+        requiresGuest:true,
+      },
+    },
+    {
+      path: '/vip',
+      name: 'vip',
+
+      component:VipView,
+      meta:{
+        requiresGuest:true,
+      },
+    },
+    {
+      path: '/reffer',
+      name: 'reffer',
+
+      component:RefferView,
+      meta:{
+        requiresGuest:true,
+      },
+    },
   ]
 })
 

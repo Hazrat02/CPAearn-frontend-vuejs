@@ -65,7 +65,7 @@
       </div>
 
       <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-        <img src="assets/img/services.jpg" alt="" class="img-fluid services-img">
+        <img src="./../assets\frontend\img\services.jpg" alt="" class="img-fluid services-img">
         <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
         <p>
           Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.
@@ -108,7 +108,7 @@
 
             <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
               <div class="faq-container">
-                <div class="faq-item faq-active">
+                <div class="faq-item ">
                   <h3>
                     <span class="num">1.</span>
                     <span>Non consectetur a erat nam at lectus urna duis?</span>
@@ -227,6 +227,8 @@ export default {
   created(){
 
     this.$setLoading(false);
+    console.log(this.$isLoading)
   }
 }
 </script>
+

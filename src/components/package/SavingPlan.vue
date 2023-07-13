@@ -91,7 +91,9 @@
       <div class="text-center">
         <h3>Reffer Your Friend Earn 2$</h3>
         <p>When your friend buy our vip plan autometic refferal balance transfer your main balance</p>
-        <a class="cta-btn" href="#">Reffer Now</a>
+    
+        <RouterLink class="cta-btn"  to="/reffer"> Reffer Now</RouterLink>
+
       </div>
     </div>
   </div>

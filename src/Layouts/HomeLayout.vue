@@ -1,5 +1,21 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
+
+import { RouterLink, RouterView } from "vue-router";export default {
+  mounted() {
+    document.addEventListener('touchend', this.handlePinchGesture);
+  },
+  beforeDestroy() {
+    document.removeEventListener('touchend', this.handlePinchGesture);
+  },
+  methods: {
+    handlePinchGesture(event) {
+      if (event.touches.length === 2) {
+        // Perform additional checks or logic here if needed
+        location.reload();
+      }
+    },
+  },
+  }
 </script>
 <template>
   <body
@@ -9,7 +25,7 @@ import { RouterLink, RouterView } from "vue-router";
     style="background-color: #f0f2f5"
   >
     <!-- ======= Header ======= -->
-    <div>
+    <div class="sticky-top">
       <Header />
     </div>
 
@@ -21,7 +37,7 @@ import { RouterLink, RouterView } from "vue-router";
     <a
       href="#"
       id="scroll-top"
-      class="scroll-top d-none align-items-center justify-content-center"
+      class="scroll-top  align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
     <Footer />
