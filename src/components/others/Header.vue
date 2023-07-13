@@ -1,10 +1,5 @@
 <template>
-  <!-- ======= Header ======= -->
-  <body
-    
-    data-bs-spy="scroll"
-    data-bs-target="#navmenu"
-  >
+
     <header id="header" class="header sticky-top d-flex align-items-center">
       <div
         class="container-fluid d-flex align-items-center justify-content-between"
@@ -15,16 +10,18 @@
         >
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="./src/assets/frontend/img/logo.png" alt=""> -->
-          <h1>Append</h1>
+          <h1>CPAearn</h1>
           <span>.</span>
         </a>
 
         <!-- Nav Menu -->
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="index.html#hero">Home</a></li>
+            
+            <li><RouterLink to="/">Home</RouterLink></li>
             <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#services">Services</a></li>
+            <!-- <RouterLink to="/register">Register</RouterLink> -->
+            <li><RouterLink to="/helpcenter">Services</RouterLink></li>
             <li><a href="index.html#portfolio">Portfolio</a></li>
             <li><a href="index.html#team">Team</a></li>
             <li><a href="blog.html">Blog</a></li>
@@ -62,6 +59,5 @@
         <a class="btn-getstarted" href="index.html#about">Get Started</a>
       </div>
     </header>
-    <!-- End Header -->
-  </body>
+
 </template>

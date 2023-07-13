@@ -1,14 +1,7 @@
 <template>
   <div>
-    <div class="row container justify-content-between" v-if="isloadng">
-      <div style="background-color: rgb(251, 252, 252);height: 100px;" class="col-3 d-flex justify-content-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
-      <div style="background-color: rgb(251, 252, 252);height: 100px;" class="col-3 d-flex justify-content-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
-      <div style="background-color: rgb(251, 252, 252);height: 100px;" class="col-3 d-flex justify-content-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
- 
-      
-     
-    </div>
-    <div v-else>
+    
+    <div>
       <Carousel
         v-bind="settings"
         :breakpoints="breakpoints"
@@ -53,6 +46,8 @@
         </Slide>
       </Carousel>
     </div>
+
+  
   </div>
 </template>
 <script>
@@ -69,8 +64,8 @@ export default {
   },
   data() {
     return {
-      isloadng: true,
-
+ 
+      isLoading:true,
       cryptoData: {},
       settings: {
         itemsToShow: 1.5,
@@ -98,11 +93,13 @@ export default {
   },
 
   created() {
+    
     axios
       .get(
         "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Clitecoin%2Ctron%2Cdogecoin%2Ccoredao%2Cmatic-network%2Cethereum&vs_currencies=Usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true"
       )
       .then((response) => {
+        
         this.cryptoData = response.data;
         this.cryptoData.bitcoin.usd_market_cap =
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmEGV3t3ifQQLa4IZxioNX2z-1Pqs86jEznLUDVSM&s";
@@ -118,9 +115,12 @@ export default {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtakZ9eKNBC0ADpfPuCPNe9oopAee4rcHkjEsTyEQyfpx4LyK_bYMwRyY8dZpksit8mrc&usqp=CAU";
         this.cryptoData["matic-network"].usd_market_cap =
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB_SrkQp2pfafxYMch5Ot4442gsQ97m92371J1GdQ&s";
-          this.isloadng= false
+        
+          this.$setLoading(false);
+
         });
   },
+
 };
 </script>
 <style scoped>

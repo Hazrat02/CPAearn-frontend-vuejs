@@ -5,7 +5,7 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span>Append</span>
+            <span>CPAearn</span>
           </a>
           <p>
             Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada
@@ -59,7 +59,7 @@
 
     <div class="container copyright text-center mt-4">
       <p>
-        &copy; <span>Copyright</span> <strong class="px-1">Append</strong>
+        &copy; <span>Copyright</span> <strong class="px-1">CPAearn</strong>
         <span>All Rights Reserved</span>
       </p>
       <div class="credits">

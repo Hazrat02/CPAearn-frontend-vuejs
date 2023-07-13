@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
+import ServicesView from '../views/ServicesView.vue'
 import AboutView from '../views/AboutView.vue'
 import HomeLayout from '../Layouts/HomeLayout.vue'
 import AuthLayout from '../Layouts/AuthLayout.vue'
@@ -8,6 +9,7 @@ import LoginComponent from '../components/Auth/Login.vue'
 import RegisterComponent from '../components/Auth/Register.vue'
 import ForgetComponent from '../components/Auth/Forget.vue'
 import authenticated from '../midleware/auth.js';
+import { setloading } from '../utils/extra'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -62,6 +64,17 @@ const router = createRouter({
       meta:{
         Layout:AuthLayout,
       },
+    },
+    {
+      path: '/helpcenter',
+      name: 'helpcenter',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component:ServicesView,
+      meta:{
+        requiresGuest:true,
+      },
     }
   ]
 })
@@ -82,7 +95,10 @@ router.beforeEach((to,from, next) => {
     if (to.meta.requiresGuest  && authenticated()) {
       next('/');
     } else {
+      
       next();
+      setloading(true);
+
     }
     // Allow navigation to the next route
     

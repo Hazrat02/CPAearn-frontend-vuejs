@@ -1,19 +1,25 @@
-export default function logout() {
-    localStorage.clear();
-    this.$router.push('/login');
-            this.$notify({
-              title: "message",
-              text: 'Your account logout!',
-              type: "success",
-            });
-    
-  }
-// export default function logout() {
-//     // localStorage.clear();
-//     // Perform any additional logout logic
-//     return 'bal'
-//   }
-  
+import { reactive, toRef } from 'vue';
+
+let Loading = false;
+
+const state = reactive({
+  Loading: Loading,
+});
+
+const LoadingRef = toRef(state, 'Loading');
+
+
+export function setloading(val) {
+
+  LoadingRef.value = val;
+
+}
+
+
+export  function isLoading() {
+  return LoadingRef.value;
+}
+
 
  
   

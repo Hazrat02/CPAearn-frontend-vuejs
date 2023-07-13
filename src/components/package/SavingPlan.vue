@@ -1,109 +1,118 @@
 <template>
   
+  <body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
 
-<body  class="services-details-page" data-bs-spy="scroll" data-bs-target="#navmenu">
 
-  
-
-  <main id="main " class="">
-    <i class="mobile-nav-toggle  d-none bi bi-list"></i>
-    <!-- Services Details Page Title & Breadcrumbs -->
-    <div data-aos="fade" class="page-title">
-      <div class="heading">
-        <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1>Services Details</h1>
-              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Services Details</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <!-- Service-details Section - Services Details Page -->
-    <section id="service-details" class="service-details">
-
-      <div class="container">
-
-        <div class="row gy-5">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="service-box">
-              <h4>Serices List</h4>
-              <div class="services-list">
-                <a href="#" class="active"><i class="bi bi-arrow-right-circle"></i><span>Web Design</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Web Design</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Product Management</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Graphic Design</span></a>
-                <a href="#"><i class="bi bi-arrow-right-circle"></i><span>Marketing</span></a>
-              </div>
-            </div><!-- End Services List -->
-
-            <div class="service-box">
-              <h4>Download Catalog</h4>
-              <div class="download-catalog">
-                <a href="#"><i class="bi bi-filetype-pdf"></i><span>Catalog PDF</span></a>
-                <a href="#"><i class="bi bi-file-earmark-word"></i><span>Catalog DOC</span></a>
-              </div>
-            </div><!-- End Services List -->
-
-            <div class="help-box d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-headset help-icon"></i>
-              <h4>Have a Question?</h4>
-              <p class="d-flex align-items-center mt-2 mb-0"><i class="bi bi-telephone me-2"></i> <span>+1 5589 55488 55</span></p>
-              <p class="d-flex align-items-center mt-1 mb-0"><i class="bi bi-envelope me-2"></i> <a href="mailto:contact@example.com">contact@example.com</a></p>
-            </div>
-
-          </div>
-
-          <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-            <img src="../../../assets/frontend/img/services.jpg" alt="" class="img-fluid services-img">
-            <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
-            <p>
-              Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-            </ul>
-            <p>
-              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
-            </p>
-            <p>
-              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- End Service-details Section -->
-
-  </main>
+<main id="main">
 
  
-  <!-- Scroll Top Button -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Pricing Section - Home Page -->
+  <section id="pricing" class="pricing">
 
-  <!-- Preloader -->
-  <div id="preloader">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <!--  Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>PLAN</h2>
+      <p>Earn Passive Income - Lucrative Realty Investments</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+
+      <div class="row g-4">
+
+        <div class="col-lg-4">
+          <div class="pricing-item">
+            <h3>Free Plan</h3>
+            <div class="icon">
+              <i class="bi bi-box"></i>
+            </div>
+            <h4><sup>$</sup>0<span> / month</span></h4>
+            <ul>
+              <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
+              <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
+              <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
+              <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
+              <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+            </ul>
+            <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
+          </div>
+        </div><!-- End Pricing Item -->
+
+        <div class="col-lg-4">
+          <div class="pricing-item featured">
+            <h3>Business Plan</h3>
+            <div class="icon">
+              <i class="bi bi-rocket"></i>
+            </div>
+
+            <h4><sup>$</sup>29<span> / month</span></h4>
+            <ul>
+              <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
+              <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
+              <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
+              <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
+              <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+            </ul>
+            <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
+          </div>
+        </div><!-- End Pricing Item -->
+
+        <div class="col-lg-4">
+          <div class="pricing-item">
+            <h3>Developer Plan</h3>
+            <div class="icon">
+              <i class="bi bi-send"></i>
+            </div>
+            <h4><sup>$</sup>49<span> / month</span></h4>
+            <ul>
+              <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
+              <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
+              <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
+              <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
+              <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+            </ul>
+            <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
+          </div>
+        </div><!-- End Pricing Item -->
+
+      </div>
+
+    </div>
+
+  </section><!-- End Pricing Section -->
+
+ <!-- Call-to-action Section - Home Page -->
+ <div id="call-to-action" class="call-to-action">
+
+<img src="https://media.istockphoto.com/id/1154923171/photo/e-commerce-online-business-profit-e-business.jpg?b=1&s=612x612&w=0&k=20&c=s246m2kyXsQEyj9BDUMOFs0WTrQcrrpRP7vhqBHguGI=" alt="">
+
+<div class="container">
+  <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+    <div class="col-xl-10">
+      <div class="text-center">
+        <h3>Reffer Your Friend Earn 2$</h3>
+        <p>When your friend buy our vip plan autometic refferal balance transfer your main balance</p>
+        <a class="cta-btn" href="#">Reffer Now</a>
+      </div>
+    </div>
   </div>
+</div>
+
+</div><!-- End Call-to-action Section -->
+
+</main>
+
+
+<!-- Scroll Top Button -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<!-- <div id="preloader">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div> -->
+
 
 
 </body>
@@ -112,12 +121,7 @@
   </template>
   <script>
   import axios from "axios";
-  // import "./../../assets/frontend/vendor/bootstrap/css/bootstrap.min.css";
-  // import "./../../assets/frontend/vendor/bootstrap-icons/bootstrap-icons.css";
-  // import "./../../assets/frontend/vendor/glightbox/css/glightbox.min.css";
-  // import "./../../assets/frontend/vendor/swiper/swiper-bundle.min.css";
-  // import "./../../assets/frontend/vendor/aos/aos.css";
-  // import "./../../assets/frontend/css/main.css";
+
   export default {
     name: 'MyComponent',
     data() {
@@ -133,25 +137,5 @@
   </script >
   <style  scoped>
 
-  /* <!-- Vendor CSS Files -->
-  <link href="./src/assets/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="./src/assets/frontend/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="./src/assets/frontend/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="./src/assets/frontend/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="./src/assets/frontend/vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="./src/assets/frontend/css/main.css" rel="stylesheet"> */
- 
-  .roted {
-    transform: rotate(-6deg);
-    
-  }
-  .offr {
-    transform: rotate(6deg);
-    padding: 20px;
-  }
-
-  
   </style>
   

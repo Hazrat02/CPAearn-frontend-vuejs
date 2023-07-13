@@ -1,4 +1,4 @@
-@import './base.css';
+
 
 @import "./frontend/vendor/bootstrap/css/bootstrap.min.css";
 @import "./frontend/vendor/bootstrap-icons/bootstrap-icons.css";
@@ -31,9 +31,9 @@
 /* Nav Menu Colors */
 :root {
   --color-nav: #3a3939;
-  --color-nav-hover: #e84545;
+  --color-nav-hover: #5e5e5e;
   --color-nav-dropdown: #3a3939;
-  --color-nav-dropdown-hover: #e84545;
+  --color-nav-dropdown-hover: #d1a2a2;
   --color-nav-dropdown-background: #ffffff;
   --color-nav-mobile-background: #ffffff;
 }
@@ -41,4 +41,12 @@
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;
+}
+nav a.router-link-exact-active {
+  color: white;
+  /* font-size: 20px; */
+  background-color:  #71bdf0;
+  border-radius: 6px;
+
+  
 }

@@ -28,6 +28,7 @@ export default {
 
   data() {
     return {
+      isLoading:true,
       banner: [
         {
           img: "https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
@@ -62,68 +63,69 @@ export default {
 </script>
 
 <template>
-  <main style="background-color: #f0f2f5" class="">
+  <div>
+    <HomeLayout>
+      <main   style="background-color: #f0f2f5">
+
+<div class="d-flex ">
+  <span>Notics!</span>
+  <marquee
+    behavior="scroll"
+    direction="left"
+    onmouseover="this.stop();"
+    onmouseout="this.start();"
+  >
+    Wellcome in our company.you can deposit money any time but withdraw
+    sunday and friday off.
+  </marquee>
+</div>
+
+
+
+<div>
+  <Carousel :autoplay="20000" :wrap-around="true" style="margin-top: -55px">
+  <Slide class="" v-for="slide in banner" :key="slide">
+    <div
+      :style="{
+        background: 'url(' + slide.img + ') no-repeat center center fixed',
+        backgroundSize: 'cover',
     
-    <div>
-      <Header />
+
+
+      }"
+      class="carousel__item"
+    >
+    <h1 style="color: #f0f2f5;"> {{ slide.title }}</h1>
+      {{ slide.img }}
+      
     </div>
-    <div class="d-flex ">
-      <span>Notics!</span>
-      <marquee
-        behavior="scroll"
-        direction="left"
-        onmouseover="this.stop();"
-        onmouseout="this.start();"
-      >
-        Wellcome in our company.you can deposit money any time but withdraw
-        sunday and friday off.
-      </marquee>
-    </div>
+  </Slide>
 
-    <!-- <TheWelcome /> -->
+  <template #addons>
+    <Pagination class="" />
+  </template>
+</Carousel>
+</div>
 
-    <div>
-      <Carousel :autoplay="20000" :wrap-around="true">
-      <Slide class="" v-for="slide in banner" :key="slide">
-        <div
-          :style="{
-            background: 'url(' + slide.img + ') no-repeat center center fixed',
-            backgroundSize: 'cover',
-        
-  
+<CryptoPrice style="margin-top: -100px" class="" />
 
-          }"
-          class="carousel__item"
-        >
-        <h1 style="color: #f0f2f5;"> {{ slide.title }}</h1>
-          {{ slide.img }}
-          
-        </div>
-      </Slide>
+<SavingPlan class="" />
 
-      <template #addons>
-        <Pagination class="" />
-      </template>
-    </Carousel>
-    </div>
+<!-- <button @click="logout">logout</button> -->
 
-    <CryptoPrice class="" />
-    <SavingPlan class="" />
-    <Footer />
-    <button @click="logout">logout</button>
-  </main>
+
+</main>
+ 
+    </HomeLayout>
+  </div>
+
 
 </template>
 
 <style scoped>
 
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
-  /* @import "./../assets/frontend/vendor/bootstrap/css/bootstrap.min.css";
-  @import "./../assets/frontend/vendor/bootstrap-icons/bootstrap-icons.css";
-  @import "./../assets/frontend/vendor/glightbox/css/glightbox.min.css";
-  @import "./../assets/frontend/vendor/swiper/swiper-bundle.min.css";
-  @import "./../assets/frontend/vendor/aos/aos.css";
-  @import "./../assets/frontend/css/main.css"; */
+
 .carousel__item {
   min-height: 30rem;
   width: 100%;

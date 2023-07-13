@@ -1,8 +1,19 @@
 <template>
+  
+  <body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+
+<!-- ======= Header ======= -->
+
+
+      
+
+
+<main id="main">
+  <!-- <i class="mobile-nav-toggle d-none bi bi-list"></i> -->
   <div>
     <AuthLayout>
       <template v-slot:bodytext>
-        <p class="mb-4 opacity-60" style="color: hsl(218, 81%, 85%)">
+        <p class="mb-4 opacity-60" style="color: hsl(219, 61%, 76%)" data-aos="zoom-in" data-aos-delay="100">
           Log in your account and earn money from our international company
         </p>
       </template>
@@ -115,8 +126,18 @@
         </form>
       </div>
     </AuthLayout>
+ 
   </div>
 
+</main>
+
+<!-- Scroll Top Button -->
+<a href="#" id="scroll-top" class="scroll-top d-none align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+
+
+</body>
   <!-- <template v-slot:bodytext ></template> -->
 </template>
 
@@ -135,30 +156,30 @@ export default {
     };
   },
   computed: {
-    animation() {
-      return {
-        /**
-         * Animation function
-         *
-         * Runs before animating, so you can take the initial height, width, color, etc
-         * @param  {HTMLElement}  element  The notification element
-         */
-        enter(element) {
-          let height = element.clientHeight;
-          return {
-            // animates from 0px to "height"
-            height: [height, 777],
+    // animation() {
+    //   return {
+    //     /**
+    //      * Animation function
+    //      *
+    //      * Runs before animating, so you can take the initial height, width, color, etc
+    //      * @param  {HTMLElement}  element  The notification element
+    //      */
+    //     enter(element) {
+    //       let height = element.clientHeight;
+    //       return {
+    //         // animates from 0px to "height"
+    //         height: [height, 777],
 
-            // animates from 0 to random opacity (in range between 0.5 and 1)
-            opacity: [Math.random() * 0.5 + 0.5, 0],
-          };
-        },
-        leave: {
-          height: 0,
-          opacity: 0,
-        },
-      };
-    },
+    //         // animates from 0 to random opacity (in range between 0.5 and 1)
+    //         opacity: [Math.random() * 0.5 + 0.5, 0],
+    //       };
+    //     },
+    //     leave: {
+    //       height: 0,
+    //       opacity: 0,
+    //     },
+    //   };
+    // },
   },
 
   methods: {
