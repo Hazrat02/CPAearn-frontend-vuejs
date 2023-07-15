@@ -5,11 +5,13 @@ import ServicesView from '../views/ServicesView.vue'
 import RefferView from '../views/RefferView.vue'
 import ContactView from '../views/ContactView.vue'
 import WallateView from '../views/WallateView.vue'
+import EarnView from '../views/EarnView.vue'
 import VipView from '../views/VipView.vue'
 import AboutView from '../views/AboutView.vue'
 import HomeLayout from '../Layouts/HomeLayout.vue'
 import AuthLayout from '../Layouts/AuthLayout.vue'
 import LoginComponent from '../components/Auth/Login.vue'
+// import GoogleAds from '../components/earn/GoogleAds.vue'
 import RegisterComponent from '../components/Auth/Register.vue'
 import ForgetComponent from '../components/Auth/Forget.vue'
 import authenticated from '../midleware/auth.js';
@@ -108,7 +110,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component:ContactView,
+      component:EarnView,
       meta:{
         requiresGuest:true,
       },

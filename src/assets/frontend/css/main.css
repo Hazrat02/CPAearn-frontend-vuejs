@@ -143,6 +143,7 @@ section {
   z-index: 997;
 }
 
+
 .header .logo img {
   max-height: 40px;
   margin-right: 6px;
@@ -201,7 +202,7 @@ section {
   --color-background: #ffffff;
   --color-secondary: #444444;
   --color-nav: #444444;
-  --color-nav-hover: #e84545;
+  --color-nav-hover: #d6d0d091;
   box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -299,7 +300,7 @@ section {
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
+    left: -110%;
     top: 130%;
     opacity: 0;
     transition: 0.3s;
@@ -383,7 +384,7 @@ section {
   .navmenu .megamenu ul li a:hover,
   .navmenu .megamenu ul li .active,
   .navmenu .megamenu ul li .active:hover {
-    color: var(--color-nav-dropdown-hover);
+    color: rgba(199, 240, 240, 0.671);
   }
 
   .navmenu .megamenu:hover>ul {

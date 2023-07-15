@@ -14,7 +14,7 @@ import App from './App.vue'
 import router from './router'
 import Particles from 'vue3-particles'
 import Notifications from '@kyvg/vue3-notification'
-
+import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
 import 'vue3-snotify/style';
 
 // ==========package=============
@@ -24,6 +24,8 @@ import './assets/main.css';
 // layouts
 import AuthLayout from "./Layouts/AuthLayout.vue";
 import HomeLayout from "./Layouts/HomeLayout.vue";
+
+
 
 
 const app = createApp(App)
@@ -39,6 +41,10 @@ app.component('MobileNav', MobileNav);
 app.component('Loading', Loading);
 app.component('AuthLayout', AuthLayout);
 app.component('HomeLayout', HomeLayout);
+app.component('Carousel', Carousel);
+app.component('Navigation', Navigation);
+app.component('Pagination', Pagination);
+app.component('Slide', Slide);
 
 
 

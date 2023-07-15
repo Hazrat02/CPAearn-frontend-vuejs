@@ -7,23 +7,16 @@ import auth from "../midleware/auth.js";
 import CryptoPrice from "../components/Crypto/CryptoPrice.vue";
 import SavingPlan from "../components/package/SavingPlan.vue";
 
-// import utils from '../utils/extra.js'
-// import * as extra from '../utils/extra.js';
 
-import { defineComponent } from "vue";
-import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
 
-import "vue3-carousel/dist/carousel.css";
+
 
 export default {
   components: {
     TheWelcome,
     CryptoPrice,
     SavingPlan,
-    Carousel,
-    Navigation,
-    Pagination,
-    Slide,
+  
   },
 
   data() {

@@ -54,5 +54,18 @@ import { RouterLink, RouterView } from "vue-router";export default {
   backdrop-filter: saturate(200%) blur(5px);
   background-color: black;
 } */
+@media only screen and (max-width: 600px) {
+  .header {
+    display: none ;
+  }
+  .bal{
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+.bal{
+  display: none ;
+}
 
+}
 </style>

@@ -1,8 +1,15 @@
 <template>
 
-    <header id="header" class="header sticky-top d-flex align-items-center">
+    <header style="
+    
+    
+    
+    
+    
+    
+    "  id="header" class="header  sticky-top d-flex align-items-center">
       <div
-        class="container-fluid d-flex align-items-center justify-content-between"
+        class="bal container-fluid d-flex align-items-center justify-content-between"
       >
         <RouterLink
         to="/"
@@ -27,30 +34,15 @@
             
             <li><RouterLink class="hovdiv" to="/contact"><div> <i class="bi bi-wechat"></i> <span class="spanhide">Contact</span></div></RouterLink></li>
             <li><RouterLink class="hovdiv" to="/earning"><div><i class="bi bi-cash-coin"></i>  <span class="spanhide">Earn</span></div></RouterLink></li>
-            <!-- <li class="dropdown has-dropdown">
-              <a href="#"
+            <li class="dropdown has-dropdown">
+              <a 
                 ><span>More</span> <i class="bi bi-chevron-down"></i
               ></a>
               <ul class="dd-box-shadow">
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown has-dropdown">
-                  <a href="#"
-                    ><span>Deep Dropdown</span>
-                    <i class="bi bi-chevron-down"></i
-                  ></a>
-                  <ul class="dd-box-shadow">
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
+                <li><RouterLink to="/reffer"><div ><span class="">Reffer</span></div></RouterLink></li>
+               
               </ul>
-            </li> -->
+            </li>
           
           
           </ul>
@@ -65,3 +57,7 @@
     </header>
 
 </template>
+<style scoped>
+
+
+</style>
