@@ -1,11 +1,11 @@
 <script>
-
-import { RouterLink, RouterView } from "vue-router";export default {
+import { RouterLink, RouterView } from "vue-router";
+export default {
   mounted() {
-    document.addEventListener('touchend', this.handlePinchGesture);
+    document.addEventListener("touchend", this.handlePinchGesture);
   },
   beforeDestroy() {
-    document.removeEventListener('touchend', this.handlePinchGesture);
+    document.removeEventListener("touchend", this.handlePinchGesture);
   },
   methods: {
     handlePinchGesture(event) {
@@ -15,7 +15,7 @@ import { RouterLink, RouterView } from "vue-router";export default {
       }
     },
   },
-  }
+};
 </script>
 <template>
   <body
@@ -29,7 +29,7 @@ import { RouterLink, RouterView } from "vue-router";export default {
       <Header />
     </div>
 
-    <main id="main">
+    <main id="main" style="margin-top: 0px;">
       <slot />
     </main>
 
@@ -37,14 +37,14 @@ import { RouterLink, RouterView } from "vue-router";export default {
     <a
       href="#"
       id="scroll-top"
-      class="scroll-top  align-items-center justify-content-center"
+      class="scroll-top align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
     <Footer />
-        <!-- <Loading /> -->
-        <div v-if="this.$isLoading()" id="preloader">
-    <Loading />
-  </div>
+    <!-- <Loading /> -->
+    <!-- <div v-if="this.$isLoading()" id="preloader">
+      <Loading />
+    </div> -->
   </body>
 </template>
 
@@ -56,16 +56,15 @@ import { RouterLink, RouterView } from "vue-router";export default {
 } */
 @media only screen and (max-width: 600px) {
   .header {
-    display: none ;
+    display: none;
   }
-  .bal{
+  .bal {
     display: none;
   }
 }
 @media (max-width: 500px) {
-.bal{
-  display: none ;
-}
-
+  .bal {
+    display: none;
+  }
 }
 </style>

@@ -7,7 +7,7 @@
     
     
     
-    "  id="header" class="header  sticky-top d-flex align-items-center">
+    "  id="header" class="header d-none  sticky-top d-flex align-items-center">
       <div
         class="bal container-fluid d-flex align-items-center justify-content-between"
       >
