@@ -42,9 +42,9 @@ export default {
     ></a>
     <Footer />
     <!-- <Loading /> -->
-    <!-- <div v-if="this.$isLoading()" id="preloader">
+    <div v-if="this.$isLoading()" id="preloader">
       <Loading />
-    </div> -->
+    </div>
   </body>
 </template>
 
@@ -54,17 +54,4 @@ export default {
   backdrop-filter: saturate(200%) blur(5px);
   background-color: black;
 } */
-@media only screen and (max-width: 600px) {
-  .header {
-    display: none;
-  }
-  .bal {
-    display: none;
-  }
-}
-@media (max-width: 500px) {
-  .bal {
-    display: none;
-  }
-}
 </style>

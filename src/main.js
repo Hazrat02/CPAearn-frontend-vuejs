@@ -17,6 +17,10 @@ import Notifications from '@kyvg/vue3-notification'
 import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
 import 'vue3-snotify/style';
 
+// import Trend from "vuetrend"
+
+
+
 // ==========package=============
 import './assets/base.js';
 import './assets/main.css';
@@ -32,7 +36,7 @@ const app = createApp(App)
 app.use(router);
 app.use(Notifications);
 app.use(Particles);
-
+// Vue.use(Trend)
 // =================component=============
 app.component('Bgs', Backgrounds);
 app.component('Footer', Footer);
