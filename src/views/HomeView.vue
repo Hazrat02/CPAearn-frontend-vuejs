@@ -5,6 +5,7 @@ import TheWelcome from "../components/TheWelcome.vue";
 import { useRouter } from "vue-router";
 import auth from "../midleware/auth.js";
 import CryptoPrice from "../components/Crypto/CryptoPrice.vue";
+
 import SavingPlan from "../components/package/SavingPlan.vue";
 
 export default {
@@ -78,7 +79,7 @@ export default {
                     'url(' + slide.img + ') no-repeat center center fixed',
                   backgroundSize: 'cover',
                 }"
-                class="carousel__item"
+                class="carousel__item" data-aos="zoom-in-up"
               >
                 <h1 style="color: #f0f2f5">{{ slide.title }}</h1>
                 {{ slide.img }}

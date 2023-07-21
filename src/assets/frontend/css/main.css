@@ -868,11 +868,13 @@ section {
 }
 
 .about .icon-box {
-  padding: 50px 40px;
+  padding:  40px;
+  
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   transition: all 0.3s ease-out 0s;
   background-color: var(--color-box-background);
+  height: 300px;
 }
 
 .about .icon-box i {
@@ -905,11 +907,11 @@ section {
   background-color: var(--color-primary);
   color: var(--color-inverse);
 }
-
+/* 
 .about .icon-boxes .col-md-6:nth-child(2) .icon-box,
 .about .icon-boxes .col-md-6:nth-child(4) .icon-box {
   margin-top: -40px;
-}
+} */
 
 @media (max-width: 768px) {
 

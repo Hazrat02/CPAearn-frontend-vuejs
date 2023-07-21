@@ -1,17 +1,21 @@
 <template>
   <div>
     <HomeLayout>
-      <div style="position: relative; margin-bottom: 100px ;" class="">
-        <div class=""
+      <div style="position: relative; margin-bottom: 100px" class="">
+        <div
+          class=""
           style="
             background-image: url('https://wallpaperaccess.com/full/2895055.jpg');
 
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
-            
           "
         >
-          <div style="padding-bottom: 80px;" class="row container" data-aos="fade-down">
+          <div
+            style="padding-bottom: 80px"
+            class="row container"
+            data-aos="fade-down"
+          >
             <div
               class="row justify-content-between pt-3 align-item-center col-12 col-md-8"
             >
@@ -38,13 +42,13 @@
                 </div>
               </div>
 
-              <div class="col-3 col-md-12 ">
-                <div class=" col-md-12 ml-5 d-flex justify-content-center">
+              <div class="col-3 col-md-12">
+                <div class="col-md-12 ml-5 d-flex justify-content-center">
                   <canvas ref="chartCanvas"></canvas>
                 </div>
               </div>
             </div>
-            <div style="align-items: center;" class="col-md-4 col-12 mt-3 row">
+            <div style="align-items: center" class="col-md-4 col-12 mt-3 row">
               <div class="d-flex justify-content-evenly">
                 <button class="btn btn-outline-primary">Withdraw</button>
                 <button class="btn btn-outline-primary">Deposit</button>
@@ -169,12 +173,33 @@
           </div>
         </div>
       </div>
+
+      <div>
+        <CryptoPrice />
+      </div>
+
+      <!-- Button trigger modal -->
+      <div>
+        <button @click="showModal = true">Open Modal</button>
+        <Modal
+          :visible="showModal"
+          @update:visible="showModal = $event"
+          modalWidth="500px"
+          modalHeight="300px"
+        >
+          <!-- Modal content goes here -->
+          <h2>Hello from the modal!</h2>
+          <p>This is the modal content.</p>
+          <button @click="showModal = false">Close Modal</button>
+        </Modal>
+      </div>
     </HomeLayout>
   </div>
 </template>
 
 <script>
 import "vue3-carousel/dist/carousel.css";
+import CryptoPrice from "../components/Crypto/CryptoPrice.vue";
 import {
   Chart,
   CategoryScale,
@@ -185,7 +210,14 @@ import {
   ArcElement,
   PieController,
 } from "chart.js";
+import Modal from "../components/others/Modal.vue";
+
 export default {
+  components: {
+    CryptoPrice,
+
+    Modal,
+  },
   mounted() {
     this.renderChart();
   },
@@ -210,16 +242,8 @@ export default {
           datasets: [
             {
               data: [0.00000012, 0.00000102],
-              backgroundColor: [
-                "yellow",
-                "green ",
-                
-              ],
-              borderColor: [
-                "black",
-                "rgba(25, 99, 132, 1)",
-                "blue",
-              ],
+              backgroundColor: ["yellow", "green "],
+              borderColor: ["black", "rgba(25, 99, 132, 1)", "blue"],
               borderWidth: 5,
             },
           ],
@@ -231,23 +255,19 @@ export default {
             legend: {
               position: "bottom",
             },
-
           },
-          
         },
-        
       });
-      
+
       // Set canvas height and width using CSS
       this.$refs.chartCanvas.style.height = "150px";
       this.$refs.chartCanvas.style.width = "150px";
-          
     },
   },
 
   data() {
     return {
-      isLoading: true,
+      showModal: true,
       cryptoData: {},
       settings: {
         itemsToShow: 1.5,

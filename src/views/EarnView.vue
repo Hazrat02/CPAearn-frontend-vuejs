@@ -1,47 +1,211 @@
 <template>
   <div>
     <HomeLayout>
-      <!-- Team Section - Home Page -->
-      <section class="">
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Earn</h2>
-          <p>
-            Daily show ads.
-          </p>
+      <div>
+        <div>
           <div>
-            <!-- test -->
-            <ins
-              class="adsbygoogle"
-              style="display: block"
-              data-ad-client="ca-pub-5750829707835473"
-              data-ad-slot="3151991226"
-              data-adtest="on"
-              google_adtest = "on"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
+            <canvas ref="chartCanvas" width="400" height="200"></canvas>
           </div>
         </div>
-      </section>
+        <div id="about" class="about mt-2">
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row align-items-xl-center gy-5">
+              <div class="col-xl-12">
+                <div class="row gy-4 icon-boxes">
+                  <div
+                    style="height: 300px"
+                    class="col-md-6 col-xl-4"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
+                    <div class="icon-box mt-0" style="height: 300px">
+                      <div class="d-flex justify-content-end">
+                        0/5
+                      </div>
+                      <i class="bi bi-newspaper"></i>
+                      <h3>News Read</h3>
+                      <p>
+                        Magni repellendus vel ullam hic officia accusantium ipsa
+                        dolor omnis dolor voluptatem
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    style="height: 300px"
+                    class="col-md-6 col-xl-4"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
+                    <div class="icon-box" style="height: 300px">
+                      <i class="bi bi-code-slash"></i>
+                      <h3>Web Design</h3>
+                      <p>
+                        Magni repellendus vel ullam hic officia accusantium ipsa
+                        dolor omnis dolor voluptatem
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    style="height: 300px"
+                    class="col-md-6 col-xl-4"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
+                    <div class="icon-box" style="height: 300px">
+                      <i class="bi bi-collection-play"></i>
+                      <h3>Video Ads</h3>
+                      <p>
+                        Magni repellendus vel ullam hic officia accusantium ipsa
+                        dolor omnis dolor voluptatem
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    style="height: 300px"
+                    class="col-md-6 col-xl-4"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <div class="icon-box">
+                      <i class="bi bi-envelope-check"></i>
+                      <h3>Mail Sales</h3>
+                      <p>
+                        Autem saepe animi et aut aspernatur culpa facere. Rerum
+                        saepe rerum voluptates quia
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-md-6 col-xl-4 height"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                  >
+                    <div class="icon-box">
+                      <i class="bi bi-file-richtext"></i>
+                      <h3>Banner Ads</h3>
+                      <p>
+                        Omnis perferendis molestias culpa sed. Recusandae quas
+                        possimus. Quod consequatur corrupti
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-md-6 col-xl-4 height"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <div class="icon-box">
+                      <i class="bi bi-clipboard-data"></i>
+                      <h3>Data Entry</h3>
+                      <p>
+                        Sint et dolor voluptas minus possimus nostrum.
+                        Reiciendis commodi eligendi omnis quideme lorenda
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-6 col-xl-4 height"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <div class="icon-box">
+                      <i class="bi bi-graph-up-arrow"></i>
+                      <h3>1xBet</h3>
+                      <p>
+                        Sint et dolor voluptas minus possimus nostrum.
+                        Reiciendis commodi eligendi omnis quideme lorenda
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-6 col-xl-4 height"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <div class="icon-box">
+                      <i class="bi bi-megaphone"></i>
+                      <h3>Social Promote</h3>
+                      <p>
+                        Sint et dolor voluptas minus possimus nostrum.
+                        Reiciendis commodi eligendi omnis quideme lorenda
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-6 col-xl-4 height"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <div class="icon-box">
+                      <i class="bi bi-graph-up-arrow"></i>
+                      <h3>Delares sapiente</h3>
+                      <p>
+                        Sint et dolor voluptas minus possimus nostrum.
+                        Reiciendis commodi eligendi omnis quideme lorenda
+                      </p>
+                    </div>
+                  </div>
+                  <!-- End Icon Box -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End About div -->
+      </div>
     </HomeLayout>
   </div>
 </template>
 
 <script>
-import GoogleAds from "../components/earn/GoogleAds.vue";
+import Chart from 'chart.js/auto';
+
 export default {
-  components: {
-    GoogleAds,
+  data (){
+      
   },
   mounted() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  },
-  data() {
-    return {};
-  },
+    const ctx = this.$refs.chartCanvas.getContext("2d");
+    this.chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6" ,'day7',"Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6" ,'day7'],
+        datasets: [
+          {
+            label: "Dataset",
+            data: [10, 5, 20, 10, 25, 15,24,10, 5, 20, 10, 25, 15,24],
+            borderColor: "red",
+            backgroundColor: "rgba(255, 0, 0, 0.5)",
+            pointStyle: "circle",
+            pointRadius: 10,
+            pointHoverRadius: 15,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: (ctx) =>
+              "Point Style: " + ctx.chart.data.datasets[0].pointStyle,
+          },
+        },
+      },
+    });
 
-  created() {
     this.$setLoading(false);
+  },
+  beforeDestroy() {
+    // Cleanup chart before component is destroyed
+    if (this.chart) {
+      this.chart.destroy();
+    }
   },
 };
 </script>
+
+<style scoped></style>

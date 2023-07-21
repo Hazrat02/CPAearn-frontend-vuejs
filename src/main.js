@@ -3,6 +3,7 @@ import Footer from './components/others/Footer.vue'
 import Header from './components/others/Header.vue'
 import Loading from './components/others/Loading.vue'
 import MobileNav from './components/others/MobileNav.vue'
+import GoogleAds from './components/earn/GoogleAds.vue'
 
 
 
@@ -43,6 +44,7 @@ app.component('Footer', Footer);
 app.component('Header', Header);
 app.component('MobileNav', MobileNav);
 app.component('Loading', Loading);
+app.component('GoogleAds', GoogleAds);
 app.component('AuthLayout', AuthLayout);
 app.component('HomeLayout', HomeLayout);
 app.component('Carousel', Carousel);

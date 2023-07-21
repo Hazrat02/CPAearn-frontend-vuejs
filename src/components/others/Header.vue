@@ -2,10 +2,10 @@
   <header
     style=""
     id="header"
-    class="header d-none sticky-top d-flex align-items-center"
+    class="header sticky-top d-flex align-items-center"
   >
     <div
-      class="bal container-fluid d-flex align-items-center justify-content-between"
+      class=" container-fluid d-flex align-items-center justify-content-between"
     >
       <RouterLink to="/" class="logo  align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
@@ -51,15 +51,6 @@
               </div></RouterLink
             >
           </li>
-
-          <li>
-            <RouterLink class="hovdiv" to="/contact"
-              ><div>
-                <i class="bi bi-wechat"></i>
-                <span class="spanhide">Contact</span>
-              </div></RouterLink
-            >
-          </li>
           <li>
             <RouterLink class="hovdiv" to="/earning"
               ><div>
@@ -68,6 +59,15 @@
               </div></RouterLink
             >
           </li>
+          <li>
+            <RouterLink class="hovdiv" to="/contact"
+              ><div>
+                <i class="bi bi-wechat"></i>
+                <span class="spanhide">Contact</span>
+              </div></RouterLink
+            >
+          </li>
+          
           <li class="dropdown has-dropdown">
             <a><span>More</span> <i class="bi bi-chevron-down"></i></a>
             <ul class="dd-box-shadow">
