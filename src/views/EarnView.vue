@@ -2,11 +2,46 @@
   <div>
     <HomeLayout>
       <div>
-        <div>
-          <div>
+        <div class="row mb-0 pb-0">
+          <div class="col-md-4">
+            <section id="vip p-0 m-0" class="vip">
+              <div class="container" data-aos="zoom-in" data-aos-delay="100">
+                <div class="row">
+                  <div
+                    class=""
+                    data-aos="flip-right"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000"
+                  >
+                    <div class="vip-item">
+                      <h3> Your Free Plan</h3>
+                      <div class="icon">
+                        <i class="bi bi-box"></i>
+                      </div>
+                      <h4><sup>$</sup>0<span> / month</span></h4>
+                      <ul>
+                        <li>
+                          <i class="bi bi-check"></i>
+                          <span>Unlock News Read</span>
+                        </li>
+                        <li>
+                          <i class="bi bi-check"></i>
+                          <span>Unlock Banner Ads</span>
+                        </li>
+                       
+                      </ul>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="col-md-8 mb-0 pb-0">
             <canvas ref="chartCanvas" width="400" height="200"></canvas>
           </div>
         </div>
+        <hr>
         <div id="about" class="about mt-2">
           <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row align-items-xl-center gy-5">
@@ -19,9 +54,7 @@
                     data-aos-delay="200"
                   >
                     <div class="icon-box mt-0" style="height: 300px">
-                      <div class="d-flex justify-content-end">
-                        0/5
-                      </div>
+                      <div class="d-flex justify-content-end">0/5</div>
                       <i class="bi bi-newspaper"></i>
                       <h3>News Read</h3>
                       <p>
@@ -161,22 +194,35 @@
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 
 export default {
-  data (){
-      
-  },
+  data() {},
   mounted() {
     const ctx = this.$refs.chartCanvas.getContext("2d");
     this.chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6" ,'day7',"Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6" ,'day7'],
+        labels: [
+          "Day 1",
+          "Day 2",
+          "Day 3",
+          "Day 4",
+          "Day 5",
+          "Day 6",
+          "day7",
+          "Day 1",
+          "Day 2",
+          "Day 3",
+          "Day 4",
+          "Day 5",
+          "Day 6",
+          "day7",
+        ],
         datasets: [
           {
             label: "Dataset",
-            data: [10, 5, 20, 10, 25, 15,24,10, 5, 20, 10, 25, 15,24],
+            data: [10, 5, 20, 10, 25, 15, 24, 10, 5, 20, 10, 25, 15, 24],
             borderColor: "red",
             backgroundColor: "rgba(255, 0, 0, 0.5)",
             pointStyle: "circle",
@@ -207,5 +253,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

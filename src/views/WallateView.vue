@@ -180,19 +180,31 @@
 
       <!-- Button trigger modal -->
       <div>
-        <button @click="showModal = true">Open Modal</button>
-        <Modal
-          :visible="showModal"
-          @update:visible="showModal = $event"
-          modalWidth="500px"
-          modalHeight="300px"
-        >
-          <!-- Modal content goes here -->
-          <h2>Hello from the modal!</h2>
-          <p>This is the modal content.</p>
-          <button @click="showModal = false">Close Modal</button>
-        </Modal>
-      </div>
+    <!-- Your other content goes here -->
+    <button @click="showModal = true">Open Modal</button>
+
+    <!-- Use the Modal component with the necessary props -->
+    <Modal
+      :showModal="showModal"
+      :modalWidth="modalWidth"
+      :modalHeight="modalHeight"
+      :position="modalPosition"
+      @close="showModal = false"
+      :title="'Deposit'"
+    >
+    <div class="col-12 my-5">
+      <form  action="">
+        <select class="form-control" name="" id="">
+          <option value="">Bitcoin</option>
+          <option value="">Bitcoin</option>
+          <option value="">Bitcoin</option>
+          <option value="">Bitcoin</option>
+        </select>
+      </form>
+    </div>
+      <!-- Your modal content goes here -->
+    </Modal>
+  </div>
     </HomeLayout>
   </div>
 </template>
@@ -267,7 +279,11 @@ export default {
 
   data() {
     return {
-      showModal: true,
+      showModal: false,
+      modalWidth: "col-11 col-md-6 bg-white rounded-4",
+      modalHeight: "auto",
+      modalPosition: "center", // Set the default position here, other options: top, right, bottom, left
+
       cryptoData: {},
       settings: {
         itemsToShow: 1.5,

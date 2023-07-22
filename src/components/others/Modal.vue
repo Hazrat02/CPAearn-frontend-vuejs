@@ -1,79 +1,111 @@
 <template>
-  <div class="modal" v-if="visible" :style="modalStyles">
-    <div class="modal-content" :style="contentStyles">
-      <slot></slot>
+  <div class="modal-overlay" @click="closeModal" v-if="showModal">
+    <div class="" :class="this.modalWidth " style="border-radius: 100%;" >
+      <div class="modal-header">
+        <span class="modal-title">{{this.title}}</span>
+        <button class="close-button" @click="closeModal">&times;</button>
+      </div>
+      <div class="modal-content" @click.stop>
+        <!-- Your modal content goes here -->
+        <slot></slot>
+      </div>
     </div>
-    <div class="modal-overlay" @click="close"></div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "Modal",
-  props: {
-    visible: {
+export default {props: {
+    title: {
+      type: String,
+      default: "Modal Title",
+    },
+    showModal: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     modalWidth: {
       type: String,
-      default: "400px", // You can set a default width here
+      default: "col-11 col-md-6 bg-white rounded-4",
     },
     modalHeight: {
       type: String,
-      default: "auto", // You can set a default height here
+      default: "auto",
     },
-  },
-  methods: {
-    close() {
-      this.$emit("update:visible", false);
+    position: {
+      type: String,
+      default: "center", // Default position is center, other options: top, right, bottom, left
     },
   },
   computed: {
-    modalStyles() {
-      return {
-        width: this.modalWidth,
-        height: this.modalHeight,
-      };
+    // modalStyle(){
+
+    //   return this.modalWidth
+    // }
+    // ,
+    modalStyle() {
+      //col-11 col-md-6 bg-white rounded-4
+      let style = this.modalWidth;
+      return style;
     },
-    contentStyles() {
-      // You can add more styles for the modal content if needed
-      return {
-        maxHeight: `calc(${this.modalHeight} - 100px)`, // You can adjust this value to leave space for other elements in the modal
-      };
+  },
+  methods: {
+    closeModal() {
+      this.$emit("close");
     },
   },
 };
 </script>
 
-<style>
-/* Add your custom styles for the modal here */
-.modal {
+<style scoped>
+/* Add your modal styles here */
+.modal-overlay {
+  /* Styles for the overlay/background when modal is active */
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  /* Styles for the modal container */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.modal-header {
+  /* Styles for the modal header */
+  padding: 16px;
+  background-color: #f0f0f0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  justify-content: space-between;
+}
+
+.modal-title {
+  /* Styles for the modal title */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-button {
+  /* Styles for the close button */
+  cursor: pointer;
+  font-size: 20px;
+  background: none;
+  border: none;
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds modal height */
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* Styles for the modal content */
+  padding: 16px;
 }
 </style>
