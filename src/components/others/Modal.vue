@@ -1,6 +1,6 @@
 <template>
-  <div class="modal-overlay" @click="closeModal" v-if="showModal">
-    <div class="" :class="this.modalWidth " style="border-radius: 100%;" >
+  <div  class="modal-overlay" @click="closeModal" v-if="showModal">
+    <div class="" :class="this.modalWidth " style="border-radius: 100%;z-index: 999999999" >
       <div class="modal-header">
         <span class="modal-title">{{this.title}}</span>
         <button class="close-button" @click="closeModal">&times;</button>
