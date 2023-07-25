@@ -172,6 +172,10 @@ export default {
     // },
   },
 
+  created(){
+    this.$setLoading(false);
+  },
+
   methods: {
     showNotification() {
       this.$notify({
@@ -180,6 +184,7 @@ export default {
       });
     },
     register() {
+      this.$setLoading(true);
       const data = {
 
           email: this.email,
@@ -196,6 +201,7 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/auth/register", data)
         .then((response) => {
+          this.$setLoading(false);
           // localStorage.setItem('token', response.data.authorisation.token);
           // Handle the response data
           // console.log(response.data);
@@ -208,7 +214,7 @@ export default {
         })
         .catch(() => {
           // Handle the error
-
+          this.$setLoading(false);
           this.$notify({
             title: "Error message",
             text: "Something went wrong!",

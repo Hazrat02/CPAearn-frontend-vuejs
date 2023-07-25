@@ -4,7 +4,10 @@ import Header from './components/others/Header.vue'
 import Loading from './components/others/Loading.vue'
 import MobileNav from './components/others/MobileNav.vue'
 import GoogleAds from './components/earn/GoogleAds.vue'
+import axios from 'axios';
+// axios.defaults.bas
 
+axios.defaults.headers.common['Authorization']='bearer'+localStorage.getItem('token');
 
 
 

@@ -267,6 +267,7 @@ import {
   PieController,
 } from "chart.js";
 import Modal from "../components/others/Modal.vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -391,6 +392,29 @@ export default {
   },
 
   created() {
+    axios
+        .get("http://127.0.0.1:8000/api/payment")
+        .then((response) => {
+          
+          // login(response.data.authorisation.token);
+          console.log(response.data.payment);
+           
+
+          // this.$notify({
+          //   title: "message",
+          //   text: 'User succesfully login',
+          //   type: "success",
+          // });
+        })
+        .catch((error) => {
+          
+          this.$router.push('/')
+          this.$notify({
+            title: "Warning",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
     this.$setLoading(false);
   },
 };

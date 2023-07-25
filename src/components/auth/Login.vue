@@ -181,6 +181,9 @@ export default {
     //   };
     // },
   },
+  created(){
+    this.$setLoading(false);
+  },
 
   methods: {
     showNotification() {
@@ -190,6 +193,7 @@ export default {
       });
     },
     login() {
+      this.$setLoading(true);
         const data = {
       email: this.email,
       password: this.password
@@ -200,7 +204,7 @@ export default {
         .then((response) => {
           
           login(response.data.authorisation.token);
-            
+          this.$setLoading(false);
             // window.location.reload();
           // Handle the response data
           this.$router.push('/')
@@ -212,7 +216,7 @@ export default {
         })
         .catch(() => {
           // Handle the error
-          
+          this.$setLoading(false);
           this.$notify({
         title: "Error message",
         text: "Wrong email or password!",
@@ -223,8 +227,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  /* @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
-  @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"); */
-</style>

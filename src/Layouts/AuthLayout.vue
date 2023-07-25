@@ -69,7 +69,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <div></div>
 </div> -->
 
-
+<div v-if="this.$isLoading()" id="preloader">
+      <Loading />
+    </div>
 </body>
 
 

@@ -6,7 +6,7 @@ export default {};
 
 <template>
   <div>
-    <Notifications :animation="animation" />
+    <Notifications  />
 
     <RouterView />
   </div>
