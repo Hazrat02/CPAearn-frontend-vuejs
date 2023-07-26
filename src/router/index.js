@@ -15,7 +15,12 @@ import LoginComponent from '../components/Auth/Login.vue'
 import RegisterComponent from '../components/Auth/Register.vue'
 import ForgetComponent from '../components/Auth/Forget.vue'
 import authenticated from '../midleware/auth.js';
+import { logout } from "../midleware/auth.js";
 import { setloading } from '../utils/extra'
+import axios from 'axios';
+
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -78,9 +83,9 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component:ServicesView,
-      meta:{
-        requiresGuest:true,
-      },
+      // meta:{
+      //   requiresGuest:true,
+      // },
     },
     {
       path: '/contact',
@@ -100,9 +105,9 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component:WallateView,
-      // meta:{
-      //   requiresGuest:true,
-      // },
+      meta:{
+        requiresAuth:true,
+      },
     },
     {
       path: '/earning',
@@ -120,9 +125,9 @@ const router = createRouter({
       name: 'vip',
 
       component:VipView,
-      meta:{
-        requiresGuest:true,
-      },
+      // meta:{
+      //   requiresGuest:true,
+      // },
     },
     {
       path: '/reffer',
@@ -139,26 +144,45 @@ const router = createRouter({
 
 
 
-
-
-
-router.beforeEach((to,from, next) => {
-  if (to.meta.requiresAuth  && !authenticated()) {
-    
-    // Redirect to login page or any other desired route
+router.beforeEach((to, from, next) => {
+  // Function to check if the JWT token is expired
+  function isTokenExpired(token) {
+    const tokenData = JSON.parse(atob(token.split('.')[1]));
+    const expirationTime = tokenData.exp * 1000; // Convert expiration time to milliseconds
+    return Date.now() >= expirationTime;
+  }
+  const jwtToken = localStorage.getItem('token');
+  if (jwtToken && isTokenExpired(jwtToken)) {
+    // Clear the localStorage and redirect to the login page
+    localStorage.removeItem('token');
+    logout();
     next('/login');
-    
   } else {
-    if (to.meta.requiresGuest  && authenticated()) {
-      next('/');
-    } else {
-      
-      next();
-      setloading(true);
-
-    }
     // Allow navigation to the next route
     
+  // Check if the route requires authentication and user is not authenticated
+  if (to.meta.requiresAuth && !authenticated()) {
+    // Redirect to login page or any other desired route
+    next('/login');
+  } else {
+    // Check if the route requires a guest (unauthenticated user) and user is authenticated
+    if (to.meta.requiresGuest && authenticated()) {
+      next('/');
+    } else {
+      axios.defaults.headers.common['Authorization']='bearer'+localStorage.getItem('token');
+
+      next();
+      setloading(true);
+    
+    }
+  }
   }
 });
+
+
+
+
+
+
+
 export default router

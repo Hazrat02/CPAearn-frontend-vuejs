@@ -1,6 +1,6 @@
 import { reactive, toRef } from 'vue';
 
-console.log('done')
+
 let Loading = false;
 
 const state = reactive({
@@ -20,6 +20,26 @@ export function setloading(val) {
 export  function isLoading() {
   return LoadingRef.value;
 }
+
+
+let backedUrl = 'http://127.0.0.1:8000/';
+
+const backedUrlstate = reactive({
+  backedUrl: backedUrl,
+});
+
+const backedUrlRef = toRef(backedUrlstate, 'backedUrl');
+
+export  function setbackedUrl(link) {
+  backedUrlRef.value= backedUrl+link
+  return backedUrlRef.value;
+}
+
+
+
+
+
+
 
 
  

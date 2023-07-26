@@ -4,15 +4,11 @@ import Header from './components/others/Header.vue'
 import Loading from './components/others/Loading.vue'
 import MobileNav from './components/others/MobileNav.vue'
 import GoogleAds from './components/earn/GoogleAds.vue'
-import axios from 'axios';
-// axios.defaults.bas
-
-axios.defaults.headers.common['Authorization']='bearer'+localStorage.getItem('token');
 
 
 
 
-import {setloading,isLoading} from './utils/extra.js'
+import {setloading,isLoading,setbackedUrl} from './utils/extra.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -38,6 +34,7 @@ import HomeLayout from "./Layouts/HomeLayout.vue";
 
 const app = createApp(App)
 app.use(router);
+
 app.use(Notifications);
 app.use(Particles);
 // Vue.use(Trend)
@@ -63,6 +60,7 @@ app.component('Slide', Slide);
 // extra==========================================
 app.config.globalProperties.$setLoading = setloading;
 app.config.globalProperties.$isLoading = isLoading;
+app.config.globalProperties.$setbackedUrl = setbackedUrl;
 
 app.mount('#app')
 

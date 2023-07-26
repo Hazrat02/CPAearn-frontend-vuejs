@@ -2,7 +2,7 @@
   <header
     style=""
     id="header"
-    class="header d-none sticky-top d-flex align-items-center"
+    class="header  sticky-top d-flex align-items-center"
   >
     <div
       class=" container-fluid d-flex align-items-center justify-content-between"
