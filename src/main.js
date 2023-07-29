@@ -15,9 +15,19 @@ import router from './router'
 import Particles from 'vue3-particles'
 import Notifications from '@kyvg/vue3-notification'
 import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
-import 'vue3-snotify/style';
 
-// import Trend from "vuetrend"
+
+
+
+
+
+// pinia store==============================
+import { createPinia } from 'pinia';
+
+
+// const userStore = useUserStore();
+// userStore.loadUserFromLocalStorage();
+
 
 
 
@@ -33,7 +43,9 @@ import HomeLayout from "./Layouts/HomeLayout.vue";
 
 
 const app = createApp(App)
+const pinia = createPinia();
 app.use(router);
+app.use(pinia);
 
 app.use(Notifications);
 app.use(Particles);

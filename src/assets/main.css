@@ -212,6 +212,10 @@ nav a.router-link-exact-active {
   }
 }
 
+.pe{
+  cursor: pointer;
+}
+
 
 
 

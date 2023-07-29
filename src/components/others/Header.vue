@@ -2,12 +2,12 @@
   <header
     style=""
     id="header"
-    class="header  sticky-top d-flex align-items-center"
+    class="header sticky-top d-flex align-items-center"
   >
     <div
-      class=" container-fluid d-flex align-items-center justify-content-between"
+      class="container-fluid d-flex align-items-center justify-content-between"
     >
-      <RouterLink to="/" class="logo  align-items-center me-auto me-xl-0">
+      <RouterLink to="/" class="logo align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="./src/assets/frontend/img/logo.png" alt=""> -->
         <h1>CPAearn</h1>
@@ -67,7 +67,7 @@
               </div></RouterLink
             >
           </li>
-          
+
           <li class="dropdown has-dropdown">
             <a><span>More</span> <i class="bi bi-chevron-down"></i></a>
             <ul class="dd-box-shadow">
@@ -75,6 +75,11 @@
                 <RouterLink to="/reffer"
                   ><div><span class="">Reffer</span></div></RouterLink
                 >
+              </li>
+              <li>
+                <div class="pe-auto">
+                  <a class="pe" @click="logout">Logout</a>
+                </div>
               </li>
             </ul>
           </li>
@@ -86,4 +91,43 @@
     </div>
   </header>
 </template>
+<script>
+import { logout } from "../../midleware/auth";
+import axios from "axios";
+
+export default {
+  data() {
+    return {};
+  },
+
+  methods: {
+    logout() {
+      this.$setLoading(true);
+      axios
+        .post(this.$setbackedUrl("api/auth/logout"))
+        .then((response) => {
+          this.$setLoading(false);
+
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+
+          logout(); // Change the authenticated value to false
+
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+    },
+  },
+};
+</script>
 <style scoped></style>

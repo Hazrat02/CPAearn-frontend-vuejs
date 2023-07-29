@@ -1,5 +1,5 @@
 <script>
-import { logout } from "../midleware/auth.js";
+
 import axios from "axios";
 import TheWelcome from "../components/TheWelcome.vue";
 import { useRouter } from "vue-router";
@@ -35,16 +35,7 @@ export default {
   },
 
   methods: {
-    logout() {
-      logout(); // Change the authenticated value to false
-
-      this.$router.push("/login");
-      this.$notify({
-        title: "message",
-        text: "Your account logout!",
-        type: "success",
-      });
-    },
+    
   },
 };
 </script>

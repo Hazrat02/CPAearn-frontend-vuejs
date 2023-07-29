@@ -1,6 +1,10 @@
 <template>
   <div>
     <HomeLayout>
+      <div v-if="authUser">
+        <p>Welcome, {{ authUser.name }}!</p>
+        <p>Email: {{ authUser.email }}</p>
+      </div>
       <div style="position: relative; margin-bottom: 100px" class="">
         <div
           class=""
@@ -76,11 +80,7 @@
           "
         >
           <div class="" data-aos="fade-left">
-            <Carousel
-              v-bind="settings"
-              :breakpoints="breakpoints"
-              style="margin-top: -55px"
-            >
+            <Carousel :breakpoints="breakpoints" style="margin-top: -55px">
               <Slide class="" v-for="slide in analysis" :key="slide">
                 <div class="carousel__item">
                   <!-- Revenue Card -->
@@ -193,38 +193,75 @@
           :title="'Deposit'"
         >
           <div class="col-12 my-3">
-            <form action="">
-              <div class="form-outline mb-2">
-                <label class="form-label" for="deposit">Deposit price</label>
-                <input
-                  placeholder="Min Deposit 2$"
-                  v-model="deposit"
-                  type="email"
-                  id="deposit"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="form-outline mb-2">
-                <label class="form-label" for="deposit">Method</label>
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  v-model="catId"
-                >
-                  <option selected>Open this select menu</option>
-                  <option
-                    v-for="item in payment"
-                    :key="item.id"
-                    :value="item.id"
-                    @click="selectItem(item)"
+            <form action="" @submit.prevent="depositNow">
+              <div class="row">
+                <div class="form-outline mb-2 col-12 col-md-6">
+                  <b
+                    ><label class="form-label" for="deposit"
+                      >Deposit price</label
+                    ></b
                   >
-                    {{ item.name }}
-                  </option>
-                </select>
+                  <input
+                    placeholder="Min Deposit 2$"
+                    v-model="deposit"
+                    type="text"
+                    id="deposit"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-outline mb-2 col-12 col-md-6">
+                  <b><label class="form-label" for="deposit">Method</label></b>
+                  <select
+                    id="paymentmethod"
+                    name="paymentmethod"
+                    @change="handleClick"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected disabled>Open this select menu</option>
+                    <option
+                      v-for="item in payment"
+                      :key="item.id"
+                      :value="item.id"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
+                </div>
               </div>
+
               <br />
-              <hr class="my-3"/>
+              <hr class="my-3" />
+              <div v-show="tutorial">
+                <div
+                  class="container p-2"
+                  style="border: dotted 4px rgba(0, 0, 0, 0.432)"
+                >
+                  <p>
+                    <b class="text-danger"
+                      ><i class="bi bi-exclamation-triangle-fill"></i>
+                      Step-1:</b
+                    >
+                    Fill Your diposit price and select payment Method.
+                  </p>
+                  <p>
+                    <b class="text-danger"
+                      ><i class="bi bi-exclamation-triangle-fill"></i>
+                      Step-2:</b
+                    >
+                    See coin symbol and network.and copy address for payment
+                  </p>
+                  <p>
+                    <b class="text-danger"
+                      ><i class="bi bi-exclamation-triangle-fill"></i>
+                      Step-3:</b
+                    >
+                    Go to your crypto account. Withdraw coin set this network
+                    than paste this address or scan QR code
+                  </p>
+                </div>
+              </div>
               <div v-for="item in filteredPayment" :key="item.id">
                 <div>
                   <div class="d-flex justify-content-evenly">
@@ -263,18 +300,31 @@
                       />
                     </div>
                   </div>
-                  <div class="form-outline mb-2">
-                    <label class="form-label" for="deposit"
-                      >Deposit price</label
-                    >
-                    <input
-                      placeholder="Min Deposit 2$"
-                      v-model="deposit"
-                      type="email"
-                      id="deposit"
-                      class="form-control"
-                      required
-                    />
+                  <div>
+                    <div class="form-outline mb-2 col-9">
+                      <b
+                        ><label class="form-label" for="deposit"
+                          >TRX ID</label
+                        ></b
+                      >
+                    </div>
+                    <div class="row">
+                      <div class="col-9">
+                        <input
+                          class="d-block form-control"
+                          placeholder="TRX*******"
+                          v-model="trxid"
+                          type="text"
+                          id="trxid"
+                          required
+                        />
+                      </div>
+                      <div class="col-3">
+                        <button class="btn d-block btn-outline-primary">
+                          Deposit Now
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -303,26 +353,30 @@ import {
 } from "chart.js";
 import Modal from "../components/others/Modal.vue";
 import axios from "axios";
+import { useAuthUserStore } from "../store/user";
 
 export default {
   components: {
     CryptoPrice,
-
     Modal,
   },
   data() {
     return {
+      authUser: "",
+      trxid: "",
+      tutorial: true,
+      deposit: "",
       showModal: false,
       modalWidth: "col-11 col-md-6 bg-white rounded-4",
       modalHeight: "auto",
       modalPosition: "center", // Set the default position here, other options: top, right, bottom, left
-      textToCopy: "www.cpaearn.com/323294", // The text you want to copy
+      textToCopy: "", // The text you want to copy
       isCopied: false, // Track the state of the button
       buttonText: "", // Initial button text
       cryptoData: {},
       payment: [],
+      filteredPayment: "",
 
-      catId: "",
       s: {
         itemsToShow: 1.5,
         snapAlign: "center",
@@ -368,16 +422,53 @@ export default {
   mounted() {
     this.renderChart();
   },
-  computed: {
-    filteredPayment() {
-      return this.payment.filter((item) => item.id === this.catId);
-    },
-  },
+
   methods: {
-    selectItem(item) {
-      // Set the selectedItemId when an item is clicked
-      this.selectedItemId = item.id;
+    depositNow() {
+      this.$setLoading(true);
+      const data = {
+        trxid: this.trxid,
+        status: "pending",
+        user_id: "1",
+        method: this.filteredPayment["0"].id,
+        type: "deposit",
+        network: this.filteredPayment["0"].network,
+        price: this.deposit,
+        address: this.filteredPayment["0"].address,
+      };
+      console.log(data);
+
+      axios
+        .post(this.$setbackedUrl("api/deposit"), data)
+        .then((response) => {
+          this.$setLoading(false);
+
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          // Handle the error
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
     },
+    handleClick(event) {
+      this.tutorial = false;
+
+      const bal = (this.filteredPayment = this.payment.filter(
+        (item) => item.id == event.target.value
+      ));
+
+      console.log(bal);
+    },
+
     renderChart() {
       const ctx = this.$refs.chartCanvas.getContext("2d");
 
@@ -436,27 +527,36 @@ export default {
         this.buttonText = "";
       }, 2000); // Change back to original text after 2 seconds (adjust as needed)
     },
-    // filterpayment() {
-    //         // this.filteredpayment = this.payment.filter(payment => payment.id == this.catId);
-    //         // this.filteredpayment= this.payment.find(item => item.id == '1');
-
-    //         console.log('filteredpayment')
-    //     },
   },
+  // mounted(){
+  //   const userStore = useAuthUserStore();
+  //   const authUser = userStore.authUser;
+  //   this.authUser = authUser;
+  // },
 
   created() {
+    // auth user data +++++++++++++++++++++++++++++
+    this.$setLoading(true);
+
+    const userStore = useAuthUserStore();
+    const authUser = userStore.authUser;
+
+    
+    if (authUser) {
+      
+
+      this.authUser = authUser;
+
+    } else {
+      userStore.reSetAuthUser();
+      
+    }
+
+    // payment data=====================================================
     axios
       .get("http://127.0.0.1:8000/api/payment")
       .then((response) => {
-        // login(response.data.authorisation.token);
-        const bal = (this.payment = response.data.payment);
-        console.log(bal);
-
-        // this.$notify({
-        //   title: "message",
-        //   text: 'User succesfully login',
-        //   type: "success",
-        // });
+        this.payment = response.data.payment;
       })
       .catch((error) => {
         this.$notify({
@@ -465,6 +565,11 @@ export default {
           type: "error",
         });
       });
+
+      this.$setLoading(false);
+
+      
+
   },
 };
 </script>

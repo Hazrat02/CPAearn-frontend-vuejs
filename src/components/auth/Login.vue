@@ -144,7 +144,7 @@
 <script>
 import axios from 'axios';
 import { login } from '../../midleware/auth.js';
-
+import { useAuthUserStore } from '../../store/user';
 
 // import { notify } from 'vue3-notify'
 export default {
@@ -155,32 +155,7 @@ export default {
       password: "",
     };
   },
-  computed: {
-    // animation() {
-    //   return {
-    //     /**
-    //      * Animation function
-    //      *
-    //      * Runs before animating, so you can take the initial height, width, color, etc
-    //      * @param  {HTMLElement}  element  The notification element
-    //      */
-    //     enter(element) {
-    //       let height = element.clientHeight;
-    //       return {
-    //         // animates from 0px to "height"
-    //         height: [height, 777],
 
-    //         // animates from 0 to random opacity (in range between 0.5 and 1)
-    //         opacity: [Math.random() * 0.5 + 0.5, 0],
-    //       };
-    //     },
-    //     leave: {
-    //       height: 0,
-    //       opacity: 0,
-    //     },
-    //   };
-    // },
-  },
   created(){
     this.$setLoading(false);
   },
@@ -202,24 +177,27 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/auth/login",data)
         .then((response) => {
-          
+          console.log(response.data.user);
           login(response.data.authorisation.token);
+          const userStore = useAuthUserStore();
+
+          const user =response.data.authUser;
+          userStore.setAuthUser(user);
           this.$setLoading(false);
-            // window.location.reload();
-          // Handle the response data
-          this.$router.push('/')
+    
+          this.$router.push('/wallate')
           this.$notify({
             title: "message",
             text: 'User succesfully login',
             type: "success",
           });
         })
-        .catch(() => {
+        .catch((error) => {
           // Handle the error
           this.$setLoading(false);
           this.$notify({
         title: "Error message",
-        text: "Wrong email or password!",
+        text: error.response.data.message,
         type:'error'
       });
         });

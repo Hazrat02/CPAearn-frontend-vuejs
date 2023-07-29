@@ -1,5 +1,6 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import { logout } from "../midleware/auth.js";
 export default {
   mounted() {
     document.addEventListener("touchend", this.handlePinchGesture);

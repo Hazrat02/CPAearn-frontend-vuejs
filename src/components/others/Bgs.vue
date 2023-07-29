@@ -3,7 +3,7 @@
         <Particles
           id="tsparticles"
           :particlesInit="particlesInit"
-          :particlesLoaded="particlesLoaded"
+       
           :options="{
                   background: {
                       color: {
