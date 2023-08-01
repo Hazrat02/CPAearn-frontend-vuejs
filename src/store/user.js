@@ -11,23 +11,22 @@ export const useAuthUserStore = defineStore('authUser', {
       this.authUser = newUser;
       this.saveUserToLocalStorage(newUser);
     },
-    getUser(){
-      axios
-      .post("http://127.0.0.1:8000/api/auth/me")
-      .then((response) => {
-          
-          this.authUser = response.data.authUser;
-          this.saveUserToLocalStorage(response.data.authUser)
-          
-      })
-      .catch((error) => {
+    async getUser(){
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/api/auth/me");
+        this.setAuthUser(response.data.authUser);
+        console.log('api',response.data.authUser);
+        return response.data; // Return the fetched data
+      } catch (error) {
         console.log(error);
-      });
-      // return response.data.authUser;
+      }
+   
     },
-    reSetAuthUser() {
-      this.getUser();
-      return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) 
+    async reSetAuthUser() {
+      await this.getUser(); // Wait for the data to be fetched
+      const data = this.authUser;
+   
+      return data;
     },
     clearAuthUser() {
       this.user = null;

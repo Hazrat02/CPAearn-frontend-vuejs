@@ -54,7 +54,12 @@
             </div>
             <div style="align-items: center" class="col-md-4 col-12 mt-3 row">
               <div class="d-flex justify-content-evenly">
-                <button class="btn btn-outline-primary">Withdraw</button>
+                <button
+                  class="btn btn-outline-primary"
+                  @click="showWithdrawModal = true"
+                >
+                  Withdraw
+                </button>
                 <button
                   class="btn btn-outline-primary"
                   @click="showModal = true"
@@ -131,7 +136,7 @@
         <h5 class="card-title"><i class="bi bi-receipt"></i> Recent TRX</h5>
         <div class="">
           <div class="overflow-auto py-3" style="background: #9c9c9c1a">
-            <table class="table-borderless datatable mt-2 container">
+            <table class="table-borderless datatable mt-2 mb-4 container">
               <thead>
                 <tr>
                   <th>#</th>
@@ -143,27 +148,67 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="transactionItem in transaction" :key="transactionItem.id">
-                  <th><i class="bi" :class="{
-                'bi-arrow-down-square': transactionItem.type === 'deposit',
-                'bi-arrow-up-square': transactionItem.type === 'withdraw',
-                
-              }"> </i></th>
-                  <td>{{transactionItem.method.name}}</td>
-                  <td>{{transactionItem.type}}</td>
-                  <td>{{transactionItem.created_at.substring(0, 10) }}</td>
-                  <td>${{transactionItem.price}}</td>
+                <tr
+                  v-for="(transactionItem, index) in displayedItems"
+                  :key="index"
+                >
+                  <th>
+                    <i
+                      class="bi"
+                      :class="{
+                        'bi-arrow-down-square':
+                          transactionItem.type === 'deposit',
+                        'bi-arrow-up-square':
+                          transactionItem.type === 'withdraw',
+                      }"
+                    >
+                    </i>
+                  </th>
+                  <td>{{ transactionItem.method.name }}</td>
+                  <td>{{ transactionItem.type }}</td>
+                  <td>{{ transactionItem.created_at.substring(0, 10) }}</td>
+                  <td>${{ transactionItem.price }}</td>
                   <td>
-                    <span  class="badge" :class="{
-                'bg-warning': transactionItem.status === 'pending',
-                'bg-danger': transactionItem.status === 'rejected',
-                'bg-success': transactionItem.status === 'success',
-              }">{{transactionItem.status}}</span>
+                    <span
+                      class="badge"
+                      :class="{
+                        'bg-warning': transactionItem.status === 'pending',
+                        'bg-danger': transactionItem.status === 'rejected',
+                        'bg-success': transactionItem.status === 'success',
+                      }"
+                      >{{ transactionItem.status }}</span
+                    >
                   </td>
-                  </tr>
+                </tr>
               </tbody>
+          
             </table>
+            <nav aria-label="Page navigation example mt-3">
+              <ul class="pagination justify-content-center">
+                <li class="page-item "  :class="{
+                        'disabled': currentPage === 1,
+                        
+                      }">
+                  <button class="page-link" @click="previousPage" :disabled="currentPage === 1">
+                Previous
+              </button>
+               
+                </li>
+                <li class="page-item"> <span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span></li>
+              
+                <li class="page-item">
+                  
+                  <button class="page-link" @click="nextPage" :class="{
+                        'disabled': currentPage === totalPages,
+                        
+                      }">
+                Next
+              </button>
+                </li>
+              </ul>
+            </nav>
           </div>
+          
         </div>
       </div>
 
@@ -182,6 +227,154 @@
         >
           <div class="col-12 my-3">
             <form action="" @submit.prevent="depositNow">
+              <div class="row">
+                <div class="form-outline mb-2 col-12 col-md-6">
+                  <b
+                    ><label class="form-label" for="deposit"
+                      >Deposit price</label
+                    ></b
+                  >
+                  <input
+                    placeholder="Min Deposit 2$"
+                    v-model="deposit"
+                    type="text"
+                    id="deposit"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="form-outline mb-2 col-12 col-md-6">
+                  <b><label class="form-label" for="deposit">Method</label></b>
+                  <select
+                    id="paymentmethod"
+                    name="paymentmethod"
+                    @change="handleClick"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected disabled>Open this select menu</option>
+                    <option
+                      v-for="item in payment"
+                      :key="item.id"
+                      :value="item.id"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <br />
+              <hr class="my-3" />
+              <div v-show="tutorial">
+                <div
+                  class="container p-2"
+                  style="border: dotted 4px rgba(0, 0, 0, 0.432)"
+                >
+                  <p>
+                    <b class="text-danger"
+                      ><i class="bi bi-exclamation-triangle-fill"></i>
+                      Step-1:</b
+                    >
+                    Fill Your diposit price and select payment Method.
+                  </p>
+                  <p>
+                    <b class="text-danger"
+                      ><i class="bi bi-exclamation-triangle-fill"></i>
+                      Step-2:</b
+                    >
+                    See coin symbol and network.and copy address for payment
+                  </p>
+                  <p>
+                    <b class="text-danger"
+                      ><i class="bi bi-exclamation-triangle-fill"></i>
+                      Step-3:</b
+                    >
+                    Go to your crypto account. Withdraw coin set this network
+                    than paste this address or scan QR code
+                  </p>
+                </div>
+              </div>
+              <div v-for="item in filteredPayment" :key="item.id">
+                <div>
+                  <div class="d-flex justify-content-evenly">
+                    <p>
+                      <b>Symbol:</b><span>{{ item.name }}</span>
+                    </p>
+                    <p>
+                      <b>Network:</b><span>{{ item.network }}</span>
+                    </p>
+                  </div>
+
+                  <div class="d-flex justify-content-between">
+                    <input
+                      v-model="item.address"
+                      readonly
+                      type="text"
+                      class="form-control"
+                      disabled
+                    />
+                    <button
+                      @click="copyText"
+                      :disabled="isCopied"
+                      class="btn btn-primary"
+                    >
+                      <i
+                        :class="['bi', isCopied ? 'fa-check' : 'bi-files']"
+                      ></i>
+                      {{ buttonText }}
+                    </button>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-11 col-md-6 mt-2">
+                      <img class="img-thumbnail"
+                        :src="this.$setbackedUrl('img/payment/') + item.image"
+                        alt="payment"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="form-outline mb-2 col-9">
+                      <b
+                        ><label class="form-label" for="deposit"
+                          >TRX ID</label
+                        ></b
+                      >
+                    </div>
+                    <div class="row">
+                      <div class="col-8 col-md-9">
+                        <input
+                          class="d-block form-control"
+                          placeholder="TRX*******"
+                          v-model="trxid"
+                          type="text"
+                          id="trxid"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-3   col-4">
+                        <button class="btn d-block btn-outline-primary">
+                          Deposit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Your modal content goes here -->
+        </Modal>
+        <Modal
+          :showModal="showWithdrawModal"
+          :modalWidth="modalWidth"
+          :modalHeight="modalHeight"
+          :position="modalPosition"
+          @close="showWithdrawModal = false"
+          :title="'Withdraw'"
+        >
+          <div class="col-12 my-3">
+            <form action="" @submit.prevent="withdrawNow">
               <div class="row">
                 <div class="form-outline mb-2 col-12 col-md-6">
                   <b
@@ -354,9 +547,15 @@ export default {
       transaction: "",
       authUser: "",
       trxid: "",
+      user_id: "",
       tutorial: true,
       deposit: "",
       showModal: false,
+      showWithdrawModal: false,
+      withdrawAddress: "",
+      withdrawMethod: "",
+      withdrawnetwork: "",
+      withdrawprice: "",
       modalWidth: "col-11 col-md-6 bg-white rounded-4",
       modalHeight: "auto",
       modalPosition: "center", // Set the default position here, other options: top, right, bottom, left
@@ -366,6 +565,10 @@ export default {
       cryptoData: {},
       payment: [],
       filteredPayment: "",
+
+      // paginate
+      currentPage: 1, // The current page number
+      itemsPerPage: 10, // Number of items to display per page
 
       s: {
         itemsToShow: 1.5,
@@ -412,32 +615,55 @@ export default {
   mounted() {
     this.renderChart();
   },
+  computed: {
+    // Calculate the total number of pages based on the total number of items and itemsPerPage
+    totalPages() {
+      return Math.ceil(this.transaction.length / this.itemsPerPage);
+    },
+    // Get the items to display on the current page
+    displayedItems() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.transaction.slice(start, end);
+    },
+  },
 
   methods: {
-    depositNow() {
+    async depositNow() {
       this.$setLoading(true);
       const data = {
         trxid: this.trxid,
         status: "pending",
-        user_id: "1",
+        user_id: this.authUser.id,
         method: this.filteredPayment["0"].id,
         type: "deposit",
         network: this.filteredPayment["0"].network,
         price: this.deposit,
         address: this.filteredPayment["0"].address,
       };
-      console.log(data);
 
-      axios
+      await axios
         .post(this.$setbackedUrl("api/deposit"), data)
         .then((response) => {
           this.$setLoading(false);
+          // transactionStore===================================
+          const getTransaction = transactionStore();
 
-          this.$notify({
-            title: "message",
-            text: response.data.message,
-            type: "success",
-          });
+          getTransaction.addTransaction(response.data);
+          // Try to get the data from the store
+          (this.transaction = getTransaction.authTransaction),
+            console.log(this.transaction);
+          console.log("addTransaction", response.data);
+
+          (this.showModal = false),
+            (this.filteredPayment = ""),
+            (this.tutorial = true),
+            (this.deposit = ""),
+            this.$notify({
+              title: "message",
+              text: response.data.message,
+              type: "success",
+            });
         })
         .catch((error) => {
           // Handle the error
@@ -448,6 +674,56 @@ export default {
             type: "error",
           });
         });
+    },
+    withdrawNow() {
+      this.$setLoading(true);
+      const data = {
+        trxid: "",
+        status: "pending",
+        user_id: this.authUser.id,
+        method: this.withdrawMethod,
+        type: "withdraw",
+        network: this.withdrawnetwork,
+        price: this.withdrawprice,
+        address: this.withdrawAddress,
+      };
+      console.log(data);
+
+      axios
+        .post(this.$setbackedUrl("api/deposit"), data)
+        .then((response) => {
+          this.$setLoading(false);
+          (this.showModal = false),
+            (this.filteredPayment = ""),
+            (this.tutorial = true),
+            (this.deposit = ""),
+            this.$notify({
+              title: "message",
+              text: response.data.message,
+              type: "success",
+            });
+        })
+        .catch((error) => {
+          // Handle the error
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+    },
+
+    // paginate=================================
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
     },
     handleClick(event) {
       this.tutorial = false;
@@ -534,7 +810,7 @@ export default {
       this.authUser = authUser;
     } else {
       // userStore.reSetAuthUser();
-      this.authUser = userStore.reSetAuthUser();
+      this.authUser = await userStore.reSetAuthUser();
     }
 
     // transactionStore===================================
@@ -567,9 +843,8 @@ export default {
         });
       });
 
-      this.$setLoading(false);
+    this.$setLoading(false);
   },
-  
 };
 </script>
 <style scoped>

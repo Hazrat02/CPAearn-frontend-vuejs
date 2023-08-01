@@ -5,7 +5,7 @@
         <span class="modal-title">{{this.title}}</span>
         <button class="close-button" @click="closeModal">&times;</button>
       </div>
-      <div class="modal-content" @click.stop>
+      <div class="modal-content "  @click.stop>
         <!-- Your modal content goes here -->
         <slot></slot>
       </div>
@@ -79,6 +79,7 @@ export default {props: {
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+ 
 }
 
 .modal-header {
@@ -107,5 +108,7 @@ export default {props: {
 .modal-content {
   /* Styles for the modal content */
   padding: 16px;
+  max-height: 700px;
+  overflow-y: scroll;
 }
 </style>
