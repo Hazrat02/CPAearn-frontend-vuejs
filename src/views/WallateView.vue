@@ -143,36 +143,24 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th><i class="bi bi-arrow-down-square"></i></th>
-                  <td>Bitcoin</td>
-                  <td>Deposit</td>
-                  <td>20/04/23</td>
-                  <td>$64</td>
+                <tr v-for="transactionItem in transaction" :key="transactionItem.id">
+                  <th><i class="bi" :class="{
+                'bi-arrow-down-square': transactionItem.type === 'deposit',
+                'bi-arrow-up-square': transactionItem.type === 'withdraw',
+                
+              }"> </i></th>
+                  <td>{{transactionItem.method.name}}</td>
+                  <td>{{transactionItem.type}}</td>
+                  <td>{{transactionItem.created_at.substring(0, 10) }}</td>
+                  <td>${{transactionItem.price}}</td>
                   <td>
-                    <span class="badge bg-success">Approved</span>
+                    <span  class="badge" :class="{
+                'bg-warning': transactionItem.status === 'pending',
+                'bg-danger': transactionItem.status === 'rejected',
+                'bg-success': transactionItem.status === 'success',
+              }">{{transactionItem.status}}</span>
                   </td>
-                </tr>
-                <tr>
-                  <th><i class="bi bi-arrow-up-square"></i></th>
-                  <td>Tron</td>
-                  <td>Withdraw</td>
-                  <td>20/04/23</td>
-                  <td>$6</td>
-                  <td>
-                    <span class="badge bg-danger">Rejected</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th><i class="bi bi-arrow-down-square"></i></th>
-                  <td>Bitcoin</td>
-                  <td>Deposit</td>
-                  <td>20/04/23</td>
-                  <td>$64</td>
-                  <td>
-                    <span class="badge bg-success">Approved</span>
-                  </td>
-                </tr>
+                  </tr>
               </tbody>
             </table>
           </div>
@@ -354,6 +342,7 @@ import {
 import Modal from "../components/others/Modal.vue";
 import axios from "axios";
 import { useAuthUserStore } from "../store/user";
+import { transactionStore } from "../store/transaction";
 
 export default {
   components: {
@@ -362,6 +351,7 @@ export default {
   },
   data() {
     return {
+      transaction: "",
       authUser: "",
       trxid: "",
       tutorial: true,
@@ -534,25 +524,36 @@ export default {
   //   this.authUser = authUser;
   // },
 
-  created() {
+  async created() {
     // auth user data +++++++++++++++++++++++++++++
-    this.$setLoading(true);
 
     const userStore = useAuthUserStore();
     const authUser = userStore.authUser;
 
-    
     if (authUser) {
-      
-
       this.authUser = authUser;
-
     } else {
-      userStore.reSetAuthUser();
-      
+      // userStore.reSetAuthUser();
+      this.authUser = userStore.reSetAuthUser();
     }
 
+    // transactionStore===================================
+    const getTransaction = transactionStore();
+
+    // Try to get the data from the store
+    const transactionData = getTransaction.authTransaction;
+
+    if (transactionData) {
+      this.transaction = transactionData;
+    } else {
+      // If data is not available, fetch it and set the component property
+      this.transaction = await getTransaction.authUserTransaction();
+    }
+
+    console.log("this", this.transaction);
+
     // payment data=====================================================
+
     axios
       .get("http://127.0.0.1:8000/api/payment")
       .then((response) => {
@@ -567,10 +568,8 @@ export default {
       });
 
       this.$setLoading(false);
-
-      
-
   },
+  
 };
 </script>
 <style scoped>
