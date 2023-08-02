@@ -20,7 +20,6 @@ import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
 
 
 
-
 // pinia store==============================
 import { createPinia } from 'pinia';
 
@@ -46,6 +45,7 @@ import HomeLayout from "./Layouts/HomeLayout.vue";
 const app = createApp(App)
 const pinia = createPinia();
 app.use(router);
+
 app.use(pinia);
 
 app.use(Notifications);

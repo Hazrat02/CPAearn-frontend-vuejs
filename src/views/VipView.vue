@@ -6,8 +6,9 @@
         <div class="container section-title" data-aos="fade-up">
           <h2>vip</h2>
           <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
+            Our Premium Package is a specialized subscription plan designed to offer enhanced features and benefits for our valued users. By subscribing to the Premium Package, you gain access to exclusive tools and services that can amplify your investment experience and yield potential. Here are the key features of our Premium Package:
+
+
           </p>
         </div>
         <!-- End Section Title -->

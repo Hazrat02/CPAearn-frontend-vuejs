@@ -117,7 +117,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component:EarnView,
       meta:{
-        requiresGuest:true,
+        requiresAuth:true,
       },
     },
     {
@@ -135,10 +135,15 @@ const router = createRouter({
 
       component:RefferView,
       meta:{
-        requiresGuest:true,
+        requiresAuth:true,
       },
     },
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
+
 })
 
 
@@ -177,8 +182,7 @@ router.beforeEach((to, from, next) => {
     }
   }
   }
-});
-
+})
 
 
 

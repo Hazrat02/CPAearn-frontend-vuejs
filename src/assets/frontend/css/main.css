@@ -131,7 +131,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Global Header
+# Global header
 --------------------------------------------------------------*/
 .header {
   --color-background: #ffffff;
@@ -196,7 +196,7 @@ section {
   }
 }
 
-/* Global Header on page scroll
+/* Global header on page scroll
 ------------------------------*/
 .scrolled .header {
   --color-background: #ffffff;
@@ -218,7 +218,7 @@ section {
   }
 }
 
-/* Home Page Custom Header
+/* Home Page Custom header
 ------------------------------*/
 .index-page .header {
   --color-background: rgba(255, 255, 255, 0);
@@ -227,7 +227,7 @@ section {
   --color-nav-hover: #ffffff;
 }
 
-/* Home Page Custom Header on page scroll
+/* Home Page Custom header on page scroll
 ------------------------------*/
 .index-page.scrolled .header {
   --color-background: #ffffff;
@@ -426,6 +426,13 @@ section {
     display: block;    /* show text */
   }
 }
+@media (max-width: 900px) {
+  .header {
+    display: none;
+  }
+
+
+}
 
 
 
@@ -440,7 +447,7 @@ section {
   visibility: hidden;
   opacity: 0;
   right: 15px;
-  bottom: 15px;
+  bottom: 150px;
   z-index: 99999;
   background-color: var(--color-primary);
   width: 40px;

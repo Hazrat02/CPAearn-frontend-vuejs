@@ -21,7 +21,7 @@
         <nav class="breadcrumbs">
           <div class="container">
             <ol>
-              <li><a href="index.html">Home</a></li>
+              <li><router-link to="/">Home</router-link></li>
               <li class="current">Services Details</li>
             </ol>
           </div>
@@ -43,34 +43,23 @@
                   >
                   <a href="#"
                     ><i class="bi bi-arrow-right-circle"></i
-                    ><span>Web Design</span></a
+                    ><span>Video Ads</span></a
                   >
                   <a href="#"
                     ><i class="bi bi-arrow-right-circle"></i
-                    ><span>Product Management</span></a
+                    ><span>News read</span></a
                   >
                   <a href="#"
                     ><i class="bi bi-arrow-right-circle"></i
-                    ><span>Graphic Design</span></a
+                    ><span>Mail Sales</span></a
                   >
                   <a href="#"
                     ><i class="bi bi-arrow-right-circle"></i
                     ><span>Marketing</span></a
                   >
-                </div>
-              </div>
-              <!-- End Services List -->
-
-              <div class="service-box">
-                <h4>Download Catalog</h4>
-                <div class="download-catalog">
                   <a href="#"
-                    ><i class="bi bi-filetype-pdf"></i
-                    ><span>Catalog PDF</span></a
-                  >
-                  <a href="#"
-                    ><i class="bi bi-file-earmark-word"></i
-                    ><span>Catalog DOC</span></a
+                    ><i class="bi bi-arrow-right-circle"></i
+                    ><span>Social Promote </span></a
                   >
                 </div>
               </div>
@@ -103,47 +92,95 @@
                 class="img-fluid services-img"
               />
               <h3>
-                Temporibus et in vero dicta aut eius lidero plastis trand lined
-                voluptas dolorem ut voluptas
+                Investing safely in our website is our top priority, and we have
+                taken several measures to ensure the security and protection of
+                our users' funds.
               </h3>
               <p>
-                Blanditiis voluptate odit ex error ea sed officiis deserunt.
-                Cupiditate non consequatur et doloremque consequuntur.
-                Accusantium labore reprehenderit error temporibus saepe
-                perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem
-                architecto eum et quos deleniti officia qui.
+                We employ advanced encryption technologies to safeguard
+                sensitive data and financial transactions, providing a secure
+                environment for your investments. Our platform adheres strictly
+                to industry best practices and regulatory guidelines,
+                implementing robust Know Your Customer (KYC) and Anti-Money
+                Laundering (AML) procedures to verify and authenticate user
+                identities. Additionally, we regularly monitor and analyze user
+                activity to detect and prevent any suspicious or fraudulent
+                behavior. We work with reputable payment processors to ensure
+                seamless and secure transactions, minimizing the risks
+                associated with financial transactions.
               </p>
+
+              <h4>
+                Your account may be blocked on the deposit or investment website
+                due to several reasons. Some of the common reasons include:
+              </h4>
               <ul>
                 <li>
                   <i class="bi bi-check-circle"></i>
-                  <span>Aut eum totam accusantium voluptatem.</span>
-                </li>
-                <li>
-                  <i class="bi bi-check-circle"></i>
                   <span
-                    >Assumenda et porro nisi nihil nesciunt voluptatibus.</span
+                    >Contact Customer Support: Reach out to the website's
+                    customer support team to inquire about the reason for the
+                    account block and seek resolution.</span
                   >
                 </li>
                 <li>
                   <i class="bi bi-check-circle"></i>
-                  <span>Ullamco laboris nisi ut aliquip ex ea</span>
+                  <span
+                    >Provide Necessary Information: If asked, cooperate with the
+                    website by providing any required verification documents or
+                    details to verify your identity.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Appeal Process: If you believe the account block was
+                    unjustified, request an appeal and present your case to the
+                    website's support team.</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-check-circle"></i>
+                  <span
+                    >Follow Guidelines: Ensure that you understand and abide by
+                    the website's terms and conditions to avoid similar issues
+                    in the future.</span
+                  >
                 </li>
               </ul>
               <p>
-                Est reprehenderit voluptatem necessitatibus asperiores neque sed
-                ea illo. Deleniti quam sequi optio iste veniam repellat odit.
-                Aut pariatur itaque nesciunt fuga.
+                Remember that each website might have its specific policies, so
+                it is essential to familiarize yourself with the rules and
+                guidelines before using their services.
               </p>
+              <b>Terms and Conditions:</b>
               <p>
-                Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam
-                aut consequuntur recusandae mollitia doloremque est architecto
-                cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex
-                repellendus eveniet velit sint quia sapiente cumque. Et ipsa
-                perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum.
-                Eaque iusto cupiditate et totam et quia dolorum in. Sunt
-                molestiae ipsum at consequatur vero. Architecto ut pariatur
-                autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit
-                dolore alias explicabo ea.
+                Ads and Marketing: a. The Website may display advertisements
+                from third-party advertisers. Users understand that engaging
+                with these ads is at their own discretion and risk. b. Users
+                agree not to use any ad-blocking software or methods that
+                disrupt the intended display of ads on the Website. Betting and
+                Gambling: a. Users must comply with all applicable laws and
+                regulations related to betting and gambling activities on the
+                Website. b. The Website is not liable for any financial losses
+                incurred through betting or gambling activities. Developer Plan
+                and Business Plan: a. Users subscribing to the Developer Plan or
+                Business Plan are granted specific features and benefits as per
+                the subscription details. b. The Website reserves the right to
+                modify or terminate these plans and associated benefits at any
+                time. Termination and Suspension: a. The Website reserves the
+                right to suspend or terminate any user account for violation of
+                these Terms or engaging in fraudulent or malicious activities.
+                b. Users can request termination of their accounts, subject to
+                any outstanding obligations. Intellectual Property: a. All
+                content and materials on the Website, including logos,
+                trademarks, and texts, are the property of the Website and
+                protected by intellectual property laws. b. Users may not
+                reproduce, distribute, or use any content from the Website
+                without prior written permission. Privacy Policy: a. The
+                Website's Privacy Policy outlines how user information is
+                collected, used, and protected. Users are encouraged to review
+                the Privacy Policy.
               </p>
             </div>
           </div>
@@ -160,34 +197,36 @@
                   <span>Frequently Asked </span><strong>Questions</strong>
                 </h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Duis aute irure dolor in reprehenderit
+                  If your problem or inquiry is not addressed in our Frequently
+                  Asked Questions (FAQs) section, we encourage you to get in
+                  touch with our dedicated support team. <router-link to="contact">Contact Us</router-link>
                 </p>
               </div>
             </div>
 
             <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
               <div class="faq-container">
-                <div class="faq-item"  v-for=" (item,index) in ask" :key="index" :class="{
-                'faq-active': item.id === this.activeAsk,
-               
-                
-              }" @click="toggleActiveAsk(item.id)">
+                <div
+                  class="faq-item"
+                  v-for="(item, index) in ask"
+                  :key="index"
+                  :class="{
+                    'faq-active': item.id === this.activeAsk,
+                  }"
+                  @click="toggleActiveAsk(item.id)"
+                >
                   <h3>
-                    <span class="num">{{index}}.</span>
-                    <span>{{item.ask}}</span>
+                    <span class="num">{{ index }}.</span>
+                    <span>{{ item.ask }}</span>
                   </h3>
                   <div class="faq-content">
                     <p>
-                      {{item.ans}}
+                      {{ item.ans }}
                     </p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <!-- End Faq item-->
-
-                
               </div>
             </div>
           </div>
@@ -199,16 +238,14 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+import axios from "axios";
 
 export default {
-
   data() {
     return {
-      ask:'',
-      activeAsk:'',
-    }
+      ask: "",
+      activeAsk: "",
+    };
   },
   methods: {
     toggleActiveAsk(itemId) {
@@ -221,20 +258,15 @@ export default {
       }
     },
 
-
-    setup() {
-      
-    },
-    showAns() {
-      
-    },
+    setup() {},
+    showAns() {},
   },
   created() {
     axios
       .get("http://127.0.0.1:8000/api/ask")
       .then((response) => {
         this.ask = response.data.ask;
-        console.log(this.ask)
+        console.log(this.ask);
       })
       .catch((error) => {
         this.$notify({

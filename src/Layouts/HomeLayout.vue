@@ -19,40 +19,55 @@ export default {
 };
 </script>
 <template>
+
   <body
-    class=""
-    data-bs-spy="scroll"
-    data-bs-target="#navmenu"
+    class=" pb-5"
+
     style="background-color: #f0f2f5"
   >
-    <!-- ======= Header ======= -->
-    <div class="sticky-top">
-      <Header />
+  <!-- -->
+      <!-- ======= Header ======= -->
+  <div class="sticky2">
+    <Header /> 
     </div>
+    
 
-    <main id="main" style="margin-top: 0px;">
+    <main id="main " style="margin-top: 0px;">
       <slot />
-    </main>
-
-    <!-- Scroll Top Button -->
-    <a
+      <a
       href="#"
       id="scroll-top"
       class="scroll-top align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
+    </main>
+
+    <!-- Scroll Top Button -->
+    
     <Footer />
     <!-- <Loading /> -->
     <div v-if="this.$isLoading()" id="preloader">
       <Loading />
     </div>
+    <br>
+
   </body>
 </template>
 
-<style>
-/* .bg-glass {
-  background-color: hsla(192, 100%, 99%, 0.267) !important;
-  backdrop-filter: saturate(200%) blur(5px);
-  background-color: black;
-} */
+<style scoped>
+.sticky2 {
+  position: sticky;
+  top: 0;
+  z-index: 999; /* Use an appropriate z-index to ensure it appears above other content */
+}
+
+@media (max-width: 700px) {
+  .sticky2 {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    top: initial; /* Reset top to default */
+  }
+}
+
 </style>

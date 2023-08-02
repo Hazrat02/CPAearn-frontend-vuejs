@@ -1,10 +1,10 @@
 <template>
   <div>
     <HomeLayout>
-      <div v-if="authUser">
+      <!-- <div v-if="authUser">
         <p>Welcome, {{ authUser.name }}!</p>
         <p>Email: {{ authUser.email }}</p>
-      </div>
+      </div> -->
       <div style="position: relative; margin-bottom: 100px" class="">
         <div
           class=""
@@ -181,34 +181,43 @@
                   </td>
                 </tr>
               </tbody>
-          
             </table>
             <nav aria-label="Page navigation example mt-3">
               <ul class="pagination justify-content-center">
-                <li class="page-item "  :class="{
-                        'disabled': currentPage === 1,
-                        
-                      }">
-                  <button class="page-link" @click="previousPage" :disabled="currentPage === 1">
-                Previous
-              </button>
-               
+                <li
+                  class="page-item"
+                  :class="{
+                    disabled: currentPage === 1,
+                  }"
+                >
+                  <button
+                    class="page-link"
+                    @click="previousPage"
+                    :disabled="currentPage === 1"
+                  >
+                    Previous
+                  </button>
                 </li>
-                <li class="page-item"> <span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span></li>
-              
                 <li class="page-item">
-                  
-                  <button class="page-link" @click="nextPage" :class="{
-                        'disabled': currentPage === totalPages,
-                        
-                      }">
-                Next
-              </button>
+                  <span class="page-link"
+                    >Page {{ currentPage }} of {{ totalPages }}</span
+                  >
+                </li>
+
+                <li class="page-item">
+                  <button
+                    class="page-link"
+                    @click="nextPage"
+                    :class="{
+                      disabled: currentPage === totalPages,
+                    }"
+                  >
+                    Next
+                  </button>
                 </li>
               </ul>
             </nav>
           </div>
-          
         </div>
       </div>
 
@@ -327,7 +336,8 @@
                   </div>
                   <div class="row justify-content-center">
                     <div class="col-11 col-md-6 mt-2">
-                      <img class="img-thumbnail"
+                      <img
+                        class="img-thumbnail"
                         :src="this.$setbackedUrl('img/payment/') + item.image"
                         alt="payment"
                       />
@@ -352,7 +362,7 @@
                           required
                         />
                       </div>
-                      <div class="col-md-3   col-4">
+                      <div class="col-md-3 col-4">
                         <button class="btn d-block btn-outline-primary">
                           Deposit
                         </button>
@@ -379,14 +389,13 @@
                 <div class="form-outline mb-2 col-12 col-md-6">
                   <b
                     ><label class="form-label" for="deposit"
-                      >Deposit price</label
+                      >Withdraw price</label
                     ></b
                   >
                   <input
-                    placeholder="Min Deposit 2$"
-                    v-model="deposit"
-                    type="text"
-                    id="deposit"
+                    placeholder="Min withdraw 2$"
+                    v-model="withdrawprice"
+                    type="number"
                     class="form-control"
                   />
                 </div>
@@ -452,40 +461,14 @@
                     <p>
                       <b>Network:</b><span>{{ item.network }}</span>
                     </p>
+                    <p><b>Fee:</b><span>2%</span></p>
                   </div>
 
-                  <div class="d-flex justify-content-between">
-                    <input
-                      v-model="item.address"
-                      readonly
-                      type="text"
-                      class="form-control"
-                      disabled
-                    />
-                    <button
-                      @click="copyText"
-                      :disabled="isCopied"
-                      class="btn btn-primary"
-                    >
-                      <i
-                        :class="['bi', isCopied ? 'fa-check' : 'bi-files']"
-                      ></i>
-                      {{ buttonText }}
-                    </button>
-                  </div>
-                  <div class="row justify-content-center">
-                    <div class="col-12 col-md-6">
-                      <img
-                        :src="this.$setbackedUrl('img/payment/') + item.image"
-                        alt="payment"
-                      />
-                    </div>
-                  </div>
                   <div>
                     <div class="form-outline mb-2 col-9">
                       <b
                         ><label class="form-label" for="deposit"
-                          >TRX ID</label
+                          >Withdraw Address</label
                         ></b
                       >
                     </div>
@@ -493,16 +476,16 @@
                       <div class="col-9">
                         <input
                           class="d-block form-control"
-                          placeholder="TRX*******"
-                          v-model="trxid"
+                          placeholder="TM3Ex5GM6sj******"
+                          v-model="withdrawAddress"
                           type="text"
-                          id="trxid"
+                          id="withdrawaddress"
                           required
                         />
                       </div>
                       <div class="col-3">
                         <button class="btn d-block btn-outline-primary">
-                          Deposit Now
+                          Withdraw
                         </button>
                       </div>
                     </div>
@@ -511,7 +494,6 @@
               </div>
             </form>
           </div>
-          <!-- Your modal content goes here -->
         </Modal>
         <div></div>
       </div>
@@ -559,7 +541,7 @@ export default {
       modalWidth: "col-11 col-md-6 bg-white rounded-4",
       modalHeight: "auto",
       modalPosition: "center", // Set the default position here, other options: top, right, bottom, left
-      textToCopy: "", // The text you want to copy
+      textToCopy: "sssssssssssssssss", // The text you want to copy
       isCopied: false, // Track the state of the button
       buttonText: "", // Initial button text
       cryptoData: {},
@@ -652,8 +634,7 @@ export default {
           getTransaction.addTransaction(response.data);
           // Try to get the data from the store
           (this.transaction = getTransaction.authTransaction),
-            console.log(this.transaction);
-          console.log("addTransaction", response.data);
+
 
           (this.showModal = false),
             (this.filteredPayment = ""),
@@ -680,31 +661,39 @@ export default {
       const data = {
         trxid: "",
         status: "pending",
-        user_id: this.authUser.id,
-        method: this.withdrawMethod,
+        network: this.filteredPayment["0"].network,
+        method: this.filteredPayment["0"].id,
         type: "withdraw",
-        network: this.withdrawnetwork,
+
         price: this.withdrawprice,
         address: this.withdrawAddress,
       };
-      console.log(data);
 
       axios
         .post(this.$setbackedUrl("api/deposit"), data)
         .then((response) => {
           this.$setLoading(false);
-          (this.showModal = false),
+          (this.showWithdrawModal = false),
             (this.filteredPayment = ""),
             (this.tutorial = true),
-            (this.deposit = ""),
+            (this.withdrawAddress = ""),
+            (this.withdrawprice = "");
+
+            const getTransaction = transactionStore();
+
+              getTransaction.addTransaction(response.data);
+              // Try to get the data from the store
+              (this.transaction = getTransaction.authTransaction),
+
+
             this.$notify({
               title: "message",
-              text: response.data.message,
+              text: 'Withdraw request done!',
               type: "success",
             });
         })
         .catch((error) => {
-          // Handle the error
+
           this.$setLoading(false);
           this.$notify({
             title: "Error message",
@@ -731,8 +720,7 @@ export default {
       const bal = (this.filteredPayment = this.payment.filter(
         (item) => item.id == event.target.value
       ));
-
-      console.log(bal);
+      this.textToCopy = this.filteredPayment[0].address;
     },
 
     renderChart() {
@@ -794,11 +782,6 @@ export default {
       }, 2000); // Change back to original text after 2 seconds (adjust as needed)
     },
   },
-  // mounted(){
-  //   const userStore = useAuthUserStore();
-  //   const authUser = userStore.authUser;
-  //   this.authUser = authUser;
-  // },
 
   async created() {
     // auth user data +++++++++++++++++++++++++++++
@@ -825,8 +808,6 @@ export default {
       // If data is not available, fetch it and set the component property
       this.transaction = await getTransaction.authUserTransaction();
     }
-
-    console.log("this", this.transaction);
 
     // payment data=====================================================
 
