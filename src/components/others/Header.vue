@@ -11,7 +11,7 @@
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="./src/assets/frontend/img/logo.png" alt=""> -->
         <h1>CPAearn</h1>
-        <span>.</span>
+        
       </RouterLink>
 
       <!-- Nav Menu -->

@@ -212,12 +212,13 @@ export default {
             type: "success",
           });
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error.response.data)
           // Handle the error
           this.$setLoading(false);
           this.$notify({
             title: "Error message",
-            text: "Something went wrong!",
+            text:error.response.data.message,
             type: "error",
           });
         });

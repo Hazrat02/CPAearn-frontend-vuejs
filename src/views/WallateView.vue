@@ -182,7 +182,7 @@
                 </tr>
               </tbody>
             </table>
-            <nav aria-label="Page navigation example mt-3">
+            <nav v-show="totalPages>1" aria-label="Page navigation example mt-3">
               <ul class="pagination justify-content-center">
                 <li
                   class="page-item"
