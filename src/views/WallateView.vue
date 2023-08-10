@@ -31,7 +31,7 @@
                       0.00000102<i class="bi bi-currency-bitcoin"></i>
                     </h3>
                   </div>
-                  <div>= 1.4$</div>
+                  <div>= {{authUser.main_balance}}$</div>
                 </div>
                 <div class="col-md-4 col-12">
                   <div>
@@ -42,7 +42,7 @@
                       0.0000002<i class="bi bi-currency-bitcoin"></i>
                     </h3>
                   </div>
-                  <div>= 00.40$</div>
+                  <div>= {{authUser.frozen_balance}} $</div>
                 </div>
               </div>
 
@@ -52,7 +52,7 @@
                 </div>
               </div>
             </div>
-            <div style="align-items: center" class="col-md-4 col-12 mt-3 row">
+            <div style="align-items: center;" class="col-md-4 col-12 mt-3 row" >
               <div class="d-flex justify-content-evenly">
                 <button
                   class="btn btn-outline-primary"
@@ -526,6 +526,7 @@ export default {
   },
   data() {
     return {
+      chart:'',
       transaction: "",
       authUser: "",
       trxid: "",
@@ -724,8 +725,19 @@ export default {
     },
 
     renderChart() {
-      const ctx = this.$refs.chartCanvas.getContext("2d");
 
+
+
+
+      this.$nextTick(() => {
+    const ctx = this.$refs.chartCanvas.getContext("2d");
+    if (!this.authUser) {
+        return;
+      }
+      if (this.chart) {
+        this.chart.destroy();
+      }
+      
       Chart.register(
         CategoryScale,
         LinearScale,
@@ -737,13 +749,15 @@ export default {
       );
 
       const chart = new Chart(ctx, {
+       
         type: "pie",
         data: {
           labels: ["Main", "Frozen"],
           datasets: [
             {
-              data: [0.00000012, 0.00000102],
-              backgroundColor: ["yellow", "green "],
+              data: [ this.authUser.main_balance , this.authUser.frozen_balance],
+
+              backgroundColor: ["#1234", "rgb(216, 221, 216)"],
               borderColor: ["black", "rgba(25, 99, 132, 1)", "blue"],
               borderWidth: 5,
             },
@@ -763,6 +777,10 @@ export default {
       // Set canvas height and width using CSS
       this.$refs.chartCanvas.style.height = "150px";
       this.$refs.chartCanvas.style.width = "150px";
+  });
+      
+      
+      
     },
     copyText() {
       const textarea = document.createElement("textarea");
@@ -782,7 +800,7 @@ export default {
       }, 2000); // Change back to original text after 2 seconds (adjust as needed)
     },
   },
-
+  
   async created() {
     // auth user data +++++++++++++++++++++++++++++
 
@@ -804,9 +822,11 @@ export default {
 
     if (transactionData) {
       this.transaction = transactionData;
+   
     } else {
       // If data is not available, fetch it and set the component property
       this.transaction = await getTransaction.authUserTransaction();
+     
     }
 
     // payment data=====================================================
@@ -823,9 +843,19 @@ export default {
           type: "error",
         });
       });
-
+      
     this.$setLoading(false);
   },
+  watch: {
+    authUser: {
+      handler() {
+        // Watch for changes in authUser and re-render the chart
+        this.renderChart();
+      },
+      immediate: true, // Call the handler immediately on component creation
+    },
+  },
+
 };
 </script>
 <style scoped>

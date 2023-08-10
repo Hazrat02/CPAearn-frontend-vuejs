@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
+import WorkView from '../views/WorkView.vue'
 import ServicesView from '../views/ServicesView.vue'
 import RefferView from '../views/RefferView.vue'
 import ContactView from '../views/ContactView.vue'
@@ -134,6 +135,15 @@ const router = createRouter({
       name: 'reffer',
 
       component:RefferView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/work/:id',
+      name: 'work',
+
+      component:WorkView,
       meta:{
         requiresAuth:true,
       },

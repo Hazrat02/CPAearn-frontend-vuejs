@@ -111,6 +111,7 @@ export default {
   methods: {
     logout() {
       this.$setLoading(true);
+      logout();
       axios
         .post(this.$setbackedUrl("api/auth/logout"))
         .then((response) => {
@@ -122,7 +123,7 @@ export default {
             type: "success",
           });
 
-          logout(); // Change the authenticated value to false
+           // Change the authenticated value to false
 
           this.$router.push("/login");
         })
