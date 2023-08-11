@@ -1,5 +1,5 @@
 <template>
-  <main id="main">
+  <main id="main" style="position: relative;">
     <!-- Blog Details Page Title & Breadcrumbs -->
     <div data-aos="fade" class="page-title">
       <div class="heading">
@@ -7,8 +7,9 @@
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <h1>Blog Details</h1>
-              <div>
-                <p>Redirecting in {{ countdown }} seconds...</p>
+              <div class="zoom-in-zoom-out " >
+                 {{ countdown }} 
+               
               </div>
               <p class="mb-0">
                 Odio et unde deleniti. Deserunt numquam exercitationem. Officiis
@@ -723,6 +724,7 @@ export default {
   data() {
     return {
       countdown: 60,
+      countdownInterval: null,
       component: "",
       news: "Mailsell",
       authUser: "",
@@ -733,44 +735,50 @@ export default {
     };
   },
   mounted() {
-    this.startCountdown();
+    this.countdown = "60";
+   
   },
+
+  // beforeRouteLeave(to, from, next) {
+  //   this.stopCountdown(); // Stop the countdown before leaving the route
+  //   next();
+  // },
+
   methods: {
-    startCountdown() {
-      const interval = setInterval(() => {
+    
+    makeTime() {
+      
         this.countdown--;
-        if (this.countdown <= 0) {
-          clearInterval(interval);
-          this.redirectToOtherRoute();
-        }
-      }, 1000);
+      
     },
     redirectToOtherRoute() {
-      // Replace 'other-route' with the actual route you want to redirect to
       this.$router.push("/earning");
     },
   },
 
-  // computed: {
-  //   async selectedComponent() {
-  //     const componentMapping = {
-  //       news: () => import(`./workView/ReadNews.vue`), // 'news' id maps to the news component path
-  //       mailsell: () => import(`./workView/Mailsell.vue`), // 'news' id maps to the news component path
-  //       // Add other id-component path mappings here...
-  //     };
-  //     const componentName = this.$route.params.id;
-  //      const componentPath = await componentMapping[componentName];
-  //     console.log('sd',componentPath);
-  //     if (!componentPath) {
-  //       // Return a default component or null if the componentName is not found in the mapping
-  //       return null;
-  //     }
+  computed: {
+    startCountdown() {
+      
+      if (this.countdown > '0') {
+        setTimeout(() => {
+        this.countdown--;
+        this.startCountdown();
+      }, 1000);
+      } else {
+        this.$router.push("/earning");
+        this.$notify({
+          title: "Warning",
+          text: 'Sorry!You need upgrate your Plan',
+          type: "error",
+        });
+      }
+      
+    },
+  },
 
-  //     return () => componentPath(); // Load the component using import function
-  //   },
-  // },
-
+  
   async created() {
+    this.startCountdown();
     // this.news=news
     if (isAuthenticated() == true) {
       // auth user data +++++++++++++++++++++++++++++
@@ -793,3 +801,32 @@ export default {
   },
 };
 </script>
+<style scoped>
+.zoom-in-zoom-out {
+ position: fixed  ;
+ top: 50%;
+ left: 50%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 50px;
+ width: 50px;
+ padding: 5px;
+ z-index: 666666666;
+ border-radius: 100px;
+  background: rgba(137, 139, 137, 0.747);
+  animation: zoom-in-zoom-out 2s ease-out infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+</style>

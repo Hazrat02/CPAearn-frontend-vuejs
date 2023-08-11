@@ -66,124 +66,7 @@
                       </div>
                     </router-link>
                   </div>
-                  <div
-                    style="height: 300px"
-                    class="col-md-6 col-xl-4"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
-                  >
-                    <div class="icon-box" style="height: 300px">
-                      <i class="bi bi-code-slash"></i>
-                      <h3>Web Design</h3>
-                      <p>
-                        Magni repellendus vel ullam hic officia accusantium ipsa
-                        dolor omnis dolor voluptatem
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    style="height: 300px"
-                    class="col-md-6 col-xl-4"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
-                  >
-                    <div class="icon-box" style="height: 300px">
-                      <i class="bi bi-collection-play"></i>
-                      <h3>Video Ads</h3>
-                      <p>
-                        Magni repellendus vel ullam hic officia accusantium ipsa
-                        dolor omnis dolor voluptatem
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    style="height: 300px"
-                    class="col-md-6 col-xl-4"
-                    data-aos="fade-up"
-                    data-aos-delay="300"
-                  >
-                    <div class="icon-box">
-                      <i class="bi bi-envelope-check"></i>
-                      <h3>Mail Sales</h3>
-                      <p>
-                        Autem saepe animi et aut aspernatur culpa facere. Rerum
-                        saepe rerum voluptates quia
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    class="col-md-6 col-xl-4 height"
-                    data-aos="fade-up"
-                    data-aos-delay="400"
-                  >
-                    <div class="icon-box">
-                      <i class="bi bi-file-richtext"></i>
-                      <h3>Banner Ads</h3>
-                      <p>
-                        Omnis perferendis molestias culpa sed. Recusandae quas
-                        possimus. Quod consequatur corrupti
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    class="col-md-6 col-xl-4 height"
-                    data-aos="fade-up"
-                    data-aos-delay="500"
-                  >
-                    <div class="icon-box">
-                      <i class="bi bi-clipboard-data"></i>
-                      <h3>Data Entry</h3>
-                      <p>
-                        Sint et dolor voluptas minus possimus nostrum.
-                        Reiciendis commodi eligendi omnis quideme lorenda
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="col-md-6 col-xl-4 height"
-                    data-aos="fade-up"
-                    data-aos-delay="500"
-                  >
-                    <div class="icon-box">
-                      <i class="bi bi-graph-up-arrow"></i>
-                      <h3>1xBet</h3>
-                      <p>
-                        Sint et dolor voluptas minus possimus nostrum.
-                        Reiciendis commodi eligendi omnis quideme lorenda
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="col-md-6 col-xl-4 height"
-                    data-aos="fade-up"
-                    data-aos-delay="500"
-                  >
-                    <div class="icon-box">
-                      <i class="bi bi-megaphone"></i>
-                      <h3>Social Promote</h3>
-                      <p>
-                        Sint et dolor voluptas minus possimus nostrum.
-                        Reiciendis commodi eligendi omnis quideme lorenda
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="col-md-6 col-xl-4 height"
-                    data-aos="fade-up"
-                    data-aos-delay="500"
-                  >
-                    <div class="icon-box">
-                      <i class="bi bi-graph-up-arrow"></i>
-                      <h3>Delares sapiente</h3>
-                      <p>
-                        Sint et dolor voluptas minus possimus nostrum.
-                        Reiciendis commodi eligendi omnis quideme lorenda
-                      </p>
-                    </div>
-                  </div>
+                 
                   <!-- End Icon Box -->
                 </div>
               </div>
@@ -289,6 +172,8 @@ export default {
         // userStore.reSetAuthUser();
         this.work = await works.getWork();
       }
+
+      console.log(this.work)
     } else {
       this.authUser = "";
       this.work = "";
