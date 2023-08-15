@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
-   * Preloader
+   * Preloaderz
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {

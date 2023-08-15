@@ -752,7 +752,9 @@ export default {
       
     },
     redirectToOtherRoute() {
+      
       this.$router.push("/earning");
+
     },
   },
 

@@ -14,7 +14,6 @@
           class="justify-content-center"
           method="POST"
           enctype="multipart/form-data"
-          
         >
           <!-- Email input -->
 
@@ -49,18 +48,66 @@
               >
             </div>
           </div>
+          <div class="form-outline mb-2">
+            <div style="position: relative">
+              <input
+                id="userCode"
+                placeholder="Enter Your Code"
+                type="text"
+                v-model="userCode"
+                class="form-control"
+                required
+              />
+
+              <div
+                v-if="sendcode"
+                style="position: absolute; top: 20%; right: 5%; cursor: pointer"
+                @click="sentCode"
+              >
+                sent code
+              </div>
+              <div
+                v-if="resendcode"
+                style="position: absolute; top: 20%; right: 5%; cursor: pointer"
+                @click="sentCode"
+              >
+                Resent
+              </div>
+              <div
+                v-if="countdown"
+                style="position: absolute; top: 20%; right: 5%; cursor: pointer"
+              >
+                00:00:{{ countdown }}
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <label class="form-label justify-content-start" for="userCode"
+                >Code</label
+              >
+            </div>
+          </div>
 
           <!-- Password input -->
           <div class="form-outline mb-2">
-            <input
-              name="password"
-              placeholder="******"
-              v-model="password"
-              type="password"
-              id="password"
-              class="form-control"
-              required
-            />
+            <div style="position: relative">
+              <input
+                name="password"
+                placeholder="******"
+                v-model="password"
+                :type="passwordFieldType"
+                id="password"
+                class="form-control"
+                required
+              />
+
+              <i
+                style="position: absolute; top: 7%; right: 5%; font-size: 25px"
+                class="bi "
+                :class="icon"
+                @click="togglePasswordVisibility"
+              ></i>
+            </div>
 
             <div class="d-flex" style="justify-content: space-between">
               <label class="form-label" for="password">password</label>
@@ -70,7 +117,7 @@
             <input
               name="password_confirmation"
               placeholder="******"
-              type="password"
+              :type="passwordFieldType"
               v-model="password_confirmation"
               class="form-control"
               required
@@ -114,7 +161,6 @@
             <p><a href="">Read all team.</a>Uderested?</p>
           </div>
           <input type="hidden" name="role" value="1" />
-          <input type="hidden" name="socialite_id" value="" />
 
           <!-- Submit button -->
           <div class="container container-fluid justify-content-center">
@@ -126,7 +172,6 @@
               Register
             </button>
           </div>
-
         </form>
       </div>
     </AuthLayout>
@@ -139,44 +184,55 @@ import axios from "axios";
 export default {
   data() {
     return {
+      passwordType: "password",
+      sendcode: true,
+      showicon: true,
+      resendcode: false,
+      userCode: "",
+      countdown: "",
       name: "",
       email: "",
       password: "",
       password_confirmation: "",
       profile: "",
+      showPassword: false,
     };
   },
   computed: {
-    // animation() {
-    //   return {
-    //     /**
-    //      * Animation function
-    //      *
-    //      * Runs before animating, so you can take the initial height, width, color, etc
-    //      * @param  {HTMLElement}  element  The notification element
-    //      */
-    //     enter(element) {
-    //       let height = element.clientHeight;
-    //       return {
-    //         // animates from 0px to "height"
-    //         height: [height, 777],
-    //         // animates from 0 to random opacity (in range between 0.5 and 1)
-    //         opacity: [Math.random() * 0.5 + 0.5, 0],
-    //       };
-    //     },
-    //     leave: {
-    //       height: 0,
-    //       opacity: 0,
-    //     },
-    //   };
-    // },
+    passwordFieldType() {
+      return this.showPassword ? "text" : "password";
+    },
+    icon() {
+      return this.showicon ? "bi-eye-slash-fill" : "bi-eye-fill";
+    },
+    sentCode() {
+      (this.sendcode = false),
+        (this.resendcode = false),
+        (this.countdown = "60");
+      this.startCountdown();
+    },
+    startCountdown() {
+      if (this.countdown > "0") {
+        setTimeout(() => {
+          this.countdown--;
+          this.startCountdown();
+        }, 1000);
+      } else {
+        this.resendcode = true;
+      }
+    },
   },
 
-  created(){
+  created() {
     this.$setLoading(false);
   },
 
   methods: {
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+      this.showicon = !this.showicon;
+
+    },
     showNotification() {
       this.$notify({
         title: "Important message",
@@ -186,15 +242,10 @@ export default {
     register() {
       this.$setLoading(true);
       const data = {
-
-          email: this.email,
-          password: this.password,
-          name: this.name
-
-        // email: "test33g@gmail.com",
-        // password: "test@gmail.com",
-        // name: "test",
-
+        email: this.email,
+        password: this.password,
+        name: this.name,
+        password_confirmation: this.password_confirmation,
       };
       console.log(data);
 
@@ -202,10 +253,8 @@ export default {
         .post("http://127.0.0.1:8000/api/auth/register", data)
         .then((response) => {
           this.$setLoading(false);
-          // localStorage.setItem('token', response.data.authorisation.token);
-          // Handle the response data
-          // console.log(response.data);
-          this.$router.push('/login');
+
+          this.$router.push("/login");
           this.$notify({
             title: "message",
             text: response.data.message,
@@ -213,12 +262,10 @@ export default {
           });
         })
         .catch((error) => {
-          console.log(error.response.data)
-          // Handle the error
           this.$setLoading(false);
           this.$notify({
             title: "Error message",
-            text:error.response.data.message,
+            text: error.response.data.message,
             type: "error",
           });
         });

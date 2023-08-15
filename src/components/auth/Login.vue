@@ -1,6 +1,6 @@
 <template>
   
-  <body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+  <body >
 
 <!-- ======= Header ======= -->
 
@@ -9,7 +9,6 @@
 
 
 <main id="main">
-  <!-- <i class="mobile-nav-toggle d-none bi bi-list"></i> -->
   <div>
     <AuthLayout>
       <template v-slot:bodytext>
@@ -54,15 +53,14 @@
 
             <div class="d-flex" style="justify-content: space-between">
               <label class="form-label" for="form3Example4">password</label>
-              <a
-                href=""
-                style="
+              <router-link to="/forget" style="
                   color: cadetblue;
                   cursor: pointer;
                   text-decoration: underline;
                 "
-                >forget password</a
-              >
+                >forget password
+              </router-link>
+              
             </div>
           </div>
 
@@ -132,7 +130,6 @@
 </main>
 
 <!-- Scroll Top Button -->
-<a href="#" id="scroll-top" class="scroll-top d-none align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Preloader -->
 

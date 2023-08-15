@@ -27,7 +27,15 @@
                         </li>
                         <li>
                           <i class="bi bi-check"></i>
-                          <span>Unlock Banner Ads</span>
+                          <span>Md muhit</span>
+                        </li>
+                        <li>
+                          <i class="bi bi-check"></i>
+                          <span>Md miraj khan</span>
+                        </li>
+                        <li>
+                          <i class="bi bi-check"></i>
+                          <span>Md Riyad</span>
                         </li>
                       </ul>
                     </div>

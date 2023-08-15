@@ -1,0 +1,34 @@
+<template>
+  <div>
+    <p>Facebook Page Follower Count: {{ followerCount }}</p>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      followerCount: 0,
+    };
+  },
+  mounted() {
+    this.fetchFollowerCount();
+  },
+  methods: {
+    fetchFollowerCount() {
+      const accessToken = 'YOUR_FACEBOOK_ACCESS_TOKEN';
+      const pageId = '108586097196560';
+      
+      axios.get(`https://graph.facebook.com/${pageId}/insights?metric=follower_count&period=day`)
+        .then(response => {
+          this.followerCount = response.data.fan_count;
+        })
+        .catch(error => {
+          console.error('Error fetching follower count:', error);
+        });
+    },
+  },
+};
+</script>
