@@ -61,9 +61,11 @@ export default {
   z-index: 999; /* Use an appropriate z-index to ensure it appears above other content */
 }
 
-@media (max-width: 700px) {
+
+
+@media (max-width: 767px) {
   .sticky2 {
-    width: 100%;
+    width: 100vw;
     position: fixed;
     bottom: 0;
     top: initial; /* Reset top to default */

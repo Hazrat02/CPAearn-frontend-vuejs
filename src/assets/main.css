@@ -43,6 +43,7 @@
   scroll-behavior: smooth;
 }
 nav a.router-link-exact-active {
+  
   color: white;
   /* font-size: 20px; */
   background-color:  #71bdf093;
@@ -50,11 +51,7 @@ nav a.router-link-exact-active {
 
   
 }
-@media only screen and (max-width: 600px) {
-  .logo {
-    display: none;
-  }
-}
+
 .vip {
   padding: 60px 0 120px 0;
 }

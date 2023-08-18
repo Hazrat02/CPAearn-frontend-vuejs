@@ -8,8 +8,8 @@ import { RouterLink, RouterView } from "vue-router";
     <main id="main">
       <i class="mobile-nav-toggle d-none bi bi-list"></i>
 
-      <div >
-        <Bgs/>
+      <div>
+        <Bgs />
         <section class="overflow-hidden content-wrapper">
           <div
             class="container px-4 py-5 px-md-5 text-center text-lg-start my-5"
@@ -33,18 +33,41 @@ import { RouterLink, RouterView } from "vue-router";
                 <slot name="bodytext" />
               </div>
 
-              <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+              <div class="col-lg-6 position-relative">
                 <div class="card bg-glass">
-                  <div>
-                    <div class="btn btn-secondary">
-                      <RouterLink to="/login">Login</RouterLink>
-                    </div>
-                    <div class="btn btn-secondary">
-                      <RouterLink to="/">Home</RouterLink>
-                    </div>
-                  </div>
+                  
+                  <nav id="navmenu" class="navmenu bg-white py-2">
+                    <ul class="d-flex justify-content-evenly ">
+                      <li>
+                        <RouterLink class="hovdiv" to="/">
+                          <div>
+                            <i class="bi bi-house-fill"></i>
+                            <span class="spanhide">Home</span>
+                          </div></RouterLink
+                        >
+                      </li>
 
-                  <RouterLink to="/register">Register</RouterLink>
+                      <!-- <RouterLink to="/register">Register</RouterLink> -->
+                      <li>
+                        <RouterLink class="hovdiv" to="/register"
+                          ><div>
+                            <i class="bi bi-person-plus-fill"></i> 
+                            <span class="spanhide"> Register</span>
+                          </div></RouterLink
+                        >
+                      </li>
+                      <li>
+                        <RouterLink class="hovdiv" to="/login"
+                          ><div>
+                            <i class="bi bi-key-fill"></i>
+                            <span class="spanhide"> Login</span>
+                          </div></RouterLink
+                        >
+                      </li>
+                    </ul>
+
+                    <i class="mobile-nav-toggle d-none bi bi-list"></i>
+                  </nav>
 
                   <slot />
                   <a

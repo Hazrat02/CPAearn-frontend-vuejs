@@ -37,7 +37,7 @@
                       'text-success': value.usd_24h_change > 0,
                       'text-danger': value.usd_24h_change < 0,
                     }"
-                    >{{ parseFloat(value.usd_24h_change).toFixed(2) }} $</span
+                    >{{ parseFloat(value.usd_24h_change).toFixed(2) }} %</span
                   >
                 </p>
               </div>

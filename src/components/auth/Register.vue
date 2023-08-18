@@ -13,7 +13,7 @@
         <form
           class="justify-content-center"
           method="POST"
-          enctype="multipart/form-data"
+          enctype="multipart/form-data" @submit.prevent="register"
         >
           <!-- Email input -->
 
@@ -165,7 +165,7 @@
           <!-- Submit button -->
           <div class="container container-fluid justify-content-center">
             <button
-              @click.prevent="register"
+              
               type="submit"
               class="btn btn-primary d-block px-4 container-fluid mb-4"
             >
@@ -184,9 +184,12 @@ import axios from "axios";
 export default {
   data() {
     return {
+      authEmail:'',
+      oldCode:'',
       passwordType: "password",
       sendcode: true,
       showicon: true,
+      showPassword: false,
       resendcode: false,
       userCode: "",
       countdown: "",
@@ -195,7 +198,7 @@ export default {
       password: "",
       password_confirmation: "",
       profile: "",
-      showPassword: false,
+     
     };
   },
   computed: {
@@ -205,11 +208,46 @@ export default {
     icon() {
       return this.showicon ? "bi-eye-slash-fill" : "bi-eye-fill";
     },
-    sentCode() {
+   
+  },
+
+  created() {
+    this.$setLoading(false);
+  },
+
+  methods: {
+    async sentCode() {
       (this.sendcode = false),
         (this.resendcode = false),
         (this.countdown = "60");
       this.startCountdown();
+
+      const data = {
+        email: this.email,
+        sub:'Cpaearn registation code',
+        bodytext:'Your Cpaearn registation code is:',
+        footertext:'Do not share our code anyone.It is very importent',
+        btn:''
+
+      };
+      await axios
+        .post("http://127.0.0.1:8000/api/auth/forgetcode", data)
+        .then((response) => {
+         
+          this.oldCode=response.data.code;
+          this.authEmail=response.data.email
+          console.log(this.oldCode)
+          
+        })
+        .catch((error) => {
+          
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: 'Server busy now.Please try later!',
+            type: "error",
+          });
+        });
     },
     startCountdown() {
       if (this.countdown > "0") {
@@ -221,13 +259,6 @@ export default {
         this.resendcode = true;
       }
     },
-  },
-
-  created() {
-    this.$setLoading(false);
-  },
-
-  methods: {
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
       this.showicon = !this.showicon;
@@ -240,19 +271,23 @@ export default {
       });
     },
     register() {
+
       this.$setLoading(true);
-      const data = {
-        email: this.email,
+      if (this.userCode = this.oldCode) {
+        const data = {
+         oldCode:this.oldCode,
+         userCode:this.userCode,
+        email: this.authEmail,
         password: this.password,
         name: this.name,
         password_confirmation: this.password_confirmation,
       };
-      console.log(data);
+      
 
       axios
         .post("http://127.0.0.1:8000/api/auth/register", data)
         .then((response) => {
-          this.$setLoading(false);
+          
 
           this.$router.push("/login");
           this.$notify({
@@ -269,6 +304,15 @@ export default {
             type: "error",
           });
         });
+      } else {
+        this.$notify({
+            title: "Error message",
+            text: 'Code does not match!',
+            type: "error",
+          });
+      }
+      this.$setLoading(false);
+     
     },
   },
 };

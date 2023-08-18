@@ -41,15 +41,28 @@
           <!-- Password input -->
 
           <div class="form-outline mb-4">
-            <input
-              name="password"
-              placeholder="******"
-              type="password"
-              id="form3Example4"
-              class="form-control"
-              v-model="password"
-              required
-            />
+            <div class="form-outline mb-2">
+            <div style="position: relative">
+              <input
+                name="password"
+                placeholder="******"
+                v-model="password"
+                :type="passwordFieldType"
+                id="password"
+                class="form-control"
+                required
+              />
+
+              <i
+                style="position: absolute; top: 7%; right: 5%; font-size: 25px"
+                class="bi "
+                :class="icon"
+                @click="togglePasswordVisibility"
+              ></i>
+            </div>
+
+            
+          </div>
 
             <div class="d-flex" style="justify-content: space-between">
               <label class="form-label" for="form3Example4">password</label>
@@ -148,16 +161,31 @@ export default {
   
   data() {
     return {
+      showicon: true,
+      showPassword: false,
       email: "",
       password: "",
     };
   },
-
+  computed: {
+    passwordFieldType() {
+      return this.showPassword ? "text" : "password";
+    },
+    icon() {
+      return this.showicon ? "bi-eye-slash-fill" : "bi-eye-fill";
+    },
+   
+  },
   created(){
     this.$setLoading(false);
   },
 
   methods: {
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+      this.showicon = !this.showicon;
+
+    },
     showNotification() {
       this.$notify({
         title: "Important message",

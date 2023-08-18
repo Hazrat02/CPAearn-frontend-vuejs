@@ -235,6 +235,10 @@ export default {
       
       const data = {
         email: this.email,
+        sub:'Cpaearn Forget code',
+        bodytext:'Your Cpaearn forget code is:',
+        footertext:'Do not share our code anyone.It is very importent',
+        btn:''
       };
       await axios
         .post("http://127.0.0.1:8000/api/auth/forgetcode", data)
