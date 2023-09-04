@@ -39,6 +39,14 @@
               >
             </li>
             <li>
+              <RouterLink class="hovdiv" to="/deshboard"
+                ><div>
+                  <i class="bi bi-wallet2"></i>
+                  <span class="spanhide"> Deshboard</span>
+                </div></RouterLink
+              >
+            </li>
+            <li>
               <RouterLink class="hovdiv" to="/vip">
                 <div>
                   <i class="bi bi-rocket-fill"></i>

@@ -71,6 +71,7 @@ export default {props: {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 44444444;
 }
 
 .modal-container {

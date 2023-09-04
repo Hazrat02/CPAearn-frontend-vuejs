@@ -9,8 +9,9 @@ import WallateView from '../views/WallateView.vue'
 import EarnView from '../views/EarnView.vue'
 import VipView from '../views/VipView.vue'
 import AboutView from '../views/AboutView.vue'
-import HomeLayout from '../Layouts/HomeLayout.vue'
-import AuthLayout from '../Layouts/AuthLayout.vue'
+import DeshboardView from '../views/Deshboard/DeshboardView.vue'
+// import HomeLayout from '../Layouts/HomeLayout.vue'
+// import AuthLayout from '../Layouts/AuthLayout.vue'
 import LoginComponent from '../components/Auth/Login.vue'
 // import GoogleAds from '../components/earn/GoogleAds.vue'
 import RegisterComponent from '../components/Auth/Register.vue'
@@ -30,7 +31,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta:{
-        Layout:HomeLayout,
+        // Layout:HomeLayout,
         // requiresAuth:'auth'
       },
       
@@ -43,7 +44,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: AboutView,
       meta:{
-        Layout:HomeLayout,
+        // Layout:HomeLayout,
       },
     },
     {
@@ -74,7 +75,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component:ForgetComponent,
       meta:{
-        Layout:AuthLayout,
+        // Layout:AuthLayout,
       },
     },
     {
@@ -144,6 +145,15 @@ const router = createRouter({
       name: 'work',
 
       component:WorkView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/deshboard',
+      name: 'deshboard',
+
+      component:DeshboardView,
       meta:{
         requiresAuth:true,
       },

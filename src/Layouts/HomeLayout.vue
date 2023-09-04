@@ -54,7 +54,7 @@ export default {
   </body>
 </template>
 
-<style scoped>
+<style>
 .sticky2 {
   position: sticky;
   top: 0;

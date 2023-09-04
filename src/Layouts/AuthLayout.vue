@@ -10,7 +10,7 @@ import { RouterLink, RouterView } from "vue-router";
 
       <div>
         <Bgs />
-        <section class="overflow-hidden content-wrapper">
+        <section class="overflow-hidden ">
           <div
             class="container px-4 py-5 px-md-5 text-center text-lg-start my-5"
           >

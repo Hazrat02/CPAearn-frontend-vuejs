@@ -5,18 +5,25 @@
         <p>Welcome, {{ authUser.name }}!</p>
         <p>Email: {{ authUser.email }}</p>
       </div> -->
-      <div style="position: relative; margin-bottom: 100px" class="">
+      <div style="position: relative; margin-bottom: 100px ;" class="">
+        
         <div
           class=""
           style="
             background-image: url('https://wallpaperaccess.com/full/2895055.jpg');
-
+       
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
+            position: relative;
           "
         >
+        <img src="../assets/svg/circle.svg" style="   position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;" alt="circle-image" />
+        
           <div
-            style="padding-bottom: 100px"
+            style="padding-bottom: 100px;"
             class="row container"
             data-aos="fade-down"
           >
@@ -46,22 +53,22 @@
                 </div>
               </div>
 
-              <div class="col-3 col-md-12">
+              <div class="col-3 col-md-12" style="z-index: 1">
                 <div class="col-md-12 ml-5 d-flex justify-content-center">
                   <canvas ref="chartCanvas"></canvas>
                 </div>
               </div>
             </div>
-            <div style="align-items: center;" class="col-md-4 col-12 mt-3 row" >
+            <div style="align-items: center;z-index: 1" class="col-md-4 col-12 mt-3 row" >
               <div class="d-flex justify-content-evenly">
                 <button
-                  class="btn btn-outline-primary"
+                  class="btn btn-inverse-primary"
                   @click="showWithdrawModal = true"
                 >
                   Withdraw
                 </button>
                 <button
-                  class="btn btn-outline-primary"
+                  class="btn btn-primary"
                   @click="showModal = true"
                 >
                   Deposit
@@ -383,7 +390,7 @@
           @close="showWithdrawModal = false"
           :title="'Withdraw'"
         >
-          <div class="col-12 my-3">
+          <div  class="col-12 my-3">
             <form action="" @submit.prevent="withdrawNow">
               <div class="row">
                 <div class="form-outline mb-2 col-12 col-md-6">
@@ -867,4 +874,5 @@ export default {
   padding: 0px;
   justify-content: center;
 }
+
 </style>

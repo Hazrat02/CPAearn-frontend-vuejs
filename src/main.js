@@ -8,7 +8,7 @@ import GoogleAds from './components/earn/GoogleAds.vue'
 
 
 
-import {setloading,isLoading,setbackedUrl} from './utils/extra.js'
+import {setloading,isLoading,setbackedUrl,isSidebar} from './utils/extra.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -38,6 +38,7 @@ import './assets/main.css';
 // layouts
 import AuthLayout from "./Layouts/AuthLayout.vue";
 import HomeLayout from "./Layouts/HomeLayout.vue";
+import DeshboarLayout from "./Layouts/DeshboarLayout.vue";
 
 
 
@@ -60,6 +61,7 @@ app.component('Loading', Loading);
 app.component('GoogleAds', GoogleAds);
 app.component('AuthLayout', AuthLayout);
 app.component('HomeLayout', HomeLayout);
+app.component('DeshboarLayout', DeshboarLayout);
 app.component('Carousel', Carousel);
 app.component('Navigation', Navigation);
 app.component('Pagination', Pagination);
@@ -73,6 +75,7 @@ app.component('Slide', Slide);
 // extra==========================================
 app.config.globalProperties.$setLoading = setloading;
 app.config.globalProperties.$isLoading = isLoading;
+app.config.globalProperties.$isSidebar = isSidebar;
 app.config.globalProperties.$setbackedUrl = setbackedUrl;
 
 app.mount('#app')
