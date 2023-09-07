@@ -4,7 +4,7 @@ import Header from './components/others/Header.vue'
 import Loading from './components/others/Loading.vue'
 import MobileNav from './components/others/MobileNav.vue'
 import GoogleAds from './components/earn/GoogleAds.vue'
-
+import Modal from "./components/others/Modal.vue";
 
 
 
@@ -63,6 +63,7 @@ app.component('AuthLayout', AuthLayout);
 app.component('HomeLayout', HomeLayout);
 app.component('DeshboarLayout', DeshboarLayout);
 app.component('Carousel', Carousel);
+app.component('Modal', Modal);
 app.component('Navigation', Navigation);
 app.component('Pagination', Pagination);
 app.component('Slide', Slide);

@@ -41,7 +41,7 @@
             <li>
               <RouterLink class="hovdiv" to="/deshboard"
                 ><div>
-                  <i class="bi bi-wallet2"></i>
+                  <i class="bi bi-gear-wide-connected"></i>
                   <span class="spanhide"> Deshboard</span>
                 </div></RouterLink
               >
@@ -96,6 +96,7 @@
           <i class="mobile-nav-toggle d-none bi bi-list"></i>
         </nav>
       </div>
+     
 
       <!-- End Nav Menu -->
     </div>
@@ -119,12 +120,14 @@ export default {
     }
   },
 
+
   methods: {
+  
     logout() {
       this.$setLoading(true);
       logout();
       axios
-        .post(this.$setbackedUrl("api/auth/logout"))
+        .post("api/auth/logout")
         .then((response) => {
           this.$setLoading(false);
 
@@ -146,6 +149,8 @@ export default {
             type: "error",
           });
         });
+      this.$setLoading(false);
+      
     },
   },
 };

@@ -10,6 +10,12 @@ import EarnView from '../views/EarnView.vue'
 import VipView from '../views/VipView.vue'
 import AboutView from '../views/AboutView.vue'
 import DeshboardView from '../views/Deshboard/DeshboardView.vue'
+import UserView from '../views/Deshboard/UserView.vue'
+import AdminVipView from '../views/Deshboard/AdminVipView.vue'
+import AdminWorkView from '../views/Deshboard/AdminWorkView.vue'
+import AdminAskView from '../views/Deshboard/AdminAskView.vue'
+import AdminPaymentView from '../views/Deshboard/AdminPaymentView.vue'
+import AdminTransactionView from '../views/Deshboard/AdminTransactionView.vue'
 // import HomeLayout from '../Layouts/HomeLayout.vue'
 // import AuthLayout from '../Layouts/AuthLayout.vue'
 import LoginComponent from '../components/Auth/Login.vue'
@@ -158,6 +164,60 @@ const router = createRouter({
         requiresAuth:true,
       },
     },
+    {
+      path: '/deshboard/user',
+      name: 'usermanage',
+
+      component:UserView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/deshboard/vip',
+      name: 'vipmanage',
+
+      component:AdminVipView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/deshboard/work',
+      name: 'workmanage',
+
+      component:AdminWorkView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/deshboard/ask',
+      name: 'askmanage',
+
+      component:AdminAskView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/deshboard/payment',
+      name: 'payment',
+
+      component:AdminPaymentView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
+    {
+      path: '/deshboard/transaction',
+      name: 'transaction',
+
+      component:AdminTransactionView,
+      meta:{
+        requiresAuth:true,
+      },
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top
@@ -194,7 +254,10 @@ router.beforeEach((to, from, next) => {
     if (to.meta.requiresGuest && authenticated()) {
       next('/');
     } else {
+      
+      axios.defaults.baseURL='http://127.0.0.1:8000';
       axios.defaults.headers.common['Authorization']='bearer'+localStorage.getItem('token');
+     
 
       next();
       setloading(true);

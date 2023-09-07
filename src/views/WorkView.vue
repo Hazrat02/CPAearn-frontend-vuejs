@@ -53,24 +53,6 @@ export default {
   },
   methods: {},
 
-  // computed: {
-  //   async selectedComponent() {
-  //     const componentMapping = {
-  //       news: () => import(`./workView/ReadNews.vue`), // 'news' id maps to the news component path
-  //       mailsell: () => import(`./workView/Mailsell.vue`), // 'news' id maps to the news component path
-  //       // Add other id-component path mappings here...
-  //     };
-  //     const componentName = this.$route.params.id;
-  //      const componentPath = await componentMapping[componentName];
-  //     console.log('sd',componentPath);
-  //     if (!componentPath) {
-  //       // Return a default component or null if the componentName is not found in the mapping
-  //       return null;
-  //     }
-
-  //     return () => componentPath(); // Load the component using import function
-  //   },
-  // },
 
   async created() {
     // this.news=news

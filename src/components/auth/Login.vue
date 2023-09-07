@@ -161,6 +161,7 @@ export default {
   
   data() {
     return {
+   
       showicon: true,
       showPassword: false,
       email: "",
@@ -200,7 +201,7 @@ export default {
     };
 
       axios
-        .post("http://127.0.0.1:8000/api/auth/login",data)
+        .post("/api/auth/login",data)
         .then((response) => {
           console.log(response.data.user);
           login(response.data.authorisation.token);

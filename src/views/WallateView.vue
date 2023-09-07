@@ -502,6 +502,7 @@
             </form>
           </div>
         </Modal>
+       
         <div></div>
       </div>
     </HomeLayout>
@@ -521,7 +522,7 @@ import {
   ArcElement,
   PieController,
 } from "chart.js";
-import Modal from "../components/others/Modal.vue";
+
 import axios from "axios";
 import { useAuthUserStore } from "../store/user";
 import { transactionStore } from "../store/transaction";
@@ -529,7 +530,7 @@ import { transactionStore } from "../store/transaction";
 export default {
   components: {
     CryptoPrice,
-    Modal,
+  
   },
   data() {
     return {
@@ -540,15 +541,16 @@ export default {
       user_id: "",
       tutorial: true,
       deposit: "",
-      showModal: false,
-      showWithdrawModal: false,
+      
       withdrawAddress: "",
       withdrawMethod: "",
       withdrawnetwork: "",
       withdrawprice: "",
-      modalWidth: "col-11 col-md-6 bg-white rounded-4",
+      showModal: false,
+      showWithdrawModal: false,
+      modalWidth: "col-11 col-md-6 bg-white rounded-4 top-0 ",
       modalHeight: "auto",
-      modalPosition: "center", // Set the default position here, other options: top, right, bottom, left
+      modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
       textToCopy: "sssssssssssssssss", // The text you want to copy
       isCopied: false, // Track the state of the button
       buttonText: "", // Initial button text
@@ -633,7 +635,7 @@ export default {
       };
 
       await axios
-        .post(this.$setbackedUrl("api/deposit"), data)
+        .post("api/deposit", data)
         .then((response) => {
           this.$setLoading(false);
           // transactionStore===================================
@@ -678,7 +680,7 @@ export default {
       };
 
       axios
-        .post(this.$setbackedUrl("api/deposit"), data)
+        .post("/api/deposit", data)
         .then((response) => {
           this.$setLoading(false);
           (this.showWithdrawModal = false),

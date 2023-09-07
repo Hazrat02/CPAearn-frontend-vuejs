@@ -231,7 +231,7 @@ export default {
 
       };
       await axios
-        .post("http://127.0.0.1:8000/api/auth/forgetcode", data)
+        .post("/api/auth/forgetcode", data)
         .then((response) => {
          
           this.oldCode=response.data.code;
@@ -285,7 +285,7 @@ export default {
       
 
       axios
-        .post("http://127.0.0.1:8000/api/auth/register", data)
+        .post("/api/auth/register", data)
         .then((response) => {
           
 

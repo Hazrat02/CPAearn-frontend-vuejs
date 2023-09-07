@@ -241,7 +241,7 @@ export default {
         btn:''
       };
       await axios
-        .post("http://127.0.0.1:8000/api/auth/forgetcode", data)
+        .post("/api/auth/forgetcode", data)
         .then((response) => {
           this.showCode = true;
         this.showEmail = false;
@@ -271,7 +271,7 @@ export default {
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/auth/forget", data)
+        .post("/api/auth/forget", data)
         .then((response) => {
           this.$router.push('/login')
           this.$notify({

@@ -1,20 +1,27 @@
 <template>
-  <div  class="modal-overlay" @click="closeModal" v-if="showModal">
-    <div class="" :class="this.modalWidth " style="border-radius: 100%;z-index: 999999999" >
-      <div class="modal-header">
-        <span class="modal-title">{{this.title}}</span>
-        <button class="close-button" @click="closeModal">&times;</button>
+  <div class="modal-overlay " :class="this.position" @click="closeModal" v-if="showModal">
+    <div :class="this.modalWidth" >
+
+      <div>
+        <div class="modal-header">
+          <span class="modal-title">{{ this.title }}</span>
+          <button class="close-button" @click="closeModal">&times;</button>
+        </div>
+        <div class="modal-content " @click.stop>
+          <!-- Your modal content goes here -->
+          <slot></slot>
+        </div>
       </div>
-      <div class="modal-content "  @click.stop>
-        <!-- Your modal content goes here -->
-        <slot></slot>
-      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-export default {props: {
+export default {
+  
+  
+  props: {
     title: {
       type: String,
       default: "Modal Title",
@@ -25,7 +32,7 @@ export default {props: {
     },
     modalWidth: {
       type: String,
-      default: "col-11 col-md-6 bg-white rounded-4",
+      default: "",
     },
     modalHeight: {
       type: String,
@@ -33,7 +40,7 @@ export default {props: {
     },
     position: {
       type: String,
-      default: "center", // Default position is center, other options: top, right, bottom, left
+      default: "justify-content-start top-0", // Default position is center, other options: top, right, bottom, left
     },
   },
   computed: {
@@ -61,26 +68,23 @@ export default {props: {
 .modal-overlay {
   /* Styles for the overlay/background when modal is active */
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0%;
   bottom: 0;
+  left: 0;
   right: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
-  align-items: center;
+
   z-index: 44444444;
 }
 
 .modal-container {
-  /* Styles for the modal container */
-  background-color: #fff;
-  border-radius: 8px;
+
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
- 
+
 }
 
 .modal-header {
@@ -101,7 +105,7 @@ export default {props: {
 .close-button {
   /* Styles for the close button */
   cursor: pointer;
-  font-size: 20px;
+  font-size: 35px;
   background: none;
   border: none;
 }
@@ -112,9 +116,6 @@ export default {props: {
   max-height: 700px;
   overflow-y: scroll;
 }
-
-
-
-
-
 </style>
+
+

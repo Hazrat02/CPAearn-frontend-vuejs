@@ -1,5 +1,5 @@
 import { reactive, toRef } from 'vue';
-import Axios from 'axios';
+import axios from 'axios';
 let authenticated = false;
 
 const state = reactive({
@@ -21,6 +21,7 @@ export function logout() {
 
         localStorage.clear();
         authenticatedRef.value = false;
+       
 
 }
 export function login(value) {

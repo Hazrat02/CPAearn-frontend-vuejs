@@ -861,7 +861,7 @@ nav a.router-link-exact-active {
   max-height: calc(100vh - 90px);
   position: sticky;
   top: 10%;
-  background: #b9acac;
+
   font-family: "ubuntu-regular", sans-serif;
   padding: 0;
   width: 260px;
@@ -1023,12 +1023,26 @@ nav a.router-link-exact-active {
           background: transparent; }
 
 /* style for off-canvas menu*/
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 765px) {
+  .sidebar {
+    min-height: calc(100vh - 70px);
+    max-height: calc(100vh - 90px);
+    /* display: flex
+    ;
+    justify-content: center; */
+    font-family: "ubuntu-regular", sans-serif;
+    padding: 0;
+    width: 100%;
+    z-index: 11;
+    transition: width 0.25s ease, background 0.25s ease;
+    -webkit-transition: width 0.25s ease, background 0.25s ease;
+    -moz-transition: width 0.25s ease, background 0.25s ease;
+    -ms-transition: width 0.25s ease, background 0.25s ease; }
   .sidebar-offcanvas {
     position: fixed;
-    max-height: calc(100vh - 70px);
-    top: 70px;
-    bottom: 0;
+    max-height: 80vh;
+    top: 0;
+    
     overflow: auto;
     right: -260px;
     -webkit-transition: all 0.25s ease-out;
@@ -1174,7 +1188,8 @@ nav a.router-link-exact-active {
 
 .content-wrapper {
   background: #f2edf3;
-  padding: 2.75rem 2.25rem;
+  padding: 1rem 1rem;
+ 
   width: 100%;
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
