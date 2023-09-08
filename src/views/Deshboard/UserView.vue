@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DeshboarLayout>
+        <DeshboardLayout>
 
             <div class="content-wrapper" style="">
                 <div class="page-header row justify-content-between mb-2">
@@ -190,7 +190,7 @@
 
 
             </div>
-        </DeshboarLayout>
+        </DeshboardLayout>
     </div>
 </template>
     

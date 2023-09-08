@@ -2,6 +2,7 @@ import Backgrounds from './components/others/Bgs.vue'
 import Footer from './components/others/Footer.vue'
 import Header from './components/others/Header.vue'
 import Loading from './components/others/Loading.vue'
+import Dropdown from './components/others/Dropdown.vue'
 import MobileNav from './components/others/MobileNav.vue'
 import GoogleAds from './components/earn/GoogleAds.vue'
 import Modal from "./components/others/Modal.vue";
@@ -38,7 +39,7 @@ import './assets/main.css';
 // layouts
 import AuthLayout from "./Layouts/AuthLayout.vue";
 import HomeLayout from "./Layouts/HomeLayout.vue";
-import DeshboarLayout from "./Layouts/DeshboarLayout.vue";
+import DeshboardLayout from "./Layouts/DeshboardLayout.vue";
 
 
 
@@ -61,12 +62,13 @@ app.component('Loading', Loading);
 app.component('GoogleAds', GoogleAds);
 app.component('AuthLayout', AuthLayout);
 app.component('HomeLayout', HomeLayout);
-app.component('DeshboarLayout', DeshboarLayout);
+app.component('DeshboardLayout', DeshboardLayout);
 app.component('Carousel', Carousel);
 app.component('Modal', Modal);
 app.component('Navigation', Navigation);
 app.component('Pagination', Pagination);
 app.component('Slide', Slide);
+app.component('Dropdown', Dropdown);
 
 
 

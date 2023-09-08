@@ -13,7 +13,7 @@ export const useAuthUserStore = defineStore('authUser', {
     },
     async getUser(){
       try {
-        const response = await axios.post("http://127.0.0.1:8000/api/auth/me");
+        const response = await axios.post("/api/auth/me");
         this.setAuthUser(response.data.authUser);
         console.log('api',response.data.authUser);
         return response.data; // Return the fetched data

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <DeshboarLayout>
+    <DeshboardLayout>
       <div class="content-wrapper">
 
         <div class="page-header d-flex justify-content-between align-item-center mb-2">
@@ -76,7 +76,7 @@
       </div>
 
       <!-- End vip Section -->
-    </DeshboarLayout>
+    </DeshboardLayout>
   </div>
 </template>
 

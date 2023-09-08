@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DeshboarLayout>
+    <DeshboardLayout>
       <div class="content-wrapper mt-0" style="">
    
                 <div class="page-header row justify-content-between mb-2 mt-0">
@@ -56,7 +56,7 @@
           </div>
         </div>
         
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12 grid-margin">
             <div class="card">
               <div class="card-body">
@@ -75,7 +75,7 @@
                     <tbody>
                       <tr>
                         <td>
-                          <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
+                          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="me-2" alt="image"> David Grey
                         </td>
                         <td> Fund is not recieved </td>
                         <td>
@@ -86,7 +86,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <img src="assets/images/faces/face2.jpg" class="me-2" alt="image"> Stella Johnson
+                          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="me-2" alt="image"> Stella Johnson
                         </td>
                         <td> High loading time </td>
                         <td>
@@ -97,7 +97,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <img src="assets/images/faces/face3.jpg" class="me-2" alt="image"> Marina Michel
+                          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="me-2" alt="image"> Marina Michel
                         </td>
                         <td> Website down for one week </td>
                         <td>
@@ -108,7 +108,7 @@
                       </tr>
                       <tr>
                         <td>
-                          <img src="assets/images/faces/face4.jpg" class="me-2" alt="image"> John Doe
+                          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="me-2" alt="image"> John Doe
                         </td>
                         <td> Loosing control on server </td>
                         <td>
@@ -141,16 +141,16 @@
                 </div>
                 <div class="row mt-3">
                   <div class="col-6 pe-1">
-                    <img src="assets/images/dashboard/img_1.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
-                    <img src="assets/images/dashboard/img_4.jpg" class="mw-100 w-100 rounded" alt="image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="mb-2 mw-100 w-100 rounded" alt="image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="mw-100 w-100 rounded" alt="image">
                   </div>
                   <div class="col-6 ps-1">
-                    <img src="assets/images/dashboard/img_2.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
-                    <img src="assets/images/dashboard/img_3.jpg" class="mw-100 w-100 rounded" alt="image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="mb-2 mw-100 w-100 rounded" alt="image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="mw-100 w-100 rounded" alt="image">
                   </div>
                 </div>
                 <div class="d-flex mt-5 align-items-top">
-                  <img src="assets/images/faces/face3.jpg" class="img-sm rounded-circle me-3" alt="image">
+                  <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="img-sm rounded-circle me-3" alt="image">
                   <div class="mb-0 flex-grow">
                     <h5 class="me-2 mb-2">School Website - Authentication Module.</h5>
                     <p class="mb-0 font-weight-light">It is a long established fact that a reader will be distracted by
@@ -310,9 +310,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-    </DeshboarLayout>
+    </DeshboardLayout>
   </div>
 </template>
   

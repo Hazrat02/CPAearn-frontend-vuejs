@@ -1,0 +1,109 @@
+<template>
+    <div>
+        <DeshboardLayout>
+            <div class="content-wrapper">
+
+                <div class="page-header d-flex justify-content-between align-item-center mb-2">
+                    <h3 class="page-title">
+                        <span class="page-title-icon btn-gradient-primary text-white me-2 p-1">
+                            <i class="bi bi-info-circle"></i>
+                        </span>
+                        Ask
+                    </h3>
+
+                    <div class="">
+
+                        <button class="btn btn-gradient-primary">+ Add a Ask</button>
+
+                    </div>
+
+                </div>
+                <section id="faq" class="faq">
+                    <div class="container">
+                        <div class="row gy-4">
+                            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                                <div class="content px-xl-5">
+                                    <h3>
+                                        <span>Frequently Asked </span><strong>Questions</strong>
+                                    </h3>
+                                    <p>
+                                        If your problem or inquiry is not addressed in our Frequently
+                                        Asked Questions (FAQs) section, we encourage you to get in
+                                        touch with our dedicated support team. <router-link to="contact">Contact
+                                            Us</router-link>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                                <div class="faq-container">
+                                    <div class="faq-item" v-for="(item, index) in ask" :key="index" :class="{
+                                        'faq-active': item.id === this.activeAsk,
+                                    }" @click="toggleActiveAsk(item.id)">
+                                        <h3>
+                                            <span class="num">{{ index }}.</span>
+                                            <span>{{ item.ask }}</span>
+                                        </h3>
+                                        <div class="faq-content">
+                                            <p>
+                                                {{ item.ans }}
+                                            </p>
+                                        </div>
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </div>
+                                    <!-- End Faq item-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- End Faq Section -->
+        </DeshboardLayout>
+    </div>
+</template>
+  
+<script>
+import axios from "axios";
+
+export default {
+    data() {
+        return {
+            ask: "",
+            activeAsk: "",
+        };
+    },
+    methods: {
+        toggleActiveAsk(itemId) {
+            if (this.activeAsk === itemId) {
+                // If the clicked item is already the active item, set it to null
+                this.activeAsk = null;
+            } else {
+                // Otherwise, set it to the clicked item's ID
+                this.activeAsk = itemId;
+            }
+        },
+
+        setup() { },
+        showAns() { },
+    },
+    created() {
+        axios
+            .get("http://127.0.0.1:8000/api/ask")
+            .then((response) => {
+                this.ask = response.data.ask;
+                console.log(this.ask);
+            })
+            .catch((error) => {
+                this.$notify({
+                    title: "Warning",
+                    text: error.response.data.message + ".Reload this page",
+                    type: "error",
+                });
+            });
+        this.$setLoading(false);
+    },
+};
+</script>
+<style scoped></style>
+  

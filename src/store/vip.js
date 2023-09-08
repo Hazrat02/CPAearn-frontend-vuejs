@@ -21,7 +21,7 @@ export const vipStore = defineStore("vip", {
     async getVip() {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/vip"
+          "/api/vip"
         );
         this.setVip(response.data.vip);
         return response.data.vip; // Return the fetched data

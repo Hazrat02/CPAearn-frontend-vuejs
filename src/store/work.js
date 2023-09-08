@@ -21,7 +21,7 @@ export const workStore = defineStore("work", {
     async getWork() {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/work"
+          "/api/work"
         );
         this.setWork(response.data.work);
         return this.work; // Return the fetched data

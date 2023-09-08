@@ -22,7 +22,7 @@ export const transactionStore = defineStore("transaction", {
     async getTransaction() {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/transaction"
+          "/api/transaction"
         );
         this.setTransaction(response.data);
         return response.data; // Return the fetched data

@@ -895,7 +895,7 @@ nav a.router-link-exact-active {
         -ms-flex-align: center;
         align-items: center;
         white-space: nowrap;
-        padding: 1.125rem 0 1.125rem 0;
+        padding: 1.125rem 1.125rem 1.125rem;
         color: #3e4b5b;
         -webkit-transition-duration: 0.45s;
         transition-duration: 0.45s;
@@ -1018,10 +1018,14 @@ nav a.router-link-exact-active {
             color: #b66dff;
             background: transparent; }
           .sidebar .nav.sub-menu .nav-item .nav-link:hover {
+         
             color: #555555; }
         .sidebar .nav.sub-menu .nav-item:hover {
-          background: transparent; }
 
+          background: #000000;}
+          .sidebar .nav-item:hover {
+            background: #f2edf3 !important;
+            color: #0a0404 !important}
 /* style for off-canvas menu*/
 @media screen and (max-width: 765px) {
   .sidebar {
