@@ -13,7 +13,7 @@
 
                     <div class="">
 
-                        <button class="btn btn-gradient-primary">+ Add a Ask</button>
+                        <button class="btn btn-gradient-primary" @click="showModal = true">+ Add a Ask</button>
 
                     </div>
 
@@ -58,6 +58,34 @@
                     </div>
                 </section>
             </div>
+            <Modal
+          :showModal="showModal"
+          :modalWidth="modalWidth"
+          :modalHeight="modalHeight"
+          :position="modalPosition"
+          @close="showModal = false"
+          :title="'Ask Make'"
+        >
+          
+             <div>
+                <form>
+  
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Question</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-group mb-2" >
+                    <label for="exampleFormControlTextarea1">Answer</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-grad">+ Create</button>
+                    
+                </div>
+                </form>
+             </div>
+          <!-- Your modal content goes here -->
+        </Modal>
             <!-- End Faq Section -->
         </DeshboardLayout>
     </div>
@@ -71,6 +99,11 @@ export default {
         return {
             ask: "",
             activeAsk: "",
+            modalWidth: "col-11 col-md-6 bg-white rounded-4 top-0 ",
+            showModal: false,
+            modalHeight: "auto",
+            modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
+
         };
     },
     methods: {

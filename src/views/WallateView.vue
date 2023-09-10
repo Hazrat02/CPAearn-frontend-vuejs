@@ -62,13 +62,13 @@
             <div style="align-items: center;z-index: 1" class="col-md-4 col-12 mt-3 row" >
               <div class="d-flex justify-content-evenly">
                 <button
-                  class="btn btn-inverse-primary"
+                  class="btn btn-grad"
                   @click="showWithdrawModal = true"
                 >
                   Withdraw
                 </button>
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-grad"
                   @click="showModal = true"
                 >
                   Deposit
@@ -526,6 +526,7 @@ import {
 import axios from "axios";
 import { useAuthUserStore } from "../store/user";
 import { transactionStore } from "../store/transaction";
+import { paymentStore } from "../store/payment";
 
 export default {
   components: {
@@ -546,9 +547,10 @@ export default {
       withdrawMethod: "",
       withdrawnetwork: "",
       withdrawprice: "",
-      showModal: false,
+      
       showWithdrawModal: false,
       modalWidth: "col-11 col-md-6 bg-white rounded-4 top-0 ",
+      showModal: false,
       modalHeight: "auto",
       modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
       textToCopy: "sssssssssssssssss", // The text you want to copy
@@ -839,20 +841,20 @@ export default {
     }
 
     // payment data=====================================================
+    const getpayment = paymentStore();
 
-    axios
-      .get("http://127.0.0.1:8000/api/payment")
-      .then((response) => {
-        this.payment = response.data.payment;
-      })
-      .catch((error) => {
-        this.$notify({
-          title: "Warning",
-          text: error.response.data.message + ".Reload this page",
-          type: "error",
-        });
-      });
-      
+// Try to get the data from the store
+const paymentData = getpayment.payment;
+
+if (paymentData) {
+  this.payment = paymentData;
+
+} else {
+  // If data is not available, fetch it and set the component property
+  this.payment = await getpayment.getPayment();
+ 
+}
+    
     this.$setLoading(false);
   },
   watch: {

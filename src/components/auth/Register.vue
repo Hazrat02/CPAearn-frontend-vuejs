@@ -143,6 +143,7 @@
             </label>
 
             <input
+            id="profile_photo_path"
               style="display: none"
               type="file"
               onchange="profile"

@@ -26,7 +26,7 @@
                                     <h4 class="card-title">User</h4>
                                     <div>
                                         <div class="dropdown">
-                                            <i @click="toggleDropdown" class="bi bi-filter-square"></i>
+                                            <i @click="toggleDropdown" class="bi bi-filter-square" style="font-size: 30px;color: rgba(0, 94, 62, 0.945);"></i>
                                             <!-- <button @click="toggleDropdown"><i class="bi bi-filter-square"></i>{{ selectedOption }}</button> -->
                                             <ul v-if="isOpen">
                                                 <li v-for="(option, index) in filterOptions" :key="index"
@@ -201,11 +201,12 @@ button {
     cursor: pointer;
 }
 
-ul {
+.dropdown ul {
     list-style-type: none;
     padding: 0;
-    margin-left: -50px;
+   
     position: absolute;
+    right: -5px;
     background-color: #ffffff;
     border: 1px solid #ccc;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -216,12 +217,12 @@ ul {
     /* Ensure the dropdown appears above other content */
 }
 
-li {
+.dropdown li {
     padding: 10px;
     cursor: pointer;
 }
 
-ul.show {
+.dropdown ul.show {
     display: block;
 }
 </style>

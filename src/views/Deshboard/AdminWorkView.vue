@@ -13,7 +13,7 @@
 
                     <div class="">
 
-                        <button class="btn btn-gradient-primary">+ Add a Work</button>
+                        <button class="btn btn-gradient-primary" @click="showModal = true">+ Add a Work</button>
 
                     </div>
 
@@ -48,6 +48,80 @@
                 </div>
                 <!-- End About div -->
             </div>
+            
+            <Modal :showModal="showModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
+                @close="showModal = false" :title="'Deposit'">
+                <div class="col-12 my-3 card">
+                    <div>
+                                Selected Options: {{ selectedOptions }}
+                            </div>
+                    <form class="justify-content-center" method="POST" enctype="multipart/form-data"
+                        @submit.prevent="register">
+                        <!-- Email input -->
+
+                        <div class="form-outline mb-2">
+                            <input placeholder="News Read" v-model="methodname" type="text" id="name" class="form-control"
+                                required />
+                            <div class="d-flex">
+                                <label class="form-label" for="name">Work Name</label>
+                            </div>
+                        </div>
+                        <div class="form-outline mb-2">
+                            <textarea placeholder="its not work without vpn" type="text" v-model="description"
+                                class="form-control" required />
+                            <div class="d-flex">
+                                <label class="form-label justify-content-start" for="description">Description</label>
+                            </div>
+                        </div>
+                       
+                        <div class="form-outline mb-2">
+                            <input placeholder="0.05" type="text" v-model="earn" class="form-control" required />
+                            <div class="d-flex">
+                                <label class="form-label justify-content-start" for="form3Example3">Earn</label>
+                            </div>
+                        </div>
+                        <div class="form-outline  mb-2">
+                            <input placeholder="news" type="text" v-model="component" class="form-control" required />
+                            <div class="d-flex">
+                                <label class="form-label justify-content-start" for="form3Example3">Component</label>
+                            </div>
+                        </div>
+                        <div class="form-outline  mb-2">
+                            <select class="form-select"    aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option  value="1">One</option>
+                                <option  value="2">Two</option>
+                                <option value="3">Three</option>
+                               
+                            </select>
+                            <!-- <MultiSelect label="Select Options" :options="options"
+                                v-model="selectedOptions"></MultiSelect> -->
+
+                            <div class="d-flex">
+                                <label class="form-label justify-content-start" for="form3Example3">VIP</label>
+                            </div>
+                        </div>
+                        
+                            <div class="form-outline  mb-2">
+                                <input placeholder="bi-0-circle" type="text" v-model="icon" class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Icon</label>
+                                </div>
+                            </div>
+                            
+
+
+
+
+
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-grad">+ Create</button>
+
+                        </div>
+                    </form>
+                </div>
+            </Modal>
         </DeshboardLayout>
     </div>
 </template>
@@ -58,19 +132,42 @@ import { useAuthUserStore } from "../../store/user";
 import isAuthenticated from "../../midleware/auth";
 import { vipStore } from "../../store/vip";
 import { workStore } from "../../store/work";
+import MultiSelect from "../../components/others/MultiSelect.vue"; // Adjust the path to the MultiSelect component
+
 export default {
+    components: {
+        MultiSelect,
+    },
     data() {
         return {
+            options: [
+                { label: "Option 1", value: "1" },
+                { label: "Option 2", value: "2" },
+                { label: "Option 3", value: "3" },
+            ],
+
+
+            selectedOptions: [], // Initialize it as an empty ar
             work: [],
             authUser: "",
             vip: "",
             active: "",
             isLoading: true,
             cryptoData: {},
+            showModal: false,
+            modalHeight: "auto",
+            modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
+            modalWidth: "col-11 col-md-6 bg-white rounded-4 top-0 ",
         };
     },
+    
+    methods: {
+        // Multiselect(event) {
+        //     console.log(event)
+        // }
+    },
 
- 
+
     async created() {
         this.$setLoading(false);
         if (isAuthenticated() == true) {
@@ -117,7 +214,7 @@ export default {
 
         this.$setLoading(false);
     },
-   
+
 };
 </script>
   

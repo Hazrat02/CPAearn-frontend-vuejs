@@ -14,7 +14,7 @@
 
           <div class="">
 
-            <button class="btn btn-gradient-primary">+ Add a VIP</button>
+            <button class="btn btn-gradient-primary" @click="showModal = true">+ Add a VIP</button>
 
           </div>
 
@@ -74,7 +74,77 @@
           </div>
         </section>
       </div>
+      <Modal
+          :showModal="showModal"
+          :modalWidth="modalWidth"
+          :modalHeight="modalHeight"
+          :position="modalPosition"
+          @close="showModal = false"
+          :title="'Vip Make'"
+        >
+        <div class="col-12 my-3 card">
+                        <form class="justify-content-center" method="POST" enctype="multipart/form-data"
+                            @submit.prevent="register">
+                            <!-- Email input -->
 
+                            <div class="form-outline mb-2">
+                                <input  placeholder="Free Plan" v-model="methodname" type="text" id="name"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label" for="name">Plan Name</label>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-2">
+                                <textarea placeholder="its not work without vpn" type="text" v-model="description"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="description">Description</label>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-2">
+                                <input  placeholder="40" type="text" v-model="price"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Price <span>$</span></label>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-2">
+                                <input placeholder="5" type="text" v-model="task"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Task</label>
+                                </div>
+                            </div>
+                           <div class="row justify-content-between">
+                            <div class="form-outline col-12 col-md-6 mb-2">
+                                <input placeholder="bi-0-circle" type="text" v-model="icon"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Icon</label>
+                                </div>
+                            </div>
+                            <div class="form-outline col-12 col-md-6 mb-2">
+                                <input placeholder="12" type="text" v-model="duration"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Duration</label>
+                                </div>
+                            </div>
+                           
+                           </div>
+                            
+
+                          
+                            
+
+                            <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-grad">+ Create</button>
+                    
+                </div>
+                        </form>
+                    </div>
+          <!-- Your modal content goes here -->
+        </Modal>
       <!-- End vip Section -->
     </DeshboardLayout>
   </div>
@@ -89,50 +159,16 @@ import axios from "axios";
 export default {
   data() {
     return {
+      showModal: false,
+      modalHeight: "auto",
+      modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
+      modalWidth: "col-11 col-md-6 bg-white rounded-4 top-0 ",
       authUser: "",
       vip: "",
       active: '',
       isLoading: true,
       cryptoData: {},
-      settings: {
-        itemsToShow: 1.5,
-        snapAlign: "center",
-      },
-      analysis: [
-        {
-          time: "Today",
-          earn: "10",
-          change: "-2",
-        },
-        {
-          time: "Monthly",
-          earn: "101",
-          change: "2",
-        },
-        {
-          time: "Yearly",
-          earn: "1000",
-          change: "-2",
-        },
-      ],
-      // breakpoints are mobile first
-      // any settings not specified will fallback to the carousel settings
-      breakpoints: {
-        // 700px and up
-        400: {
-          itemsToShow: 2.5,
-          snapAlign: "center",
-        },
-        700: {
-          itemsToShow: 3,
-          snapAlign: "center",
-        },
-        // 1024 and up
-        1024: {
-          itemsToShow: 3,
-          snapAlign: "start",
-        },
-      },
+      
     };
   },
   methods: {
