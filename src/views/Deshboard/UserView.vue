@@ -36,6 +36,11 @@
 
 
                                                 <th>Email</th>
+                                                <th>Vip</th>
+                                                <th>Balance</th>
+                                                <th>Frizen</th>
+                                                <th>Reffer</th>
+                                                <th>Use Reffer</th>
                                                 <th>Date Created</th>
 
                                                 <th>Action</th>
@@ -43,143 +48,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr v-for="(user, index) in displayedItems" :key="index">
                                                 <td>
-                                                    1
+                                                    {{index}}
                                                 </td>
                                                 <td>
-                                                    test
+                                                    {{user.name}}
                                                 </td>
                                                 <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
+                                                    <img src="" class="me-2" alt="image">
                                                 </td>
-                                                <td> Fund is not recieved </td>
+                                                <td>  {{user.email}}</td>
+                                                <td>  {{user.vip}}</td>
+                                                <td>  {{user.main_balance}}</td>
+                                                <td>  {{user.frozen_balance}}</td>
+                                                <td>  {{user.my_reffer}}</td>
+                                                <td>  {{user.use_reffer}}</td>
 
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
+                                                <td>{{ user.created_at.substring(0, 10) }}</td>
+                                                <td><div @click="userdelete" >delete</div> </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    test
-                                                </td>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
-                                                </td>
-                                                <td> Fund is not recieved </td>
-
-                                                <td> Dec 5, 2017 </td>
-                                                <td><button>delete</button> </td>
-                                            </tr>
-
-
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -195,17 +84,76 @@
 </template>
     
 <script>
+import axios from "axios";
+import { useAuthUserStore } from "../../store/user";
+ 
 export default {
+
     data() {
         return {
+            alluser:'',
+
+              // paginate
+              currentPage: 1, // The current page number
+            itemsPerPage: 10, // Number of items to display per page
 
         };
     },
+    methods: {
+        userdelete(){
+            console.log('sasa'),
+            axios
+        .get("/api/user.delete/1")
+        .then((response) => {
+          
 
-    created() {
+          
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
         this.$setLoading(false);
-        this.$isSidebar();
-        console.log(this.$isSidebar);
+        }
+  },
+   
+    computed:{
+        // Calculate the total number of pages based on the total number of items and itemsPerPage
+        totalPages() {
+            return Math.ceil(this.alluser.length / this.itemsPerPage);
+        },
+        // Get the items to display on the current page
+        displayedItems() {
+            const start = (this.currentPage - 1) * this.itemsPerPage;
+            const end = start + this.itemsPerPage;
+            return this.alluser.slice(start, end);
+        },
+    },
+
+   async created() {
+          // auth user data +++++++++++++++++++++++++++++
+
+    const userStore = useAuthUserStore();
+    const alluser = userStore.allUser;
+
+    if (alluser) {
+      this.alluser = alluser;
+    } else {
+      // userStore.reSetAuthUser();
+      this.alluser = await userStore.getAllUser();
+    }
+    console.log(this.alluser)
+        this.$setLoading(false);
+      
     },
 };
 </script>

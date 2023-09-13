@@ -49,7 +49,7 @@
           </div>
         </div>
         <hr />
-        <div id="about" class="about mt-2">
+        <div id="about" class="work mt-2">
           <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row align-items-xl-center gy-5">
               <div class="col-xl-12">
@@ -69,7 +69,7 @@
                         <h3>{{item.name}}</h3>
 
                         <p>
-                          {{item.discribtion}}
+                          {{item.description}}
                         </p>
                       </div>
                     </router-link>

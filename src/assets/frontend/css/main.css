@@ -801,13 +801,53 @@ section {
   }
 }
 
-/* About Section - Home Page
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+button {
+  background-color: #ffffff;
+  border: 1px solid #b81515;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown ul {
+  list-style-type: none;
+  padding: 0;
+ 
+  position: absolute;
+  right: -5px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 150px;
+  overflow-y: auto;
+
+  z-index: 199999;
+  /* Ensure the dropdown appears above other content */
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown ul.show {
+  display: block;
+}
+
+/* work Section - Home Page
 ------------------------------*/
-.about {
+.work {
+  margin-top: 0px !important;
   --color-background: #f4f4f4;
 }
 
-.about .content h3 {
+.work .content h3 {
   font-size: 16px;
   font-weight: 500;
   line-height: 19px;
@@ -818,16 +858,16 @@ section {
   display: inline-block;
 }
 
-.about .content h2 {
+.work .content h2 {
   color: var(--color-secondary);
   font-weight: 700;
 }
 
-.about .content p:last-child {
+.work .content p:last-child {
   margin-bottom: 0;
 }
 
-.about .content .read-more {
+.work .content .read-more {
   background: var(--color-primary);
   color: var(--color-inverse);
   font-family: var(--font-primary);
@@ -842,23 +882,23 @@ section {
   justify-content: center;
 }
 
-.about .content .read-more i {
+.work .content .read-more i {
   font-size: 18px;
   margin-left: 5px;
   line-height: 0;
   transition: 0.3s;
 }
 
-.about .content .read-more:hover {
+.work .content .read-more:hover {
   background: rgba(var(--color-primary-rgb), 0.8);
   padding-right: 19px;
 }
 
-.about .content .read-more:hover i {
+.work .content .read-more:hover i {
   margin-left: 10px;
 }
 
-.about .icon-box {
+.work .icon-box {
   padding:  40px;
   
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
@@ -868,7 +908,7 @@ section {
   height: 300px;
 }
 
-.about .icon-box i {
+.work .icon-box i {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -883,31 +923,31 @@ section {
   color: var(--color-primary);
 }
 
-.about .icon-box h3 {
+.work .icon-box h3 {
   color: var(--color-secondary);
   margin-bottom: 10px;
   font-size: 24px;
   font-weight: 700;
 }
 
-.about .icon-box p {
+.work .icon-box p {
   margin-bottom: 0;
 }
 
-.about .icon-box:hover i {
+.work .icon-box:hover i {
   background-color: var(--color-primary);
   color: var(--color-inverse);
 }
 /* 
-.about .icon-boxes .col-md-6:nth-child(2) .icon-box,
-.about .icon-boxes .col-md-6:nth-child(4) .icon-box {
+.work .icon-boxes .col-md-6:nth-child(2) .icon-box,
+.work .icon-boxes .col-md-6:nth-child(4) .icon-box {
   margin-top: -40px;
 } */
 
 @media (max-width: 768px) {
 
-  .about .icon-boxes .col-md-6:nth-child(2) .icon-box,
-  .about .icon-boxes .col-md-6:nth-child(4) .icon-box {
+  .work .icon-boxes .col-md-6:nth-child(2) .icon-box,
+  .work .icon-boxes .col-md-6:nth-child(4) .icon-box {
     margin-top: 0;
   }
 }

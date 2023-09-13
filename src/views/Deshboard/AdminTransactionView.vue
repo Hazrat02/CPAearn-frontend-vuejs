@@ -26,7 +26,7 @@
                                     <h4 class="card-title">User</h4>
                                     <div>
                                         <div class="dropdown">
-                                            <i @click="toggleDropdown" class="bi bi-filter-square" style="font-size: 30px;color: rgba(0, 94, 62, 0.945);"></i>
+                                            <i @click="toggleDropdown" class="bi bi-filter-square" style="font-size: 30px;color: rgba(133, 28, 204, 0.945);"></i>
                                             <!-- <button @click="toggleDropdown"><i class="bi bi-filter-square"></i>{{ selectedOption }}</button> -->
                                             <ul v-if="isOpen">
                                                 <li v-for="(option, index) in filterOptions" :key="index"
@@ -40,8 +40,8 @@
 
                                 </div>
 
-                                <div class="table-responsive" style="background: #9c9c9c1a">
-                                    <table class="table" style="background: #9c9c9c1a">
+                                <div class="table-responsive" style="">
+                                    <table class="table" style="">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -188,43 +188,8 @@ export default {
 }
 </style>
 
-<style scoped>
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
+<style >
 
-button {
-    background-color: #ffffff;
-    border: 1px solid #b81515;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.dropdown ul {
-    list-style-type: none;
-    padding: 0;
-   
-    position: absolute;
-    right: -5px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    max-height: 150px;
-    overflow-y: auto;
-
-    z-index: 199999;
-    /* Ensure the dropdown appears above other content */
-}
-
-.dropdown li {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.dropdown ul.show {
-    display: block;
-}
 </style>
 
     

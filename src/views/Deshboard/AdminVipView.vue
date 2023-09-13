@@ -33,17 +33,26 @@
             </p>
           </div>
           <!-- End Section Title -->
-
+        
           <div class="container">
             <div class="row g-4">
               <div v-for="(item, index) in vip" :key="index" class="col-lg-4 " data-aos="flip-right"
                 data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-                <div class="vip-item " :class="{
-                  'active2': item.id == this.authUser.vip,
-
-                }">
-
-                  <h3>{{ item.name }}</h3>
+                
+                <div class="vip-item">
+                  <div class="d-flex justify-content-end">
+                    <div class="gap-5">
+                      <i @click="toggleDropdown" class="bi bi-building-add" ></i>
+                    <i @click="toggleDropdown" class="bi bi-trash" ></i>
+                    <i @click="toggleDropdown" class="bi bi-pen" ></i>
+                    </div>
+                    
+                  </div>
+                 
+                    <h3>{{ item.name }}</h3>
+                    
+    
+          
                   <div class="icon">
                     <i class="bi" :class="item.icon"></i>
                   </div>
@@ -60,12 +69,7 @@
                       <span>{{ li.limit }}</span>
                     </li>
                   </ul>
-                  <div class="text-center">
-                    <button class="buy-btn " :class="{
-                      'activeb': item.id == this.authUser.vip,
 
-                    }" :disabled="item.id == this.authUser.vip" @click="buyNow(item)">Buy Now</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -83,12 +87,13 @@
           :title="'Vip Make'"
         >
         <div class="col-12 my-3 card">
+        
                         <form class="justify-content-center" method="POST" enctype="multipart/form-data"
-                            @submit.prevent="register">
+                            @submit.prevent="vipCreate">
                             <!-- Email input -->
 
                             <div class="form-outline mb-2">
-                                <input  placeholder="Free Plan" v-model="methodname" type="text" id="name"
+                                <input  placeholder="Free Plan" v-model="name" type="text" id="name"
                                     class="form-control" required />
                                 <div class="d-flex">
                                     <label class="form-label" for="name">Plan Name</label>
@@ -151,7 +156,7 @@
 </template>
 
 <script>
-import "vue3-carousel/dist/carousel.css";
+
 import { useAuthUserStore } from "../../store/user";
 import isAuthenticated from "../../midleware/auth";
 import { vipStore } from "../../store/vip";
@@ -159,6 +164,19 @@ import axios from "axios";
 export default {
   data() {
     return {
+         isOpen: false,
+        selectedOption: "all", // Initial selected option
+        filterOptions: ["all", "pending", "rejected","success"], // Dropdown options
+
+
+
+
+        name:'',
+        description:'',
+        price:'',
+        task:'',
+        duration:'',
+        icon:'',
       showModal: false,
       modalHeight: "auto",
       modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
@@ -172,6 +190,52 @@ export default {
     };
   },
   methods: {
+    
+    toggleDropdown() {
+            this.isOpen = !this.isOpen;
+        },
+        selectOption(option) {
+            this.selectedOption = option;
+            this.isOpen = false;
+
+            // You can add logic here to filter transactions based on the selected option
+            // For example, you can set a data property to store the selected filter option
+            // and then filter the transactions accordingly.
+        },
+  vipCreate() {
+    this.$setLoading(true);
+    const data = {
+      name:this.name,
+        description:this.description,
+        price:this.price,
+        task:this.task,
+        duration:this.duration,
+        icon:this.icon,
+    }
+    axios
+        .post("/api/vip.store", data)
+        .then((response) => {
+          
+
+          
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+        this.$setLoading(false);
+  
+  
+  },
     async buyNow(item) {
       this.$setLoading(true);
       if (isAuthenticated() === false) {

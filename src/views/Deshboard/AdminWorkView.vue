@@ -19,28 +19,29 @@
 
                 </div>
 
-                <div id="about" class="about mt-2">
+                <div class="work">
+                    
                     <div class="container">
                         <div class="row align-items-xl-center gy-5">
                             <div class="col-xl-12">
                                 <div class="row gy-4 icon-boxes">
                                     <div v-for="(item, index) in work" :key="index" style="height: 300px"
                                         class="col-md-6 col-xl-4">
-                                        <router-link :to="`/work/${item.component}`">
+                                       
                                             <div class="icon-box mt-0" style="height: 300px">
-                                                <div class="d-flex justify-content-end">0/5</div>
+                                                <div class="d-flex justify-content-end">:</div>
 
                                                 <i class="bi " :class="item.icon"></i>
                                                 <h3>{{ item.name }}</h3>
 
                                                 <p>
-                                                    {{ item.discribtion }}
+                                                    {{ item.description }}
                                                 </p>
                                             </div>
-                                        </router-link>
+                                      
                                     </div>
 
-                                    <!-- End Icon Box -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -55,12 +56,12 @@
                     <div>
                                 Selected Options: {{ selectedOptions }}
                             </div>
-                    <form class="justify-content-center" method="POST" enctype="multipart/form-data"
-                        @submit.prevent="register">
+                    <form class="justify-content-center"
+                        @submit.prevent="WorkStore">
                         <!-- Email input -->
 
                         <div class="form-outline mb-2">
-                            <input placeholder="News Read" v-model="methodname" type="text" id="name" class="form-control"
+                            <input placeholder="News Read" v-model="name" type="text" id="name" class="form-control"
                                 required />
                             <div class="d-flex">
                                 <label class="form-label" for="name">Work Name</label>
@@ -133,6 +134,7 @@ import isAuthenticated from "../../midleware/auth";
 import { vipStore } from "../../store/vip";
 import { workStore } from "../../store/work";
 import MultiSelect from "../../components/others/MultiSelect.vue"; // Adjust the path to the MultiSelect component
+import axios from "axios";
 
 export default {
     components: {
@@ -146,7 +148,12 @@ export default {
                 { label: "Option 3", value: "3" },
             ],
 
-
+            name:'',
+            vip_id:'1',
+            description:'',
+            earn:'',
+            icon:'',
+          
             selectedOptions: [], // Initialize it as an empty ar
             work: [],
             authUser: "",
@@ -162,6 +169,40 @@ export default {
     },
     
     methods: {
+
+        
+        WorkStore() {
+            this.$setLoading(true);
+            const data = {
+                name: this.name,
+
+                vip_id: this.vip_id,
+                description: this.description,
+                earn: this.earn,
+                icon: this.icon,
+            };
+            axios
+        .post("/api/work.create", data)
+        .then((response) => {
+        this.showModal = false
+
+          
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+        this.$setLoading(false);
+        }
         // Multiselect(event) {
         //     console.log(event)
         // }

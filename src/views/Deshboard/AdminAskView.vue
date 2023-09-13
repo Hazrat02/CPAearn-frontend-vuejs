@@ -68,15 +68,15 @@
         >
           
              <div>
-                <form>
+                <form @submit.prevent="askCreate">
   
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Question</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="What is your name?" v-model="askStore"></textarea>
                 </div>
                 <div class="form-group mb-2" >
                     <label for="exampleFormControlTextarea1">Answer</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" placeholder="My name is jon a" id="exampleFormControlTextarea1" rows="3" v-model="ans"></textarea>
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-grad">+ Create</button>
@@ -98,6 +98,8 @@ export default {
     data() {
         return {
             ask: "",
+            askStore: "",
+            ans: "",
             activeAsk: "",
             modalWidth: "col-11 col-md-6 bg-white rounded-4 top-0 ",
             showModal: false,
@@ -107,6 +109,36 @@ export default {
         };
     },
     methods: {
+        askCreate(){
+            this.$setLoading(true);
+            const data = {
+      ask:this.askStore,
+        ans:this.ans,
+       
+    }
+    axios
+        .post("/api/ask.store", data)
+        .then((response) => {
+          
+
+          
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+
+        this.$setLoading(false);
+        },
         toggleActiveAsk(itemId) {
             if (this.activeAsk === itemId) {
                 // If the clicked item is already the active item, set it to null
