@@ -19,7 +19,6 @@ export const useAuthUserStore = defineStore('authUser', {
       try {
         const response = await axios.post("/api/auth/me");
         this.setAuthUser(response.data.authUser);
-        console.log('api',response.data.authUser);
         return response.data; // Return the fetched data
       } catch (error) {
         console.log(error);
@@ -32,7 +31,6 @@ export const useAuthUserStore = defineStore('authUser', {
         this.setAllUser
         (response.data.alluser);
        
-        return response.data.alluser; // Return the fetched data
       } catch (error) {
         console.log(error);
       }

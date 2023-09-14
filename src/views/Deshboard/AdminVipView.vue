@@ -41,10 +41,10 @@
                 
                 <div class="vip-item">
                   <div class="d-flex justify-content-end">
-                    <div class="gap-5">
-                      <i @click="toggleDropdown" class="bi bi-building-add" ></i>
-                    <i @click="toggleDropdown" class="bi bi-trash" ></i>
-                    <i @click="toggleDropdown" class="bi bi-pen" ></i>
+                    <div class="d-flex gap-2">
+                      <i @click="toggleDropdown" class="bi bi-building-add" style="color: rgb(32, 123, 197);"></i>
+                    <i @click="vipdelete(item.id)" class="bi bi-trash" style="color: red;"></i>
+                    <i @click="toggleDropdown" class="bi bi-pen" style="color: rgb(10, 146, 101);" ></i>
                     </div>
                     
                   </div>
@@ -190,7 +190,45 @@ export default {
     };
   },
   methods: {
-    
+    vipdelete(id){
+//       // Define the Laravel route URL you want to DELETE
+//   const deleteRouteUrl = '/api/delete/{id}'; // Replace with your actual route URL
+
+//       // Define the ID you want to delete
+//   const itemIdToDelete = 1; // Replace with the actual ID you want to delete
+
+// // Send the DELETE request
+// axios.delete(deleteRouteUrl, {
+//     data: {
+//         id: itemIdToDelete
+//     }
+// })
+
+      this.$setLoading(true);
+    console.log(id)
+    axios.delete(`api/vip/delete/${id}`)
+      .then((response) => {
+          
+
+          
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+     
+        this.$setLoading(false);
+  
+    },
     toggleDropdown() {
             this.isOpen = !this.isOpen;
         },
@@ -314,7 +352,7 @@ export default {
     if (allVip) {
       this.vip = allVip;
     } else {
-      // userStore.reSetAuthUser();
+      
       this.vip = await vipPlan.getVip();
     }
 
