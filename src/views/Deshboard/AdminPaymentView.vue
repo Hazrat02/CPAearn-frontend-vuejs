@@ -46,22 +46,32 @@
                                         <tbody>
                                             <tr v-for="(transactionItem, index) in displayedItems" :key="index">
                                                 <td>
-                                                    {{index}}
+                                                    {{ index }}
                                                 </td>
                                                 <td>
-                                                    {{transactionItem.name}}
+                                                    {{ transactionItem.name }}
                                                 </td>
-                                                <td>{{transactionItem.method}} </td>
+                                                <td>{{ transactionItem.method }} </td>
                                                 <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image">
+                                                    <img src="" class="me-2" alt="image">
                                                 </td>
-                                                <td>{{transactionItem.address}} </td>
-                                                <td>{{transactionItem.network}} </td>
+                                                <td>{{ transactionItem.address }} </td>
+                                                <td>{{ transactionItem.network }} </td>
 
-                                                <td> {{transactionItem.created_at.substring(0, 10)}} </td>
-                                                <td><button>delete</button> </td>
+                                                <td> {{ transactionItem.created_at.substring(0, 10) }} </td>
+                                                <td>
+                                                    <div class="d-flex justify-content-between">
+
+
+                                                        <i @click="paymentdelete(transactionItem.id)" class="bi bi-trash"
+                                                            style="color: red;"></i>
+                                                        <i @click="paymenteditmodal(transactionItem.id)" class="bi bi-pen"
+                                                            style="color: rgb(10, 146, 101);"></i>
+
+                                                    </div>
+                                                </td>
                                             </tr>
-                                            
+
 
 
                                         </tbody>
@@ -123,6 +133,59 @@
                     </div>
                     <!-- Your modal content goes here -->
                 </Modal>
+                <Modal :showModal="showEditModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
+                    @close="showEditModal = false" :title="'Method Update'">
+                    <div class="col-12 my-3 card">
+                        <form class="justify-content-center" method="POST" enctype="multipart/form-data"
+                            @submit.prevent="paymentEdit">
+                            <!-- Email input -->
+
+                            <div class="form-outline mb-2">
+                                <input name="methodname" placeholder="Bitcoin" v-model="name" type="text" id="name"
+                                    class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label" for="name">Method Name</label>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-2">
+                                <input placeholder="btc" type="text" v-model="network" class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Network</label>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-2">
+                                <input placeholder="bitcoin" type="text" v-model="method" class="form-control" required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Method</label>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-2">
+                                <input placeholder="1x09358bsdfjks2" type="text" v-model="address" class="form-control"
+                                    required />
+                                <div class="d-flex">
+                                    <label class="form-label justify-content-start" for="form3Example3">Address</label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-outline mb-2">
+                                <input type="file" name="image" onchange="image" class="form-control" required />
+
+                                <div class="d-flex">
+                                    <label class="form-label" for="image"> Scan Image</label>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-grad">Update</button>
+
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Your modal content goes here -->
+                </Modal>
+                
 
             </div>
         </DeshboardLayout>
@@ -135,12 +198,12 @@ import { paymentStore } from '../../store/payment';
 export default {
     data() {
         return {
-              // paginate
-              currentPage: 1, // The current page number
+            // paginate
+            currentPage: 1, // The current page number
             itemsPerPage: 10, // Number of items to display per page
-
-
-            payment:'',
+            showEditModal:false,
+            editId:'',
+            payment: '',
             name: '',
             method: '',
             network: '',
@@ -153,7 +216,7 @@ export default {
 
         };
     },
-    computed:{
+    computed: {
         // Calculate the total number of pages based on the total number of items and itemsPerPage
         totalPages() {
             return Math.ceil(this.payment.length / this.itemsPerPage);
@@ -166,6 +229,34 @@ export default {
         },
     },
     methods: {
+        paymentdelete(id) {
+
+
+            this.$setLoading(true);
+
+            axios.delete(`api/payment.delete/${id}`)
+                .then((response) => {
+
+
+
+                    this.$notify({
+                        title: "message",
+                        text: response.data.message,
+                        type: "success",
+                    });
+                })
+                .catch((error) => {
+                    this.$setLoading(false);
+                    this.$notify({
+                        title: "Error message",
+                        text: error.response.data.message,
+                        type: "error",
+                    });
+                });
+
+            this.$setLoading(false);
+
+        },
 
         paymentStore() {
             this.$setLoading(true);
@@ -178,27 +269,165 @@ export default {
                 address: this.address,
             };
             axios
-        .post("/api/payment.store", data)
-        .then((response) => {
-          
+                .post("/api/payment.store", data)
+                .then((response) => {
 
-          
-          this.$notify({
-            title: "message",
-            text: response.data.message,
-            type: "success",
-          });
-        })
-        .catch((error) => {
-          this.$setLoading(false);
-          this.$notify({
-            title: "Error message",
-            text: error.response.data.message,
-            type: "error",
-          });
-        });
-        this.$setLoading(false);
-        }
+
+
+                    this.$notify({
+                        title: "message",
+                        text: response.data.message,
+                        type: "success",
+                    });
+                })
+                .catch((error) => {
+                    this.$setLoading(false);
+                    this.$notify({
+                        title: "Error message",
+                        text: error.response.data.message,
+                        type: "error",
+                    });
+                });
+            this.$setLoading(false);
+        },
+        paymenteditmodal(id) {
+
+            const item = this.payment.find(item => item.id === id);
+            this.name = item.name
+
+            this.method = item.method
+
+            this.network = item.network
+
+            this.image = item.image
+            this.address = item.address
+            this.editId = id
+
+            this.showEditModal = true
+
+
+        },
+        vipLabelModal(id) {
+
+            const item = this.payment.find(item => item.id === id);
+            this.name = item.name
+
+            this.method = item.method
+
+            this.network = item.network
+
+            this.image = item.image
+            this.address = item.address
+            this.editId = id
+
+            this.showEditModal = true
+
+
+        },
+        paymentEdit() {
+
+            this.showeditModal = false
+            this.$setLoading(true);
+
+
+            const id = this.editId
+            const data = {
+                name: this.name,
+
+                method: this.method,
+                network: this.network,
+                image: this.image,
+                address: this.address,
+
+            }
+
+
+            axios.put(`api/payment.edit/${id}`, data)
+                .then((response) => {
+
+                    this.$notify({
+                        title: "message",
+                        text: response.data.message,
+                        type: "success",
+                    });
+                    this.showEditModal = false
+                    const index = this.payment.findIndex(item => item.id === id);
+                    if (index !== -1) {
+
+                        this.payment[index].name = this.name;
+                        this.payment[index].method = this.method;
+                        this.payment[index].network = this.network;
+                        this.payment[index].image = this.image;
+                        this.payment[index].address = this.address;
+
+
+                        this.$set(this.payment, index, this.payment[index]);
+                    }
+                })
+                .catch((error) => {
+                    this.$setLoading(false);
+                    this.$notify({
+                        title: "Error message",
+                        text: error.response.data.message,
+                        type: "error",
+                    });
+                });
+
+            this.$setLoading(false);
+
+        },
+        vipLabelCreate() {
+
+            this.showeditModal = false
+            this.$setLoading(true);
+
+
+            const id = this.editId
+            const data = {
+                name: this.name,
+
+                method: this.method,
+                network: this.network,
+                image: this.image,
+                address: this.address,
+
+            }
+
+
+            axios.put(`api/payment.edit/${id}`, data)
+                .then((response) => {
+
+                    this.$notify({
+                        title: "message",
+                        text: response.data.message,
+                        type: "success",
+                    });
+                    this.showEditModal = false
+                    const index = this.payment.findIndex(item => item.id === id);
+                    if (index !== -1) {
+
+                        this.payment[index].name = this.name;
+                        this.payment[index].method = this.method;
+                        this.payment[index].network = this.network;
+                        this.payment[index].image = this.image;
+                        this.payment[index].address = this.address;
+
+
+                        this.$set(this.payment, index, this.payment[index]);
+                    }
+                })
+                .catch((error) => {
+                    this.$setLoading(false);
+                    this.$notify({
+                        title: "Error message",
+                        text: error.response.data.message,
+                        type: "error",
+                    });
+                });
+
+            this.$setLoading(false);
+
+        },
 
     },
 

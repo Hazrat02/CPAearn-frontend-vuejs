@@ -899,7 +899,7 @@ button {
 }
 
 .work .icon-box {
-  padding:  40px;
+  padding: 10px 40px 40px 40px;
   
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -908,7 +908,7 @@ button {
   height: 300px;
 }
 
-.work .icon-box i {
+.work .icon-box .workicon {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -934,7 +934,7 @@ button {
   margin-bottom: 0;
 }
 
-.work .icon-box:hover i {
+.work .icon-box:hover .workicon {
   background-color: var(--color-primary);
   color: var(--color-inverse);
 }
@@ -2801,6 +2801,7 @@ button {
   }
   
   .faq .faq-container .faq-item .faq-toggle {
+    
     position: absolute;
     top: 20px;
     right: 20px;

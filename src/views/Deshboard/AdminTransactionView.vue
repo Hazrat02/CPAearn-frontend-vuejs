@@ -49,7 +49,7 @@
                                                 <th>W/D</th>
                                                 <th>Date</th>
                                                 <th>Price</th>
-                                                <th>TRXID</th>
+                                                <th>TRXID/Address</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
 
@@ -70,7 +70,8 @@
                                                 <td>{{ transactionItem.type }}</td>
                                                 <td>{{ transactionItem.created_at.substring(0, 10) }}</td>
                                                 <td>${{ transactionItem.price }}</td>
-                                                <td>{{ transactionItem.trxid }}</td>
+                                                <td v-if="transactionItem.trxid">{{ transactionItem.trxid }} </td>
+                                                <td v-else>{{ transactionItem.address }}</td>
                                                 <td>
                                                     <span class="badge" :class="{
                                                         'bg-warning': transactionItem.status === 'pending',
@@ -79,7 +80,15 @@
                                                     }">{{ transactionItem.status }}</span>
                                                 </td>
                                                 <td>
-                                                    edit
+                                                    <div class="d-flex justify-content-between px-2">
+                                               
+
+                                               <i @click="trxEdit(transactionItem.id,'rejected')" class="bi bi-x-square"
+                                                   style="color: red;"></i>
+                                                  
+                                               <i @click="trxEdit(transactionItem.id,'success')" class="bi-check-lg" style="color: rgb(10, 146, 101);"></i>
+                                        
+                                       </div>
                                                 </td>
                                             </tr>
 
@@ -103,6 +112,7 @@
     
 <script>
 
+import axios from "axios";
 import { transactionStore } from "../../store/transaction";
 export default {
 
@@ -165,6 +175,54 @@ export default {
 
     },
     methods: {
+        trxEdit(id,status){
+            
+      this.$setLoading(true);
+
+
+     
+      const data = {
+        status:status
+
+      }
+
+
+      axios.put(`api/transaction.edit/${id}`, data)
+        .then((response) => {
+
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+
+
+
+
+
+
+          });
+          
+          const index = this.transaction.findIndex(item => item.id === id);
+          if (index !== -1) {
+
+            this.transaction[index].status = status;
+           
+
+            this.$set(this.transaction, index, this.transaction[index]);
+          }
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+
+      this.$setLoading(false);
+            console.log(id,status)
+        },
         toggleDropdown() {
             this.isOpen = !this.isOpen;
         },

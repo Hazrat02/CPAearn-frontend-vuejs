@@ -21,38 +21,27 @@
         </div>
         <section class="vip content-wrapper">
 
-          <!--  Section Title -->
-          <div class="container section-title">
-            <h2>vip</h2>
-            <p>
-              Our Premium Package is a specialized subscription plan designed to
-              offer enhanced features and benefits for our valued users. By
-              subscribing to the Premium Package, you gain access to exclusive
-              tools and services that can amplify your investment experience and
-              yield potential. Here are the key features of our Premium Package:
-            </p>
-          </div>
-          <!-- End Section Title -->
-        
+
+
           <div class="container">
             <div class="row g-4">
               <div v-for="(item, index) in vip" :key="index" class="col-lg-4 " data-aos="flip-right"
                 data-aos-easing="ease-out-cubic" data-aos-duration="2000">
-                
+
                 <div class="vip-item">
                   <div class="d-flex justify-content-end">
                     <div class="d-flex gap-2">
-                      <i @click="toggleDropdown" class="bi bi-building-add" style="color: rgb(32, 123, 197);"></i>
-                    <i @click="vipdelete(item.id)" class="bi bi-trash" style="color: red;"></i>
-                    <i @click="toggleDropdown" class="bi bi-pen" style="color: rgb(10, 146, 101);" ></i>
+                      <i @click="VipLabelModal(item.id)" class="bi bi-building-add" style="color: rgb(32, 123, 197);"></i>
+                      <i @click="vipdelete(item.id)" class="bi bi-trash" style="color: red;"></i>
+                      <i @click="vipeditmodal(item.id)" class="bi bi-pen" style="color: rgb(10, 146, 101);"></i>
                     </div>
-                    
+
                   </div>
-                 
-                    <h3>{{ item.name }}</h3>
-                    
-    
-          
+
+                  <h3>{{ item.name }}</h3>
+
+
+
                   <div class="icon">
                     <i class="bi" :class="item.icon"></i>
                   </div>
@@ -66,7 +55,7 @@
                         'bi-check': li.type == '1',
                         'na bi-x': li.type == '2',
                       }"></i>
-                      <span>{{ li.limit }}</span>
+                      <span>{{ li.limit }}</span><span> <i class="bi na bi-x" @click="unlockdelete(li.id)"></i></span>
                     </li>
                   </ul>
 
@@ -78,79 +67,159 @@
           </div>
         </section>
       </div>
-      <Modal
-          :showModal="showModal"
-          :modalWidth="modalWidth"
-          :modalHeight="modalHeight"
-          :position="modalPosition"
-          @close="showModal = false"
-          :title="'Vip Make'"
-        >
+      <Modal :showModal="showModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
+        @close="showModal = false" :title="'Vip Make'">
         <div class="col-12 my-3 card">
-        
+
+          <form class="justify-content-center" method="POST" enctype="multipart/form-data" @submit.prevent="vipCreate">
+            <!-- Email input -->
+
+            <div class="form-outline mb-2">
+              <input placeholder="Free Plan" v-model="name" type="text" id="name" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label" for="name">Plan Name</label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <textarea placeholder="its not work without vpn" type="text" v-model="description" class="form-control"
+                required />
+              <div class="d-flex">
+                <label class="form-label justify-content-start" for="description">Description</label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <input placeholder="40" type="text" v-model="price" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label justify-content-start" for="form3Example3">Price <span>$</span></label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <input placeholder="5" type="text" v-model="task" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label justify-content-start" for="form3Example3">Task</label>
+              </div>
+            </div>
+            <div class="row justify-content-between">
+              <div class="form-outline col-12 col-md-6 mb-2">
+                <input placeholder="bi-0-circle" type="text" v-model="icon" class="form-control" required />
+                <div class="d-flex">
+                  <label class="form-label justify-content-start" for="form3Example3">Icon</label>
+                </div>
+              </div>
+              <div class="form-outline col-12 col-md-6 mb-2">
+                <input placeholder="12" type="text" v-model="duration" class="form-control" required />
+                <div class="d-flex">
+                  <label class="form-label justify-content-start" for="form3Example3">Duration</label>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-grad">+ Create</button>
+
+            </div>
+          </form>
+        </div>
+        <!-- Your modal content goes here -->
+      </Modal>
+      <Modal :showModal="showEditModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
+        @close="showEditModal = false" :title="'Vip Update'">
+        <div class="col-12 my-3 card">
+
+          <form class="justify-content-center" method="POST" enctype="multipart/form-data" @submit.prevent="vipEdit">
+            <!-- Email input -->
+
+            <div class="form-outline mb-2">
+              <input placeholder="Free Plan" v-model="name" type="text" id="name" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label" for="name">Plan Name</label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <textarea placeholder="its not work without vpn" type="text" v-model="description" class="form-control"
+                required />
+              <div class="d-flex">
+                <label class="form-label justify-content-start" for="description">Description</label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <input placeholder="40" type="text" v-model="price" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label justify-content-start" for="form3Example3">Price <span>$</span></label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <input placeholder="5" type="text" v-model="task" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label justify-content-start" for="form3Example3">Task</label>
+              </div>
+            </div>
+            <div class="row justify-content-between">
+              <div class="form-outline col-12 col-md-6 mb-2">
+                <input placeholder="bi-0-circle" type="text" v-model="icon" class="form-control" required />
+                <div class="d-flex">
+                  <label class="form-label justify-content-start" for="form3Example3">Icon</label>
+                </div>
+              </div>
+              <div class="form-outline col-12 col-md-6 mb-2">
+                <input placeholder="12" type="text" v-model="duration" class="form-control" required />
+                <div class="d-flex">
+                  <label class="form-label justify-content-start" for="form3Example3">Duration</label>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-grad">Update</button>
+
+            </div>
+          </form>
+        </div>
+        <!-- Your modal content goes here -->
+      </Modal>
+      <!-- End vip Section -->
+      <Modal :showModal="showVipLabelModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
+                    @close="showVipLabelModal = false" :title="'Method Update'">
+                    <div class="col-12 my-3 card">
                         <form class="justify-content-center" method="POST" enctype="multipart/form-data"
-                            @submit.prevent="vipCreate">
+                            @submit.prevent="vipLabelMake">
                             <!-- Email input -->
 
                             <div class="form-outline mb-2">
-                                <input  placeholder="Free Plan" v-model="name" type="text" id="name"
+                                <input placeholder="Withdraw money" v-model="limit" type="text" id="label"
                                     class="form-control" required />
                                 <div class="d-flex">
-                                    <label class="form-label" for="name">Plan Name</label>
+                                    <label class="form-label" for="label">Vip Label</label>
                                 </div>
                             </div>
                             <div class="form-outline mb-2">
-                                <textarea placeholder="its not work without vpn" type="text" v-model="description"
-                                    class="form-control" required />
-                                <div class="d-flex">
-                                    <label class="form-label justify-content-start" for="description">Description</label>
-                                </div>
-                            </div>
-                            <div class="form-outline mb-2">
-                                <input  placeholder="40" type="text" v-model="price"
-                                    class="form-control" required />
-                                <div class="d-flex">
-                                    <label class="form-label justify-content-start" for="form3Example3">Price <span>$</span></label>
-                                </div>
-                            </div>
-                            <div class="form-outline mb-2">
-                                <input placeholder="5" type="text" v-model="task"
-                                    class="form-control" required />
-                                <div class="d-flex">
-                                    <label class="form-label justify-content-start" for="form3Example3">Task</label>
-                                </div>
-                            </div>
-                           <div class="row justify-content-between">
-                            <div class="form-outline col-12 col-md-6 mb-2">
-                                <input placeholder="bi-0-circle" type="text" v-model="icon"
-                                    class="form-control" required />
-                                <div class="d-flex">
-                                    <label class="form-label justify-content-start" for="form3Example3">Icon</label>
-                                </div>
-                            </div>
-                            <div class="form-outline col-12 col-md-6 mb-2">
-                                <input placeholder="12" type="text" v-model="duration"
-                                    class="form-control" required />
-                                <div class="d-flex">
-                                    <label class="form-label justify-content-start" for="form3Example3">Duration</label>
-                                </div>
+                                <select  @change="updateLabelType"  class="form-select">
+                                  <option value="" disabled selected>Select Label type</option>
+                                  <option value="1">Right</option>
+                                  <option value="2">Wrong</option>
+                                </select>
+                                
                             </div>
                            
-                           </div>
-                            
-
-                          
-                            
 
                             <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-grad">+ Create</button>
-                    
-                </div>
+                                <button type="submit" class="btn btn-grad">+ Create</button>
+
+                            </div>
                         </form>
                     </div>
-          <!-- Your modal content goes here -->
-        </Modal>
-      <!-- End vip Section -->
+                    <!-- Your modal content goes here -->
+                </Modal>
     </DeshboardLayout>
   </div>
 </template>
@@ -164,19 +233,21 @@ import axios from "axios";
 export default {
   data() {
     return {
-         isOpen: false,
-        selectedOption: "all", // Initial selected option
-        filterOptions: ["all", "pending", "rejected","success"], // Dropdown options
-
-
-
-
-        name:'',
-        description:'',
-        price:'',
-        task:'',
-        duration:'',
-        icon:'',
+      isOpen: false,
+      selectedOption: "all", // Initial selected option
+      filterOptions: ["all", "pending", "rejected", "success"], // Dropdown options
+      showVipLabelModal:false,
+      labelId:'',
+      limit:'',
+      labelType:'Select Label Type',
+      showEditModal: false,
+      editId:'',
+      name: '',
+      description: '',
+      price: '',
+      task: '',
+      duration: '',
+      icon: '',
       showModal: false,
       modalHeight: "auto",
       modalPosition: "justify-content-center align-items-center", // Set the default position here, other options: top, right, bottom, left
@@ -186,31 +257,23 @@ export default {
       active: '',
       isLoading: true,
       cryptoData: {},
-      
+
     };
   },
   methods: {
-    vipdelete(id){
-//       // Define the Laravel route URL you want to DELETE
-//   const deleteRouteUrl = '/api/delete/{id}'; // Replace with your actual route URL
+    updateLabelType(event) {
+      this.labelType = event.target.value;
+    },
+    vipdelete(id) {
 
-//       // Define the ID you want to delete
-//   const itemIdToDelete = 1; // Replace with the actual ID you want to delete
-
-// // Send the DELETE request
-// axios.delete(deleteRouteUrl, {
-//     data: {
-//         id: itemIdToDelete
-//     }
-// })
 
       this.$setLoading(true);
-    console.log(id)
-    axios.delete(`api/vip/delete/${id}`)
-      .then((response) => {
-          
+      console.log(id)
+      axios.delete(`api/vip/delete/${id}`)
+        .then((response) => {
 
-          
+
+
           this.$notify({
             title: "message",
             text: response.data.message,
@@ -225,37 +288,149 @@ export default {
             type: "error",
           });
         });
-     
-        this.$setLoading(false);
-  
-    },
-    toggleDropdown() {
-            this.isOpen = !this.isOpen;
-        },
-        selectOption(option) {
-            this.selectedOption = option;
-            this.isOpen = false;
 
-            // You can add logic here to filter transactions based on the selected option
-            // For example, you can set a data property to store the selected filter option
-            // and then filter the transactions accordingly.
-        },
-  vipCreate() {
-    this.$setLoading(true);
-    const data = {
-      name:this.name,
-        description:this.description,
-        price:this.price,
-        task:this.task,
-        duration:this.duration,
-        icon:this.icon,
-    }
-    axios
+      this.$setLoading(false);
+
+    },
+    unlockdelete(id) {
+
+
+      this.$setLoading(true);
+      console.log(id)
+      axios.delete(`api/unlock.delete/${id}`)
+        .then((response) => {
+
+
+
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+
+      this.$setLoading(false);
+
+    },
+    vipeditmodal(id) {
+
+      const item = this.vip.find(item => item.id === id);
+      this.name=item.name
+
+        this.description=item.description
+
+        this.price=item.price
+
+        this.task=item.task
+
+        this.duration=item.duration
+
+        this.icon=item.icon
+        this.editId=id
+
+        this.showEditModal = true
+
+
+    },
+    VipLabelModal(id) {
+
+      // const item = this.vip.find(item => item.id === id);
+      // this.name=item.name
+
+      //   this.description=item.description
+
+      //   this.price=item.price
+
+      //   this.task=item.task
+
+      //   this.duration=item.duration
+
+      //   this.icon=item.icon
+        this.labelId=id
+
+        this.showVipLabelModal = true
+
+
+    },
+    vipEdit() {
+
+      this.showeditModal = false
+      this.$setLoading(true);
+
+
+      const id = this.editId
+      const data = {
+        name: this.name,
+        description: this.description,
+        price: this.price,
+        task: this.task,
+        duration: this.duration,
+        icon: this.icon,
+
+      }
+
+
+      axios.put(`api/vip.edit/${id}`, data)
+        .then((response) => {
+
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+          this.showEditModal=false
+          const index = this.vip.findIndex(item => item.id === id);
+          if (index !== -1) {
+
+            this.vip[index].name = this.name;
+            this.vip[index].description = this.description;
+            this.vip[index].price = this.price;
+            this.vip[index].task = this.task;
+            this.vip[index].duration = this.duration;
+            this.vip[index].icon = this.icon;
+
+
+            this.$set(this.vip, index, this.vip[index]);
+          }
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+
+      this.$setLoading(false);
+
+    },
+
+    vipCreate() {
+      this.showModal = false
+      this.$setLoading(true);
+      const data = {
+        name: this.name,
+        description: this.description,
+        price: this.price,
+        task: this.task,
+        duration: this.duration,
+        icon: this.icon,
+      }
+      axios
         .post("/api/vip.store", data)
         .then((response) => {
-          
 
-          
+
+
           this.$notify({
             title: "message",
             text: response.data.message,
@@ -270,10 +445,45 @@ export default {
             type: "error",
           });
         });
-        this.$setLoading(false);
-  
-  
-  },
+      this.$setLoading(false);
+
+
+    },
+    vipLabelMake() {
+      this.showVipLabelModal = false
+      this.$setLoading(true);
+      const data = {
+        vip_id: this.labelId,
+        limit: this.limit,
+        type: this.labelType,
+       
+      }
+      console.log(data)
+      axios
+        .post("/api/vipunlock.store", data)
+        .then((response) => {
+
+
+
+          this.$notify({
+            title: "message",
+            text: response.data.message,
+            type: "success",
+          });
+
+        })
+        .catch((error) => {
+          this.$setLoading(false);
+          this.$notify({
+            title: "Error message",
+            text: error.response.data.message,
+            type: "error",
+          });
+        });
+      this.$setLoading(false);
+
+
+    },
     async buyNow(item) {
       this.$setLoading(true);
       if (isAuthenticated() === false) {
@@ -352,7 +562,7 @@ export default {
     if (allVip) {
       this.vip = allVip;
     } else {
-      
+
       this.vip = await vipPlan.getVip();
     }
 

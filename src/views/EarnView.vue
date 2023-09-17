@@ -65,7 +65,7 @@
                       <div class="icon-box mt-0" style="height: 300px">
                         <div class="d-flex justify-content-end">0/5</div>
 
-                        <i class="bi " :class="item.icon"></i>
+                        <i class="bi workicon" :class="item.icon"></i>
                         <h3>{{item.name}}</h3>
 
                         <p>

@@ -224,6 +224,7 @@ export default {
       this.startCountdown();
 
       const data = {
+        type:'register',
         email: this.email,
         sub:'Cpaearn registation code',
         bodytext:'Your Cpaearn registation code is:',

@@ -28,9 +28,8 @@ export const useAuthUserStore = defineStore('authUser', {
     async getAllUser(){
       try {
         const response = await axios.get("/api/all.user");
-        this.setAllUser
-        (response.data.alluser);
-       
+        this.setAllUser(response.data.alluser);
+       return  response.data.alluser
       } catch (error) {
         console.log(error);
       }

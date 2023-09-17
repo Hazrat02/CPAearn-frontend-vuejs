@@ -234,6 +234,7 @@ export default {
       this.$setLoading(true);
       
       const data = {
+        type:'forget',
         email: this.email,
         sub:'Cpaearn Forget code',
         bodytext:'Your Cpaearn forget code is:',

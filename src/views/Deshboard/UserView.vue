@@ -48,7 +48,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="(user, index) in displayedItems" :key="index">
+                                            <tr v-for="(user, index) in displayedItems " :key="index">
                                                 <td>
                                                     {{index}}
                                                 </td>
@@ -66,7 +66,14 @@
                                                 <td>  {{user.use_reffer}}</td>
 
                                                 <td>{{ user.created_at.substring(0, 10) }}</td>
-                                                <td><div @click="userdelete" >delete</div> </td>
+                                                <td> <div class="d-flex justify-content-between">
+                                               
+
+                                                    <i @click="askdelete(item.id)" class="bi bi-trash"
+                                                        style="color: red;"></i>
+                                                    <i @click="" class="bi bi-pen" style="color: rgb(10, 146, 101);"></i>
+                                             
+                                            </div></td>
                                             </tr>
                                            
                                         </tbody>
@@ -151,7 +158,7 @@ export default {
       // userStore.reSetAuthUser();
       this.alluser = await userStore.getAllUser();
     }
-    console.log(this.alluser)
+    console.log(this.alluser,'all')
         this.$setLoading(false);
       
     },
