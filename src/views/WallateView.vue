@@ -839,6 +839,7 @@ export default {
       this.transaction = await getTransaction.authUserTransaction();
      
     }
+    console.log(this.transaction)
 
     // payment data=====================================================
     const getpayment = paymentStore();

@@ -39,7 +39,7 @@ export const transactionStore = defineStore("transaction", {
     async allUserTransaction() {
       const data = await this.getTransaction(); // Wait for the data to be fetched
 
-      return data;
+      return data.allTransaction;
     },
   },
 });

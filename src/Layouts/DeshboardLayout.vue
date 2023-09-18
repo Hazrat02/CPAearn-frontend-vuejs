@@ -4,6 +4,7 @@ import { RouterLink, RouterView } from "vue-router";
 import isAuthenticated from "../midleware/auth";
 import { logout } from "../midleware/auth";
 import axios from "axios";
+import { useAuthUserStore } from "../store/user";
 
 export default {
  
@@ -11,6 +12,7 @@ export default {
     return {
       isAuthenticated: false,
       showSidebar:false,
+      authUser:'',
 
 
 
@@ -43,6 +45,22 @@ export default {
       }
     },
    
+  },
+  async created(){
+    
+    const userStore = useAuthUserStore();
+    const authUser = userStore.authUser;
+
+    if (authUser) {
+      this.authUser = authUser;
+    } else {
+      // userStore.reSetAuthUser();
+      this.authUser = await userStore.reSetAuthUser();
+    }
+
+    
+
+
   },
  
   methods: {
@@ -286,16 +304,12 @@ export default {
                     ><div><span class="">Reffer</span></div></RouterLink
                   >
                 </li>
-                <li v-if="isAuthenticated">
+                <li >
                   <div class="pe-auto">
                     <a class="pe" @click="logout">Logout</a>
                   </div>
                 </li>
-                <li v-if="!isAuthenticated">
-                  <div class="pe-auto">
-                    <router-link class="pe" to="/login">Login</router-link>
-                  </div>
-                </li>
+               
               </ul>
               <i class="mobile-nav-toggle d-none bi bi-list"></i>
             </li>
@@ -321,13 +335,14 @@ export default {
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="../assets/2895055.jpg" alt="profile">
+                  <img v-if="authUser.profile" v-bind:src="authUser.profile" alt="profile">
+                  <img v-else src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png" alt="profile">
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">David Grey. H</span>
-                  <span class="text-secondary text-small">Project Manager</span>
+                  <span class="font-weight-bold mb-2">{{this.authUser.name}}</span>
+                  <span class="text-secondary text-small">Admin</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
