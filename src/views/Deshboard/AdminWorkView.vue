@@ -31,10 +31,11 @@
                                         <div class="icon-box mt-0" style="">
                                             <div class="d-flex justify-content-end">
                                                 <div class="d-flex gap-2">
-                                                   
+
                                                     <i @click="workdelete(item.id)" class="bi bi-trash"
                                                         style="color: red;"></i>
-                                                    <i @click="workeditmodal(item.id)" class="bi bi-pen" style="color: rgb(10, 146, 101);"></i>
+                                                    <i @click="workeditmodal(item.id)" class="bi bi-pen"
+                                                        style="color: rgb(10, 146, 101);"></i>
                                                 </div>
 
                                             </div>
@@ -229,14 +230,14 @@ export default {
                 { label: "Option 2", value: "2" },
                 { label: "Option 3", value: "3" },
             ],
-            showEditModal:false,
-            editId:"",
+            showEditModal: false,
+            editId: "",
             name: '',
             vip_id: '1',
             description: '',
             earn: '',
             icon: '',
-            component:'',
+            component: '',
 
             selectedOptions: [], // Initialize it as an empty ar
             work: [],
@@ -268,6 +269,8 @@ export default {
                         text: response.data.message,
                         type: "success",
                     });
+                    const works = workStore();
+                    this.work = works.deletework(id);
                 })
                 .catch((error) => {
                     this.$setLoading(false);
@@ -292,7 +295,7 @@ export default {
                 description: this.description,
                 earn: this.earn,
                 icon: this.icon,
-                component:this.component,
+                component: this.component,
             };
             axios
                 .post("/api/work.create", data)
@@ -305,6 +308,9 @@ export default {
                         text: response.data.message,
                         type: "success",
                     });
+
+                    const works = workStore();
+                    this.work = works.addWork(response.data.work);
                 })
                 .catch((error) => {
                     this.$setLoading(false);
@@ -328,7 +334,7 @@ export default {
             this.earn = item.earn
             this.component = item.component
 
-          
+
 
             this.icon = item.icon
             this.editId = id
@@ -337,7 +343,7 @@ export default {
 
 
         },
-       workEdit() {
+        workEdit() {
 
             this.showeditModal = false
             this.$setLoading(true);
@@ -349,7 +355,7 @@ export default {
                 description: this.description,
                 earn: this.earn,
                 vip_id: this.vip_id,
-               component: this.component,
+                component: this.component,
                 icon: this.icon,
 
             }

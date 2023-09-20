@@ -159,7 +159,11 @@ export default {
                         title: "message",
                         text: response.data.message,
                         type: "success",
+
+
                     });
+                    this.ask = this.ask.filter((item) => item.id !== id);
+
                 })
                 .catch((error) => {
                     this.$setLoading(false);
@@ -201,7 +205,7 @@ export default {
 
             axios.put(`api/ask.edit/${id}`, data)
                 .then((response) => {
-                    
+
                     this.$notify({
                         title: "message",
                         text: response.data.message,
@@ -231,6 +235,7 @@ export default {
         },
         askCreate() {
             this.$setLoading(true);
+            this.showModal = false
             const data = {
                 ask: this.askStore,
                 ans: this.ans,
@@ -247,6 +252,12 @@ export default {
                         text: response.data.message,
                         type: "success",
                     });
+
+                    const dataArray = Array.isArray(response.data.ask) ? response.data.ask : [response.data.ask];
+
+                    // Adds the elements of dataArray to the end of the authTransaction array
+                    this.ask.unshift(...dataArray);
+
                 })
                 .catch((error) => {
                     this.$setLoading(false);

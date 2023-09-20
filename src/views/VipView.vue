@@ -149,16 +149,26 @@ export default {
             main_balance: this.authUser.main_balance - item.price,
           };
           axios
-            .post("http://127.0.0.1:8000/api/useredit", data)
+            .post("/api/useredit", data)
             .then((response) => {
 
-              userStore.setAuthUser(response.data)
+              // userStore.setAuthUser(response.data)
               this.$router.push('earning')
               this.$notify({
                 title: "Success",
                 text: "Package activated!",
                 type: "status",
               });
+              const index = this.authUser;
+          if (index !== -1) {
+
+            this.authUser.vip = item.id;
+            this.authUser.main_balance = this.authUser.main_balance - item.price;
+           
+
+
+            // this.$set(this.vip, index, this.vip[index]);
+          }
               console.log(response.data);
             })
             .catch((error) => {

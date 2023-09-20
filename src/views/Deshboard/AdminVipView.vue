@@ -55,7 +55,8 @@
                         'bi-check': li.type == '1',
                         'na bi-x': li.type == '2',
                       }"></i>
-                      <span>{{ li.limit }}</span><span> <i class="bi na bi-x" @click="unlockdelete(li.id)"></i></span>
+                      <span>{{ li.limit }}</span><span> <i class="bi na bi-x"
+                          @click="unlockdelete(li.id, item.id)"></i></span>
                     </li>
                   </ul>
 
@@ -189,37 +190,35 @@
       </Modal>
       <!-- End vip Section -->
       <Modal :showModal="showVipLabelModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
-                    @close="showVipLabelModal = false" :title="'Method Update'">
-                    <div class="col-12 my-3 card">
-                        <form class="justify-content-center" method="POST" enctype="multipart/form-data"
-                            @submit.prevent="vipLabelMake">
-                            <!-- Email input -->
+        @close="showVipLabelModal = false" :title="'Method Update'">
+        <div class="col-12 my-3 card">
+          <form class="justify-content-center" method="POST" enctype="multipart/form-data" @submit.prevent="vipLabelMake">
+            <!-- Email input -->
 
-                            <div class="form-outline mb-2">
-                                <input placeholder="Withdraw money" v-model="limit" type="text" id="label"
-                                    class="form-control" required />
-                                <div class="d-flex">
-                                    <label class="form-label" for="label">Vip Label</label>
-                                </div>
-                            </div>
-                            <div class="form-outline mb-2">
-                                <select  @change="updateLabelType"  class="form-select">
-                                  <option value="" disabled selected>Select Label type</option>
-                                  <option value="1">Right</option>
-                                  <option value="2">Wrong</option>
-                                </select>
-                                
-                            </div>
-                           
+            <div class="form-outline mb-2">
+              <input placeholder="Withdraw money" v-model="limit" type="text" id="label" class="form-control" required />
+              <div class="d-flex">
+                <label class="form-label" for="label">Vip Label</label>
+              </div>
+            </div>
+            <div class="form-outline mb-2">
+              <select @change="updateLabelType" class="form-select">
+                <option value="" disabled selected>Select Label type</option>
+                <option value="1">Right</option>
+                <option value="2">Wrong</option>
+              </select>
 
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-grad">+ Create</button>
+            </div>
 
-                            </div>
-                        </form>
-                    </div>
-                    <!-- Your modal content goes here -->
-                </Modal>
+
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-grad">+ Create</button>
+
+            </div>
+          </form>
+        </div>
+        <!-- Your modal content goes here -->
+      </Modal>
     </DeshboardLayout>
   </div>
 </template>
@@ -236,12 +235,12 @@ export default {
       isOpen: false,
       selectedOption: "all", // Initial selected option
       filterOptions: ["all", "pending", "rejected", "success"], // Dropdown options
-      showVipLabelModal:false,
-      labelId:'',
-      limit:'',
-      labelType:'Select Label Type',
+      showVipLabelModal: false,
+      labelId: '',
+      limit: '',
+      labelType: 'Select Label Type',
       showEditModal: false,
-      editId:'',
+      editId: '',
       name: '',
       description: '',
       price: '',
@@ -279,6 +278,8 @@ export default {
             text: response.data.message,
             type: "success",
           });
+          const vipPlan = vipStore();
+          this.vip = vipPlan.deletevip(id);
         })
         .catch((error) => {
           this.$setLoading(false);
@@ -292,11 +293,11 @@ export default {
       this.$setLoading(false);
 
     },
-    unlockdelete(id) {
+    unlockdelete(id, vipid) {
 
 
       this.$setLoading(true);
-      console.log(id)
+  
       axios.delete(`api/unlock.delete/${id}`)
         .then((response) => {
 
@@ -306,6 +307,11 @@ export default {
             title: "message",
             text: response.data.message,
             type: "success",
+          });
+          this.vip.forEach((item) => {
+            if (item.id === vipid) {
+              item.vipunlock = item.vipunlock.filter((element) => element.id !== id);
+            }
           });
         })
         .catch((error) => {
@@ -323,20 +329,20 @@ export default {
     vipeditmodal(id) {
 
       const item = this.vip.find(item => item.id === id);
-      this.name=item.name
+      this.name = item.name
 
-        this.description=item.description
+      this.description = item.description
 
-        this.price=item.price
+      this.price = item.price
 
-        this.task=item.task
+      this.task = item.task
 
-        this.duration=item.duration
+      this.duration = item.duration
 
-        this.icon=item.icon
-        this.editId=id
+      this.icon = item.icon
+      this.editId = id
 
-        this.showEditModal = true
+      this.showEditModal = true
 
 
     },
@@ -354,9 +360,9 @@ export default {
       //   this.duration=item.duration
 
       //   this.icon=item.icon
-        this.labelId=id
+      this.labelId = id
 
-        this.showVipLabelModal = true
+      this.showVipLabelModal = true
 
 
     },
@@ -386,7 +392,7 @@ export default {
             text: response.data.message,
             type: "success",
           });
-          this.showEditModal=false
+          this.showEditModal = false
           const index = this.vip.findIndex(item => item.id === id);
           if (index !== -1) {
 
@@ -436,6 +442,10 @@ export default {
             text: response.data.message,
             type: "success",
           });
+
+          const vipPlan = vipStore();
+          this.vip = vipPlan.addVip(response.data.vip);
+
         })
         .catch((error) => {
           this.$setLoading(false);
@@ -456,7 +466,7 @@ export default {
         vip_id: this.labelId,
         limit: this.limit,
         type: this.labelType,
-       
+
       }
       console.log(data)
       axios
@@ -470,7 +480,16 @@ export default {
             text: response.data.message,
             type: "success",
           });
+          const dataArray = Array.isArray(response.data.label) ? response.data.label : [response.data.label];
 
+          // Assuming this.vip is an array of objects, you need to use map to update the specific item.
+          this.vip.map((item) => {
+            if (item.id === this.labelId) {
+              // Assuming 'vipunlock' is an array property within the 'item' object.
+              // Use 'unshift' to add elements at the beginning of the array.
+              item.vipunlock.unshift(...dataArray);
+            }
+          });
         })
         .catch((error) => {
           this.$setLoading(false);

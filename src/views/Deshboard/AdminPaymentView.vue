@@ -53,7 +53,8 @@
                                                 </td>
                                                 <td>{{ transactionItem.method }} </td>
                                                 <td>
-                                                    <img src="" class="me-2" alt="image">
+                                                    <img :src="transactionItem.image" class="me-2" alt="image"
+                                                        style="width: 40px;">
                                                 </td>
                                                 <td>{{ transactionItem.address }} </td>
                                                 <td>{{ transactionItem.network }} </td>
@@ -117,7 +118,7 @@
 
 
                             <div class="form-outline mb-2">
-                                <input type="file" name="image" onchange="image" class="form-control" required />
+                                <input type="file" name="image" @change="imagehandle" class="form-control" required />
 
                                 <div class="d-flex">
                                     <label class="form-label" for="image"> Scan Image</label>
@@ -133,8 +134,8 @@
                     </div>
                     <!-- Your modal content goes here -->
                 </Modal>
-                <Modal :showModal="showEditModal" :modalWidth="modalWidth" :modalHeight="modalHeight" :position="modalPosition"
-                    @close="showEditModal = false" :title="'Method Update'">
+                <Modal :showModal="showEditModal" :modalWidth="modalWidth" :modalHeight="modalHeight"
+                    :position="modalPosition" @close="showEditModal = false" :title="'Method Update'">
                     <div class="col-12 my-3 card">
                         <form class="justify-content-center" method="POST" enctype="multipart/form-data"
                             @submit.prevent="paymentEdit">
@@ -169,7 +170,7 @@
 
 
                             <div class="form-outline mb-2">
-                                <input type="file" name="image" onchange="image" class="form-control" required />
+                                <input type="file" name="image" @change="imagehandle" class="form-control" required />
 
                                 <div class="d-flex">
                                     <label class="form-label" for="image"> Scan Image</label>
@@ -185,7 +186,7 @@
                     </div>
                     <!-- Your modal content goes here -->
                 </Modal>
-                
+
 
             </div>
         </DeshboardLayout>
@@ -201,8 +202,8 @@ export default {
             // paginate
             currentPage: 1, // The current page number
             itemsPerPage: 10, // Number of items to display per page
-            showEditModal:false,
-            editId:'',
+            showEditModal: false,
+            editId: '',
             payment: '',
             name: '',
             method: '',
@@ -229,6 +230,11 @@ export default {
         },
     },
     methods: {
+
+        imagehandle(event) {
+            this.image = event.target.files[0];
+        },
+
         paymentdelete(id) {
 
 
@@ -244,6 +250,11 @@ export default {
                         text: response.data.message,
                         type: "success",
                     });
+
+                    const getpayment = paymentStore();
+
+                    // Try to get the data from the store
+                    this.payment= getpayment.deletepayment(id);
                 })
                 .catch((error) => {
                     this.$setLoading(false);
@@ -260,25 +271,36 @@ export default {
 
         paymentStore() {
             this.$setLoading(true);
-            const data = {
-                name: this.name,
 
-                method: this.method,
-                network: this.network,
-                image: this.image,
-                address: this.address,
-            };
+            const formData = new FormData(); // Create a FormData object
+            formData.append('name', this.name);
+            formData.append('method', this.method);
+            formData.append('network', this.network);
+            formData.append('image', this.image);
+            formData.append('address', this.address);
+
+
             axios
-                .post("/api/payment.store", data)
-                .then((response) => {
+                .post("/api/payment.store", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data', // Set content type for file upload
+                    },
+                }).then((response) => {
 
 
 
                     this.$notify({
                         title: "message",
                         text: response.data.message,
-                        type: "success",
+                        type: response.data.status,
                     });
+
+                    const getpayment = paymentStore();
+
+                    // Try to get the data from the store
+                    const paymentData = getpayment.addpayment(response.data.payment);
+                    this.payment = paymentData;
+                    this.showModal = false
                 })
                 .catch((error) => {
                     this.$setLoading(false);

@@ -16,6 +16,16 @@ export const paymentStore = defineStore("payment", {
       
       // Adds the elements of dataArray to the end of the authTransaction array
       this.payment.unshift(...dataArray);
+
+      return this.payment
+      
+    },
+    deletepayment(id) {
+      
+      this.payment = this.payment.filter((item) => item.id !== id);
+
+
+      return this.payment
       
     },
     async getPayment() {

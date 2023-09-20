@@ -16,8 +16,17 @@ export const vipStore = defineStore("vip", {
       
       // Adds the elements of dataArray to the end of the authTransaction array
       this.vip.unshift(...dataArray);
+      return this.vip
+    },
+    deletevip(id) {
+      
+      this.vip = this.vip.filter((item) => item.id !== id);
+
+
+      return this.vip
       
     },
+   
     async getVip() {
       try {
         const response = await axios.get(

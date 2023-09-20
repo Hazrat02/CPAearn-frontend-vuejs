@@ -345,7 +345,7 @@
                     <div class="col-11 col-md-6 mt-2">
                       <img
                         class="img-thumbnail"
-                        :src="this.$setbackedUrl('img/payment/') + item.image"
+                        :src="item.image"
                         alt="payment"
                       />
                     </div>

@@ -15,7 +15,17 @@ export const workStore = defineStore("work", {
       const dataArray = Array.isArray(data) ? data : [data];
       
       // Adds the elements of dataArray to the end of the authTransaction array
-      this.vip.unshift(...dataArray);
+      this.work.unshift(...dataArray);
+      return this.work
+      
+    },
+   
+    deletework(id) {
+      
+      this.work = this.work.filter((item) => item.id !== id);
+
+
+      return this.work
       
     },
     async getWork() {
