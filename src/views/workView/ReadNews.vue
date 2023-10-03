@@ -418,7 +418,7 @@
                   </div>
 
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-grad">
                       Post Comment
                     </button>
                   </div>
@@ -770,7 +770,7 @@ export default {
         this.$router.push("/earning");
         this.$notify({
           title: "Warning",
-          text: 'Sorry!You need upgrate your Plan',
+          text: 'Money added',
           type: "error",
         });
       }

@@ -119,7 +119,7 @@ export default {
           type: "error",
         });
       }
-      // console.log('fdgfg',issetVip)
+      console.log('fdgfg',issetVip)
 
     const vipPlan = vipStore();
     const allVip = vipPlan.vip;

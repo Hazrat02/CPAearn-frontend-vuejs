@@ -34,13 +34,13 @@
                 <button
                   @click="copyText"
                   :disabled="isCopied"
-                  class="btn btn-primary"
+                  class="btn btn-grad"
                 >
                   <i :class="['bi', isCopied ? 'fa-check' : 'bi-files']"></i>
                   {{ buttonText }}
                   <!-- <i class="bi bi-files"></i> -->
                 </button>
-                <!-- <input type="submit" class="btn btn-primary" value="Copy" /> -->
+                <!-- <input type="submit" class="btn btn-grad" value="Copy" /> -->
               </form>
             </div>
           </div>
@@ -62,132 +62,29 @@
 
         <div class="container">
           <div class="row gy-5">
-            <div
+            <div  v-for="item in refferUser"
+                      :key="item.id"
+                      :value="item.id"
               class="col-lg-4 col-md-6 member"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               <div class="member-img">
-                <img
-                  src="./../assets/frontend/img/team/team-1.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-                <!-- <div class="social">
-                  <a href="#"><i class="bi bi-twitter"></i></a>
-                  <a href="#"><i class="bi bi-facebook"></i></a>
-                  <a href="#"><i class="bi bi-instagram"></i></a>
-                  <a href="#"><i class="bi bi-linkedin"></i></a>
-                </div> -->
+                <img v-if="item.profile" v-bind:src="item.profile" alt="profile" class="img-fluid" >
+                <img v-else class="img-fluid"  src="https://img.freepik.com/premium-vector/people-saving-money_24908-51569.jpg?w=2000" alt="profile">
+             
+                
               </div>
               <div class="member-info text-center">
-                <h4>Walter White</h4>
+                <h4>{{ item.name }}</h4>
 
-                <p><b>Balance :</b>10.5$</p>
-                <p><b>Transfer :</b>Yes</p>
+                <p><b>Balance :</b>{{item.main_balance}}$</p>
+                <p v-if=" item.vip > '1'"><b >Transfer :</b  >Yes</p>
+                <p v-else><b >Transfer :</b  >Not</p>
               </div>
             </div>
             <!-- End Team Member -->
 
-            <div
-              class="col-lg-4 col-md-6 member"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <div class="member-img">
-                <img
-                  src="./../assets/frontend/img/team/team-2.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div class="member-info text-center">
-                <h4>Sarah Jhonson</h4>
-                <p><b>Balance :</b>10.5$</p>
-                <p><b>Transfer :</b>Yes</p>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-4 col-md-6 member"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <div class="member-img">
-                <img
-                  src="./../assets/frontend/img/team/team-3.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div class="member-info text-center">
-                <h4>William Anderson</h4>
-                <p><b>Balance :</b>10.5$</p>
-                <p><b>Transfer :</b>Yes</p>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-4 col-md-6 member"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <div class="member-img">
-                <img
-                  src="./../assets/frontend/img/team/team-4.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div class="member-info text-center">
-                <h4>Amanda Jepson</h4>
-                <p><b>Balance :</b>10.5$</p>
-                <p><b>Transfer :</b>Yes</p>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-4 col-md-6 member"
-              data-aos="fade-up"
-              data-aos-delay="500"
-            >
-              <div class="member-img">
-                <img
-                  src="./../assets/frontend/img/team/team-5.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div class="member-info text-center">
-                <h4>Brian Doe</h4>
-                <p><b>Balance :</b>10.5$</p>
-                <p><b>Transfer :</b>Yes</p>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-4 col-md-6 member"
-              data-aos="fade-up"
-              data-aos-delay="600"
-            >
-              <div class="member-img">
-                <img
-                  src="./../assets/frontend/img/team/team-6.jpg"
-                  class="img-fluid"
-                  alt=""
-                />
-              </div>
-              <div class="member-info text-center">
-                <h4>Josepha Palas</h4>
-                <p><b>Balance :</b>10.5$</p>
-                <p><b>Transfer :</b>Yes</p>
-              </div>
-            </div>
-            <!-- End Team Member -->
           </div>
         </div>
       </section>
@@ -198,10 +95,13 @@
 </template>
 
 <script>
+import { useAuthUserStore } from "./../store/user";
 export default {
   data() {
     return {
-      textToCopy: "www.cpaearn.com/323294", // The text you want to copy
+      authUser:'',
+      refferUser:'',
+      textToCopy: "", // The text you want to copy
       isCopied: false, // Track the state of the button
       buttonText: "", // Initial button text
     };
@@ -225,9 +125,38 @@ export default {
       }, 2000); // Change back to original text after 2 seconds (adjust as needed)
     },
   },
-  created() {
+ async created() {
+   
+    const userStore = useAuthUserStore();
+
+
+    if (userStore.authUser) {
+        this.authUser = userStore.authUser;
+      } else {
+        // userStore.reSetAuthUser();
+        this.authUser = await userStore.reSetAuthUser();
+      }
+      this.textToCopy=this.authUser.my_reffer;
+
+    if (userStore.refferUser) {
+      this.refferUser = userStore.refferUser;
+    } else {
+      // userStore.reSetAuthUser();
+      this.refferUser = await userStore.getRefferUser();
+    }
+
     this.$setLoading(false);
-    console.log(this.$isLoading);
   },
+
+  
 };
 </script>
+<style scoped>
+.img-fluid{
+
+  height: 185px;
+ border-radius: 50%;
+  width: 185px;
+  border: 5px solid white;
+}
+</style>

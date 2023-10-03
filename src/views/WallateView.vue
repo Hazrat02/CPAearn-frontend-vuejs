@@ -333,7 +333,7 @@
                     <button
                       @click="copyText"
                       :disabled="isCopied"
-                      class="btn btn-primary"
+                      class="btn btn-grad"
                     >
                       <i
                         :class="['bi', isCopied ? 'fa-check' : 'bi-files']"

@@ -214,7 +214,7 @@ export default {
         } else {
             // If data is not available, fetch it and set the component property
             this.transaction = await getTransaction.allUserTransaction();
-            console.log(this.transaction)
+            
         }
         this.$setLoading(false);
 

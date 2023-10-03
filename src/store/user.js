@@ -5,7 +5,8 @@ const LOCAL_STORAGE_KEY = 'user_data';
 export const useAuthUserStore = defineStore('authUser', {
   state: () => ({
     authUser: null,
-    allUser:''
+    allUser:'',
+    refferUser:''
   }),
   actions: {
     setAuthUser(newUser) {
@@ -30,6 +31,17 @@ export const useAuthUserStore = defineStore('authUser', {
         const response = await axios.get("/api/all.user");
         this.setAllUser(response.data.alluser);
        return  response.data.alluser
+      } catch (error) {
+        console.log(error);
+      }
+   
+    },
+    async getRefferUser(){
+      try {
+        const response = await axios.get("/api/reffer.user");
+        this.refferUser=response.data.alluser;
+       return  response.data.alluser
+       console.log(response.data.alluser);
       } catch (error) {
         console.log(error);
       }

@@ -93,7 +93,7 @@
           <div class="container container-fluid justify-content-center">
             <button
               type="submit"
-              class="btn btn-primary d-block px-4 container-fluid mb-4"
+              class="btn btn-grad d-block px-4 container-fluid mb-4"
               @click.prevent="login"
             >
               log in

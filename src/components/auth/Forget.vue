@@ -48,7 +48,7 @@
                 <div class="container container-fluid justify-content-center">
                   <button
                     type="button"
-                    class="btn btn-primary d-block px-4 container-fluid mb-4"
+                    class="btn btn-grad d-block px-4 container-fluid mb-4"
                     @click="codeMatch"
                   >
                     Reset
@@ -77,7 +77,7 @@
                 <div class="container container-fluid justify-content-center">
                   <div
                     type="submit"
-                    class="btn btn-primary d-block px-4 container-fluid mb-4"
+                    class="btn btn-grad d-block px-4 container-fluid mb-4"
                     @click="next"
                   >
                     Next
@@ -120,7 +120,7 @@
                 <div class="container container-fluid justify-content-center">
                   <button
                     type="submit"
-                    class="btn btn-primary d-block px-4 container-fluid mb-4"
+                    class="btn btn-grad d-block px-4 container-fluid mb-4"
                     
                   >
                     Forget
